@@ -34,6 +34,7 @@
 	<link href="<?php echo base_url().'public/css/site/acticle.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/banner.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/hmenu.css' ?>" rel="stylesheet">
+	<link href="<?php echo base_url().'public/css/site/cart.css' ?>" rel="stylesheet">
 	<!--================================= My CSS =================================-->
 
 	<!-- ================================ MY JS =================================== -->
@@ -46,14 +47,19 @@
 	<script src="<?php echo base_url().'public/js/site/hmenu.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/site/acticle.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/site/slider.js'?>"></script>
+	<script src="<?php echo base_url().'public/js/site/cart.js'?>"></script>
 	<!-- ================================ MY JS =================================== -->
 
 </head>
 <body>
 	<!-- Icon scroll to Top -->
 	<img id="top_icon" src="<?php echo base_url().'public/icon/top.png' ?>">
+
+
 	<div class="container">
 		<div class="row">
+
+
 
 			<!--================= START: Banner website =================-->
 			<img style="width:100%;" src="<?php echo base_url().'public/img/banner/banner.jpg'; ?>" class="img-responsive" alt="Image">
@@ -103,6 +109,10 @@
 						</li>
 					</ul>
 
+					<ul class="navbar-right">
+				      	<li><a id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span></a></li>
+				    </ul> <!--end navbar-right -->
+
 						<!-- <ul style="margin-right:10px;" class="nav navbar-nav navbar-right">
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thành viên <span class="caret"></span></a>
@@ -147,6 +157,51 @@
 					</div>
 				</nav>
 				<!--================= END: navbar menu =================-->
+			
+
+
+
+
+	<div class="shopping-cart">
+    <div class="shopping-cart-header">
+      <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
+      <div class="shopping-cart-total">
+        <span class="lighter-text">Total:</span>
+        <span class="main-color-text">$2,229.97</span>
+      </div>
+    </div> <!--end shopping-cart-header -->
+
+    <ul class="shopping-cart-items">
+      <li class="clearfix">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
+        <span class="item-name">Sony DSC-RX100M III</span>
+        <span class="item-price">$849.99</span>
+        <span class="item-quantity">Quantity: 01</span>
+      </li>
+
+      <li class="clearfix">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item2.jpg" alt="item1" />
+        <span class="item-name">KS Automatic Mechanic...</span>
+        <span class="item-price">$1,249.99</span>
+        <span class="item-quantity">Quantity: 01</span>
+      </li>
+
+      <li class="clearfix">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item3.jpg" alt="item1" />
+        <span class="item-name">Kindle, 6" Glare-Free To...</span>
+        <span class="item-price">$129.99</span>
+        <span class="item-quantity">Quantity: 01</span>
+      </li>
+    </ul>
+
+    <a href="#" class="button">Checkout</a>
+  </div> <!--end shopping-cart -->
+
+
+
+
+
+
 
 			</div>
 			<div class="row">
