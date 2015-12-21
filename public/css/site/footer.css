@@ -1,0 +1,27 @@
+footer{
+	height: 70px;
+	background-color: #37B8C8;
+	display: block;
+	margin-top: 30px;
+	width: 100%;
+}
+footer div#footer_lienhe{
+	color: white;
+	font-size: 18px;
+	margin-left: 20px;
+	padding-left: 8px;
+	padding-bottom: 8px;
+	padding-top: 8px;
+}
+footer div#footer_lienhe a{
+	color: #DAE7D5;
+	font-size: 16px;
+
+}
+footer div#footer_content{
+	color: #B5C0AA;
+	font-size: 14px;
+	padding-left: 8px;
+	margin-left: 20px;
+	font-style: italic;
+}
