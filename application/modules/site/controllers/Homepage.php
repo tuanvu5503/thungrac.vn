@@ -10,24 +10,7 @@ class Homepage extends MX_Controller
     }
     public function index()
     {
-        $this->load->helper('convert');
-        $all_superCategory = $this->Productmodel->all_superCategory();
-
-        $products['SẢN PHẨM MỚI'] = $this->Productmodel->new_product();;
-        foreach ($all_superCategory as $row) {
-            $products[$row['super_categoryName']] = $this->Productmodel->listProductbySuperId($row['id']);
-            $menus[$row['super_categoryName']] = $this->Productmodel->getMenu($row['id']);
-        }
-
-        $data['products'] = $products;
-        $data['menus'] = $menus;
-        
-        $data['title'] = "Kinh doanh thùng rác";
-        $data['subView'] = "allProduct_layout";
-        $data['menu'] = $this->Productmodel->listCategory();
-        $data['subData'] = $data;
-
-        $this->load->view('main_layout', $data);
+       echo "string";
     }
 
     public function view_detail()
