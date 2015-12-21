@@ -4,10 +4,13 @@
 }
 
 div.new_pro_head{
-	background-color: #428BCA;
-	font: 700 16px/40px sans-serif;
-	color: white;
-	text-align: center;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	background-color: #2FBCBC;
+	font: 600 16px/35px sans-serif;
+	color: #FFF;
+	text-align: left;
+	padding-left: 20px;
 	margin-bottom: 15px;
 }
 div.new_pro{
@@ -55,12 +58,14 @@ div.new_pro div.new_pro_detail span.price{
 }
 
 div.all_pro_head{
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 	margin-top: 30px;
 	padding-left: 50px;
 	width: 100%;
-	background-color: #605656;
+	background-color: #146A8C;
 	color: white;
-	font: 700 23px/80px sans-serif;
+	font: 600 16px/35px sans-serif;
 }
 div.same_pro_head{
 	margin-top: 100px;
@@ -85,8 +90,8 @@ div.same_pro_head{
 
 div.items{
 	border-radius: 10px;
-	width: 230px;
-	height: 310px;
+	width: 200px;
+	height: 250px;
 	border: 1px #E0E0E0 solid;
 	margin-top: 20px;
 	margin-bottom: 30px;
@@ -103,7 +108,7 @@ div.items{
 
 div.items div.items_head{
 	width: 100%;
-	height: 80px;
+	height: 50px;
 }
 div.items div.pro_name{
 	width: 100%;
@@ -115,19 +120,20 @@ div.items div.pro_name{
 }
 
 div.items div.price{
-	margin-top: 10px;
+	/*margin-top: 10px;*/
 	padding-left: 15px;
-	font: 600 20px/30px sans-serif;
+	font: 600 18px/25px sans-serif;
+	color: #6a6340;
 }
 
 div.items div.items_image{
 	width: 100%;
-	height: 200px;
+	height: 170px;
 }
 
 div.addcart {
 	position:absolute;
-	top:266px;
+	top:213px;
 	border-bottom-left-radius: 10px;
 	left:0; 
 	width: 70%;
@@ -135,7 +141,7 @@ div.addcart {
 	background: #EA7974 none repeat scroll 0 0;
 	color: #fff;
 	display: block;
-	font: 700 14px/43px "Hind",sans-serif;
+	font: 700 14px/35px "Hind",sans-serif;
 	text-align: center;
 }
 
@@ -144,7 +150,7 @@ div.addcart:hover {
 }
 div.like {
 	position:absolute;
-	top:266px;
+	top:213px;
 	border-bottom-right-radius: 10px;
 	right: 0px; 
 	width: 30%;
@@ -152,7 +158,7 @@ div.like {
 	background: #c7b58e none repeat scroll 0 0;
 	color: #fff;
 	display: block;
-	font: 700 14px/43px "Hind",sans-serif;
+	font: 700 14px/35px "Hind",sans-serif;
 	text-align: center;
 	border-left: #fff 1px solid;
 }
@@ -169,7 +175,7 @@ a.product_name{
 	color: #000;
 	display: block;
 	font-family: "Hind",serif;
-	margin-bottom: 11px;
+	/*margin-bottom: 11px;*/
 	/*text-transform: uppercase;*/
 	transition: all 300ms ease 0s;
 	font-size: 13px;
@@ -212,43 +218,40 @@ div.album span.sm_img{
 }
 
 div#product_name{
-	margin-bottom: 10px;
-	line-height: 60px;
-	font-size: 30px;
-	color: #585858;
-	font-weight: 700;
-	font-family: "Roboto", sans-serif;
+    margin-bottom: 10px;
+    line-height: 10px;
+    font-size: 20px;
+    color: #2AA4B9;
+    font-weight: 600;
+    font-family: "Roboto", sans-serif;
+
 }
 
 div#price{
-	font-family: "Roboto", sans-serif;
-	font-size: 24px;
-	font-weight: normal;
-	font-style: normal;
-	text-decoration: none;
-	color: #AE1818;
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    color: #34BB3F;
 }
 
 div#describle{
-	font-family: "Roboto", sans-serif;
-	font-size: 18px;
-	font-weight: normal;
-	font-style: normal;
-	text-decoration: none;
-	color: #3E86BC;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
 }
 
 button#btn_mua{
-	height: 60px;
-	width: 300px;
-	font: 700 23px/20px sans-serif;
-	margin-top: 100px;
+	
 }
 
 img#top_icon{
 	position: fixed;
-	right: 5%;
-	width: 70px;
+	right: 1%;
+	width: 50px;
 	top: 80%;
 	cursor: pointer;
 	z-index: 99999;

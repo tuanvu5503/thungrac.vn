@@ -22,7 +22,7 @@ class Homepage extends MX_Controller
         $data['products'] = $products;
         $data['menus'] = $menus;
         
-        $data['title'] = "Kinh doanh thùng rác";
+        $data['title'] = "Thungrac Online";
         $data['subView'] = "allProduct_layout";
         $data['menu'] = $this->Productmodel->listCategory();
         $data['subData'] = $data;

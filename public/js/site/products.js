@@ -27,6 +27,19 @@ $(document).ready(function() {
 		// $("div#thumb-3").attr('display', 'block');
 	});
 
+	//================= PRODUCT SLIDER BAR =================
+	  $('.slider1').bxSlider({
+	    slideWidth: 200,
+	    minSlides: 1,
+	    maxSlides: 10,
+	    slideMargin: 25,
+	    controls: false,
+	    auto: true,
+	    moveSlides: 2,
+	    autoHover: true
+	  });
+	//================= PRODUCT SLIDER BAR =================
+
 scrolltop(); //Scroll to Top
 });
 function scrolltop()

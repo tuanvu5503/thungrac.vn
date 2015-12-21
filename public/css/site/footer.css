@@ -1,8 +1,9 @@
 footer{
 	height: 70px;
-	background-color: #215EC0;
+	background-color: #37B8C8;
 	display: block;
 	margin-top: 30px;
+	width: 100%;
 }
 footer div#footer_lienhe{
 	color: white;

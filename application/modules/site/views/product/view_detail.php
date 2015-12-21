@@ -12,9 +12,7 @@
 			zoom: 90%;
 			overflow-x: hidden;
 		}
-		.sp-wrap {
-	        width: 200px;
-	    }
+		
 	</style>
 
 	<!-- Bootstrap CSS -->
@@ -33,7 +31,6 @@
 	<link href="<?php echo base_url().'public/css/site/vmenu.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/banner.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/hmenu.css' ?>" rel="stylesheet">
-	<link href="<?php echo base_url().'public/css/site/smoothproducts.css' ?>" rel="stylesheet">
 	<!--================================= My CSS =================================-->
 
 	<!-- ================================ MY JS =================================== -->
@@ -44,7 +41,6 @@
 	<script src="<?php echo base_url().'public/js/site/products.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/site/menu.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/site/hmenu.js'?>"></script>
-	<script src="<?php echo base_url().'public/js/site/smoothproducts.js'?>"></script>
 	<!-- ================================ MY JS =================================== -->
 
 </head>
@@ -185,46 +181,44 @@
 				<div class="album">
 					<?php 
 					$i=0;
-					if ($sm_img[0] != '') { //neu khong co hinh chi tiet thi show hinh defaut.jpg
-						?>
-						<div class="sp-wrap">
-							<?php
-							foreach ($sm_img as $row) {
-								?>
-	    							<a href="<?php echo base_url().'public/img/detail_img/'.$sm_img[$i]; ?>"><img src="<?php echo base_url().'public/img/detail_img/'.$sm_img[$i]; ?>" alt=""></a>
-								<?php
-								$i++;
-							}
+					if ($sm_img[0] != '') { //neu khong co hinh chi tiet thi show hinh mac dinh
+						foreach ($sm_img as $row) {
 							?>
-						</div>
-						<?php
+							<div id='<?php echo "thumb-".$i; ?>' class="thumb <?php if ($i == 0) echo "thumb-active"; else echo "thumb-unactive"; ?>">
+								<img  width="300" height="300" src="<?php echo base_url().'public/img/detail_img/'.$sm_img[$i]; ?>" class="img-responsive zoom_01" alt="Image">
+							</div>
+							<?php
+							$i++;
+						}
 					} else {
 						?>
-							<div class="sp-wrap">
-    							<a href="<?php echo base_url().'public/img/detail_img/noimage.jpg'; ?>"><img src="<?php echo base_url().'public/img/detail_img/noimage.jpg'; ?>" alt=""></a>
+							<div id='<?php echo "thumb-".$i; ?>' class="thumb <?php if ($i == 0) echo "thumb-active"; else echo "thumb-unactive"; ?>">
+								<img  width="300" height="300" src="<?php echo base_url().'public/img/detail_img/noimage.jpg'; ?>" class="img-responsive zoom_01" alt="Image">
 							</div>
 						<?php
+					}
+					$i=0;
+					if ($sm_img[0] != '') { //neu khong co hinh chi tiet thi khong show
+						foreach ($sm_img as $row) {
+							?>
+							<span id="<?php echo $i; ?>" class="sm_img">
+								<img width="100%" height="100%" src="<?php echo base_url().'public/img/detail_img/'.$sm_img[$i]; ?>" class="img-responsive" alt="Image">
+							</span>
+							<?php 
+							$i++;
+						}
 					}
 					?>
 				</div>
 			</div>
-
-
-
-
-
-
-
-<script type="text/javascript">
-    /* wait for images to load */
-    $(window).load( function() {
-        $('.sp-wrap').smoothproducts();
-    });
+<script>
+	$('.zoom_01').elevateZoom({
+		zoomType: "inner",
+		cursor: "crosshair",
+		zoomWindowFadeIn: 500,
+		zoomWindowFadeOut: 750
+	}); 
 </script>
-
-
-
-
 			<div class="col-xs-4 col-xs-offset-1 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-1">
 				<div id="product_name"> <?php echo $product_name; ?></div>
 				<div id="price"> <span style="font-weight:bold; color:#333;">Giá:</span> <?php echo number_format($price).' VNĐ'; ?></div>
