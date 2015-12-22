@@ -11,14 +11,8 @@
   color: #6394F8;
 }
 
-
-.container {
-  margin: auto;
-  width: 80%;
-}
-
 .badge {
-  background-color: #6394F8;
+  background-color: #94D63D;
   border-radius: 10px;
   color: white;
   display: inline-block;
@@ -34,11 +28,14 @@
   margin: 20px 0;
   background: white;
   width: 320px !important;
+  height: 550px !important;
+  overflow: scroll;
   position: fixed;
   border-radius: 3px;
   padding: 20px;
   right: 2px;
   z-index: 100;
+  display: none;
 }
 .shopping-cart .shopping-cart-header {
   border-bottom: 1px solid #E8E8E8;
@@ -110,4 +107,11 @@
   content: "";
   display: table;
   clear: both;
+}
+#sticky-wrapper{
+  height: 0px !important;
+}
+
+ul#cart:hover{
+  cursor: pointer;  
 }

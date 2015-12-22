@@ -52,9 +52,13 @@
 
 </head>
 <body>
-	<!-- Icon scroll to Top -->
+	<!--============ START: ICON SCROLL TO TOP ============-->
 	<img id="top_icon" src="<?php echo base_url().'public/icon/top.png' ?>">
-
+	<!--============ END: ICON SCROLL TO TOP ============-->
+	
+	<!--============ START: BASE_URL USE IN JQUERY FILE ============-->
+	<input type="hidden" id="base_url" value="<?php echo base_url(); ?>">
+	<!--============ END: BASE_URL USE IN JQUERY FILE ============-->
 
 	<div class="container">
 		<div class="row">
@@ -65,7 +69,7 @@
 			<img style="width:100%;" src="<?php echo base_url().'public/img/banner/banner.jpg'; ?>" class="img-responsive" alt="Image">
 			<!--================= END: Banner website ===================-->
 
-			<!--================= START: navbar menu =================-->
+			<!--================= START: NAVBAR MENU NGANG =================-->
 			<nav class="navbar navbar-default container sticker" role="navigation">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
@@ -109,9 +113,13 @@
 						</li>
 					</ul>
 
-					<ul class="navbar-right">
-				      	<li><a id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span></a></li>
-				    </ul> <!--end navbar-right -->
+					<!--========== START: ICON SHOPPING CART ==========-->
+					<ul id="cart" class="nav navbar-nav navbar-right">
+				      	<li>
+				      		<a id="cart"><span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng <span class="badge"><?php echo $this->cart->total_items(); ?></span></a>
+				      	</li>
+				    </ul> 
+					<!--========== END: ICON SHOPPING CART ==========-->
 
 						<!-- <ul style="margin-right:10px;" class="nav navbar-nav navbar-right">
 							<li class="dropdown">
@@ -156,55 +164,59 @@
 						</form>
 					</div>
 				</nav>
-				<!--================= END: navbar menu =================-->
-			
-
-
-
-
-	<div class="shopping-cart">
-    <div class="shopping-cart-header">
-      <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
-      <div class="shopping-cart-total">
-        <span class="lighter-text">Total:</span>
-        <span class="main-color-text">$2,229.97</span>
-      </div>
-    </div> <!--end shopping-cart-header -->
-
-    <ul class="shopping-cart-items">
-      <li class="clearfix">
-        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
-        <span class="item-name">Sony DSC-RX100M III</span>
-        <span class="item-price">$849.99</span>
-        <span class="item-quantity">Quantity: 01</span>
-      </li>
-
-      <li class="clearfix">
-        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item2.jpg" alt="item1" />
-        <span class="item-name">KS Automatic Mechanic...</span>
-        <span class="item-price">$1,249.99</span>
-        <span class="item-quantity">Quantity: 01</span>
-      </li>
-
-      <li class="clearfix">
-        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item3.jpg" alt="item1" />
-        <span class="item-name">Kindle, 6" Glare-Free To...</span>
-        <span class="item-price">$129.99</span>
-        <span class="item-quantity">Quantity: 01</span>
-      </li>
-    </ul>
-
-    <a href="#" class="button">Checkout</a>
-  </div> <!--end shopping-cart -->
-
-
-
-
-
-
+				<!--================= END: NAVBAR MENU NGANG =================-->
 
 			</div>
 			<div class="row">
+
+				<!--========== START: BODY OF SHOPPING CART ==========-->
+				<div class="shopping-cart">
+					<div class="shopping-cart-header">
+						<i class="fa fa-shopping-cart cart-icon"></i><span class="badge"><?php echo $this->cart->total_items(); ?></span>
+						<div class="shopping-cart-total">
+							<span class="lighter-text">Total:</span>
+							<span class="main-color-text"><?php echo number_format($this->cart->total()); ?>VNĐ</span>
+						</div>
+					</div> 
+
+					<ul class="shopping-cart-items">
+
+					<?php 
+						// var_dump($this->cart->contents());
+
+						foreach ($this->cart->contents() as $item) {
+							?>
+							<li class="clearfix">
+								<!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" /> -->
+								<input type="hidden" id="id" value="<?php echo $item['id']; ?>">
+								<span class="item-name"><?php echo $item['name']; ?></span>
+								<span class="item-price"><?php echo $item['price']; ?>VNĐ</span>
+								<span class="item-quantity">Số lượng:<?php echo $item['qty']; ?></span>
+							</li>
+							<?php
+						}
+					 ?>
+
+
+							<!-- <li class="clearfix">
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
+								<span class="item-name">Sony DSC-RX100M III</span>
+								<span class="item-price">$849.99</span>
+								<span class="item-quantity">Quantity: 01</span>
+							</li> -->
+
+						
+					</ul>
+
+					<a href="#" class="button">Checkout</a>
+				</div> 
+				<!--========== END: BODY OF SHOPPING CART ==========-->
+
+
+
+
+
+
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"> <!-- Menu doc -->
 					<?php 
 					$active = 'adf';				

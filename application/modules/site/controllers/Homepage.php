@@ -7,6 +7,7 @@ class Homepage extends MX_Controller
     {
         parent::__construct();
         $this->load->model('Productmodel');
+        $this->load->library('cart');
     }
     public function index()
     {

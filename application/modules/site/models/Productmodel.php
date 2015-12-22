@@ -56,6 +56,21 @@ class Productmodel extends CI_Model {
 		return $info->result_array();
 	}
 
+	public function check_product_exist($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('product');
+		$nums = $query->num_rows();
+		return $nums;
+	}
+
+	public function get_product_info_by_id($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('product');
+		return $query->row_array();
+	}
+
 
 
 

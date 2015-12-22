@@ -9,22 +9,10 @@ $(document).ready(function() {
 		jQuery(this).find('.addcart').fadeOut(0); 
 		jQuery(this).find('.like').fadeOut(0); 
 	});
-	$('.addcart').click(function(event) {
-		alert("ADD CART");
-		return false;
-	});
+	
 	$('.like').click(function(event) {
 		alert("LIKE");
 		return false;
-	});
-
-	//Show Thumb in View detail
-	$("span.sm_img").click(function(event) {
-		var i=$(this).attr('id');
-		$("div.thumb").addClass('thumb-unactive');
-		$("div#thumb-"+i).removeClass('thumb-unactive');
-		$("div#thumb-"+i).addClass('thumb-active');
-		// $("div#thumb-3").attr('display', 'block');
 	});
 
 	//================= PRODUCT SLIDER BAR =================
