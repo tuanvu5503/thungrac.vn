@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	base_url = $('#base_url').val();
 
-	$(".shopping-cart").sticky({topSpacing:50});
+	$(".shopping-cart").sticky({topSpacing:51});
 
 	$("#cart").on("click", function() {
 	    $(".shopping-cart").fadeToggle( "fast");
@@ -20,7 +20,7 @@ $(document).ready(function() {
 	        data: {id: id},
 	        success: function(msg){
 	        	console.log(msg);
-				if (parseInt(msg) !=0 ) { 
+				if (parseInt(msg) != 0) { 
 
 	            } 
 	        }

@@ -172,7 +172,7 @@
 				<!--========== START: BODY OF SHOPPING CART ==========-->
 				<div class="shopping-cart">
 					<div class="shopping-cart-header">
-						<i class="fa fa-shopping-cart cart-icon"></i><span class="badge"><?php echo $this->cart->total_items(); ?></span>
+						<span style='font-size: 15px; margin-right:8px; color: #fff;' class='glyphicon glyphicon-shopping-cart'></span><span class="badge"><?php echo $this->cart->total_items(); ?></span>
 						<div class="shopping-cart-total">
 							<span class="lighter-text">Total:</span>
 							<span class="main-color-text"><?php echo number_format($this->cart->total()); ?>VNĐ</span>
@@ -187,11 +187,15 @@
 						foreach ($this->cart->contents() as $item) {
 							?>
 							<li class="clearfix">
-								<!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" /> -->
+								<?php if ($this->cart->has_options($item['rowid']) == TRUE): ?>
+                                    <?php foreach ($this->cart->product_options($item['rowid']) as $option_name => $option_value): ?>
+										<img width="70" height="70" src="<?php echo base_url().'public/img/products/'.$option_value; ?>" alt="item1" />
+                                    <?php endforeach; ?>
+		                        <?php endif; ?>
 								<input type="hidden" id="id" value="<?php echo $item['id']; ?>">
 								<span class="item-name"><?php echo $item['name']; ?></span>
-								<span class="item-price"><?php echo $item['price']; ?>VNĐ</span>
-								<span class="item-quantity">Số lượng:<?php echo $item['qty']; ?></span>
+								Giá: <span class="item-price"><?php echo $item['price']; ?>VNĐ</span> <br>
+								Số lượng: <span class="item-quantity"><?php echo $item['qty']; ?></span>
 							</li>
 							<?php
 						}
@@ -207,15 +211,9 @@
 
 						
 					</ul>
-
-					<a href="#" class="button">Checkout</a>
+					<a id="checkout" class="btn btn-primary" href="<?php echo base_url().'index.php/site/cart/view_order' ?>" role="button">Đặt hàng</a>
 				</div> 
 				<!--========== END: BODY OF SHOPPING CART ==========-->
-
-
-
-
-
 
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"> <!-- Menu doc -->
 					<?php 

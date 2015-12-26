@@ -34,4 +34,17 @@ class Cart extends MX_Controller
             var_dump($ok);
         }
     }
+    public function view_order()
+    {
+        $all_superCategory = $this->Productmodel->all_superCategory();
+
+        foreach ($all_superCategory as $row) {
+            $menus[$row['super_categoryName']] = $this->Productmodel->getMenu($row['id']);
+        }
+        $data['menus'] = $menus;
+        $data['menu'] = $this->Productmodel->listCategory();
+        
+        $data['title'] = "View product";
+        $this->load->view('/cart/view_order', $data);
+    }
 }
