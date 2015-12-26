@@ -1,6 +1,113 @@
+<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">  <!-- Slider -->
 
+	<div id="slider">
+		<div class="slide">
+			<img src='<?php echo base_url()."/public/img/slider/slide33.jpg"?> '/>
+			<span> <b>A Tile is good</b><br/>Some text long or short text should be placed here to inform customers of your great products...</span>
+		</div>
+
+		<div class="slide">
+			<img src='<?php echo base_url()."/public/img/slider/slide22.jpg"?> '/>
+			<span> Finally a short text...</span>
+		</div>
+
+		<div class="slide">
+			<img src='<?php echo base_url()."/public/img/slider/slide11.jpg"?> '/>
+			<span> Finally a short text...</span>
+		</div>
+
+	</div>
+</div>
+
+<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"> <!-- Bai viet -->
+	<div id="acticle_head">
+		<img id="acticle_title-icon" src="<?php echo base_url().'public/icon/acticle_title-icon.png' ?>">
+		Tin hot trong tuần
+	</div>
+	<ul class="acticle" data-mcs-theme="dark" style="font-size:15px;">
+		<li>
+			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+		</li>
+
+		<li>
+			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+		</li>
+
+		<li>
+			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+		</li>
+
+		<li>
+			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+		</li>
+
+		<li>
+			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+		</li>
+
+		<li>
+			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+		</li>
+
+		<li>
+			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+		</li>
+
+		<li>
+			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+		</li>
+
+		<li>
+			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+		</li>
+
+		<li>
+			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+		</li>
+
+		<li>
+			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+		</li>
+
+		<li>
+			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+		</li>
+
+		<li>
+			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+		</li>
+
+		<li>
+			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+		</li>
+
+		<li>
+			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+		</li>
+
+		<li>
+			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+		</li>
+	</ul>
+</div>
 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"> <!-- all product -->
-<!--================================= List product by super category =================================-->
+	<!--================================= List product by super category =================================-->
 	<?php 
 	foreach ($products as $key => $value) {
 		?>
@@ -38,14 +145,14 @@
 						</a>
 					</div>
 				</div>
-			<?php
+				<?php
 			}
 			?>		
 		</div>
 		<?php
 	}
-	 ?>
-<!--================================= End List product by super category =================================-->
+	?>
+	<!--================================= End List product by super category =================================-->
 
 
 

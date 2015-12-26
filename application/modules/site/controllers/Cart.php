@@ -38,13 +38,18 @@ class Cart extends MX_Controller
     {
         $all_superCategory = $this->Productmodel->all_superCategory();
 
+        
         foreach ($all_superCategory as $row) {
             $menus[$row['super_categoryName']] = $this->Productmodel->getMenu($row['id']);
         }
+
         $data['menus'] = $menus;
-        $data['menu'] = $this->Productmodel->listCategory();
         
-        $data['title'] = "View product";
-        $this->load->view('/cart/view_order', $data);
+        $data['title'] = "Đặt hàng";
+        $data['subView'] = "/cart/view_order_layout";
+        $data['menu'] = $this->Productmodel->listCategory();
+        $data['subData'] = $data;
+
+        $this->load->view('main_layout', $data);
     }
 }
