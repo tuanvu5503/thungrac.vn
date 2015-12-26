@@ -3,18 +3,27 @@
 	<link href="<?php echo base_url().'public/css/site/cart/style.css' ?>" rel="stylesheet">
 	
     
-    <h1>Shopping Cart</h1>
+    <h1>Đơn đặt hàng</h1>
 
 <div class="shopping-cart2">
 
   <div class="column-labels">
-    <label class="product-image">Image</label>
-    <label class="product-details">Product</label>
-    <label class="product-price">Price</label>
-    <label class="product-quantity">Quantity</label>
-    <label class="product-removal">Remove</label>
-    <label class="product-line-price">Total</label>
+    <label class="product-image">Hình ảnh</label>
+    <label class="product-details">Sản phẩm</label>
+    <label class="product-price">Giá</label>
+    <label class="product-quantity">Số lượng</label>
+    <label class="product-removal">Thao tác</label>
+    <label class="product-line-price">Tổng tiền</label>
   </div>
+
+
+
+
+
+
+
+
+  
 
   <div class="product">
     <div class="product-image">
@@ -36,6 +45,10 @@
     <div class="product-line-price">25.98</div>
   </div>
 
+
+
+
+
   <div class="product">
     <div class="product-image">
       <img src="http://s.cdpn.io/3/large-NutroNaturalChoiceAdultLambMealandRiceDryDogFood.png">
@@ -55,6 +68,9 @@
     </div>
     <div class="product-line-price">45.99</div>
   </div>
+
+
+
 
   <div class="totals">
     <div class="totals-item">

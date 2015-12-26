@@ -87,7 +87,7 @@
 }
 
 #checkout {
-  background-color: #37B8C8;
+  background-color: #6b6;
   border: none;
   color: white;
   text-align: center;
@@ -100,7 +100,7 @@
 
 
 #checkout:hover {
-  background-color: #21737D;
+  background-color: #494;
 }
 
 .clearfix:after {

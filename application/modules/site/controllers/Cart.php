@@ -36,20 +36,32 @@ class Cart extends MX_Controller
     }
     public function view_order()
     {
-        $all_superCategory = $this->Productmodel->all_superCategory();
+        $cart = $this->cart->contents();
+        if ( ! empty($cart) ){
 
-        
-        foreach ($all_superCategory as $row) {
-            $menus[$row['super_categoryName']] = $this->Productmodel->getMenu($row['id']);
+            //=========================== START: INFOMATION OF ORDER PRODUCT ===========================
+            foreach ($this->cart->contents() as $item) {
+                echo $item['id'];
+            }
+            //=========================== END: INFOMATION OF ORDER PRODUCT ===========================
+
+            //=========================== START: MENU ===========================
+            $all_superCategory = $this->Productmodel->all_superCategory();
+            foreach ($all_superCategory as $row) {
+                $menus[$row['super_categoryName']] = $this->Productmodel->getMenu($row['id']);
+            }
+            //=========================== END: MENU ===========================
+
+            
+            $data['menus'] = $menus;
+            $data['title'] = "Đặt hàng";
+            $data['subView'] = "/cart/view_order_layout";
+            $data['menu'] = $this->Productmodel->listCategory();
+            $data['subData'] = $data;
+
+            $this->load->view('main_layout', $data);
+        } else {
+            echo "Ban chua dat hang";
         }
-
-        $data['menus'] = $menus;
-        
-        $data['title'] = "Đặt hàng";
-        $data['subView'] = "/cart/view_order_layout";
-        $data['menu'] = $this->Productmodel->listCategory();
-        $data['subData'] = $data;
-
-        $this->load->view('main_layout', $data);
     }
 }
