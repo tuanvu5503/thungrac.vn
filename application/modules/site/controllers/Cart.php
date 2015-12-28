@@ -28,35 +28,41 @@ class Cart extends MX_Controller
                 'options' => array('image' => $product_info['image'])
                 );
 
-            print_r($data);
             // $ok = $this->cart->destroy($data);
             $ok = $this->cart->insert($data);
-            var_dump($ok);
         }
     }
     public function view_order()
     {
+        // $ok = $this->cart->destroy();
         $cart = $this->cart->contents();
         if ( ! empty($cart) ){
 
             //=========================== START: INFOMATION OF ORDER PRODUCT ===========================
+            $order_product_id = array(); // Array ID of order product
             foreach ($this->cart->contents() as $item) {
-                echo $item['id'];
+                $info = array('id' => $item['id'], 'order_qty' => $item['qty'] );
+                $order_product_info[] = $info;
             }
+            $info_of_order_product_array = $this->Productmodel->info_of_order_product_array($order_product_info);
+            // var_dump($info_of_order_product_array); die;
             //=========================== END: INFOMATION OF ORDER PRODUCT ===========================
 
-            //=========================== START: MENU ===========================
+            //=========================== START: CONTENTS OF MENU ===========================
             $all_superCategory = $this->Productmodel->all_superCategory();
             foreach ($all_superCategory as $row) {
                 $menus[$row['super_categoryName']] = $this->Productmodel->getMenu($row['id']);
             }
-            //=========================== END: MENU ===========================
+            //=========================== END: CONTENTS OF MENU ===========================
 
             
+            $data['info_of_order_product_array'] = $info_of_order_product_array;
             $data['menus'] = $menus;
             $data['title'] = "Đặt hàng";
             $data['subView'] = "/cart/view_order_layout";
             $data['menu'] = $this->Productmodel->listCategory();
+           
+
             $data['subData'] = $data;
 
             $this->load->view('main_layout', $data);
