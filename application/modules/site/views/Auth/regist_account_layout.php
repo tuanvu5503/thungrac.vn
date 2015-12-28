@@ -14,48 +14,41 @@
     <div id="content">
       <h1>Đăng ký tài khoản</h1>
       
-      <form id="registerform" method="post" action="#">
+      <form id="registerform" method="post" action="<?php echo base_url().'index.php/site/auth/regist_account' ?>">
         <div class="formrow">
-          <label for="username">Username</label>
-          <input data-progression="" type="text" name="username" id="username" class="basetxt" tabindex="1" data-helper="Any name with at least 6 characters.">
-          <p class="errmsg">Please add some more characters</p>
+          <label for="username">Tên đăng nhập</label>
+          <input required data-progression="" type="text" name="username" id="username" class="basetxt" tabindex="1" data-helper="Nhập ít nhất 6 ký tự">
+          <p class="errmsg">Username không hợp lệ!</p>
         </div>
         
         <div class="formrow">
-          <label for="email">Email Address</label>
-          <input data-progression="" type="email" name="email" id="email" class="basetxt" tabindex="2" data-helper="Where do we send your verification email?">
-          <p class="errmsg">Please enter a proper e-mail</p>
+          <label for="email">Email</label>
+          <input data-progression="" type="email" name="email" id="email" class="basetxt" tabindex="2" data-helper="Nhập địa chỉ email của bạn!">
+          <p class="errmsg">Email không hợp lệ!</p>
         </div>
 
          <div class="formrow">
           <label for="email">Số điện thoại</label>
-          <input data-progression="" type="email" name="email" id="email" class="basetxt" tabindex="2" data-helper="Where do we send your verification email?">
-          <p class="errmsg">Please enter a proper e-mail</p>
+          <input required data-progression="" type="text" name="phone" id="phone" class="basetxt" tabindex="2" data-helper="Nhập số điện thoại của bạn!">
+          <p class="errmsg">Số điện thoại không đúng!</p>
         </div>
         
         <div class="formrow">
-          <label for="password1">Password</label>
-          <input data-progression="" type="password" name="password1" id="password1" class="basetxt" tabindex="3" data-helper="Make sure you can remember it!">
+          <label for="password1">Mật khẩu</label>
+          <input required data-progression="" type="password" name="password1" id="password1" class="basetxt" tabindex="3" data-helper="Nhập mật khẩu!">
         </div>
         
         <div class="formrow">
-          <label for="password2">Password(again)</label>
-          <input data-progression="" type="password" name="password2" id="password2" class="basetxt" tabindex="4" data-helper="Please re-enter the password again.">
-          <p class="errmsg">Passwords do not match!</p>
+          <label for="password2">Nhập lại mật khẩu</label>
+          <input required data-progression="" type="password" name="password2" id="password2" class="basetxt" tabindex="4" data-helper="Nhập lại mật khẩu!">
+          <p class="errmsg">Mật khẩu không khớp nhau!</p>
         </div>
         
-        <input type="submit" id="submitformbtn" class="submitbtn" value="Sign Up">
+        <input type="submit" id="submitformbtn" class="submitbtn" value="Đăng ký">
       </form>
     </div><!-- @end #content -->
   </div><!-- @end #w -->
     
- <div class="footer-bar">
-    <span class="article-wrapper">
-        <span class="article-label">Xem Bài Viết: </span>
-        <span class="article-link"><a href="http://www.thuthuatweb.net/css/tao-registration-form-don-gian-voi-jquery-va-css3.html">Tạo Registration Form đơn giản với jQuery và CSS3</a></span>
-    </span>
-    
-</div>
     
 <script type="text/javascript">
 $(function(){
@@ -73,7 +66,7 @@ $(function(){
     tooltipPadding: '7',
     tooltipAnimate: true
   }).submit(function(e){
-    e.preventDefault();
+    // e.preventDefault();
   });
   
   $('#username').on('blur', function(){
@@ -93,6 +86,17 @@ $(function(){
     
     var pattern = new RegExp(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/);
     if(!pattern.test(mailval)) {
+      $(this).next('.errmsg').slideDown();
+    } else {
+      $(this).next('.errmsg').slideUp();
+    }
+  });
+
+  $('#phone').on('blur', function(){
+    var phone_val = $(this).val();
+    
+    var pattern = new RegExp(/^[0-9]{9,11}$/);
+    if(!pattern.test(phone_val)) {
       $(this).next('.errmsg').slideDown();
     } else {
       $(this).next('.errmsg').slideUp();

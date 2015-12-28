@@ -7,11 +7,11 @@ class Auth extends MX_Controller
     {
         parent::__construct();
         $this->load->library('cart');
+        $this->load->model('Productmodel');
         // $this->load->model('Auth');
     }
     public function regist_account()
     {
-        $this->load->model('Productmodel');
 
         //=========================== START: CONTENTS OF MENU ===========================
         $all_superCategory = $this->Productmodel->all_superCategory();
