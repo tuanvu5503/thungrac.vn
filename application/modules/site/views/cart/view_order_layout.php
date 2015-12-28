@@ -1,4 +1,4 @@
-<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">  <!-- Slider -->
+<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
 	<link href="<?php echo base_url().'public/css/site/cart/normalize.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/cart/style.css' ?>" rel="stylesheet">
 	
