@@ -1,6 +1,6 @@
 /* Set rates + misc */
-var taxRate = 0.05;
-var shippingRate = 15.00; 
+var taxRate = 0;
+var shippingRate = 0; 
 var fadeTime = 300;
 
 
@@ -21,7 +21,7 @@ function recalculateCart()
   
   /* Sum up row totals */
   $('.product').each(function () {
-    subtotal += parseFloat($(this).children('.product-line-price').text());
+    subtotal += parseFloat($(this).children('.product-line-price').text().replace(",", ""));
   });
   
   /* Calculate totals */
@@ -34,7 +34,7 @@ function recalculateCart()
     $('#cart-subtotal').html(subtotal.toFixed(2));
     $('#cart-tax').html(tax.toFixed(2));
     $('#cart-shipping').html(shipping.toFixed(2));
-    $('#cart-total').html(total.toFixed(2));
+    $('#cart-total').html(formatNumber(total));
     if(total == 0){
       $('.checkout').fadeOut(fadeTime);
     }else{
@@ -57,7 +57,7 @@ function updateQuantity(quantityInput)
   /* Update line price display and recalc cart totals */
   productRow.children('.product-line-price').each(function () {
     $(this).fadeOut(fadeTime, function() {
-      $(this).text(linePrice.toFixed(2));
+      $(this).text(formatNumber(linePrice));
       recalculateCart();
       $(this).fadeIn(fadeTime);
     });
@@ -74,4 +74,17 @@ function removeItem(removeButton)
     productRow.remove();
     recalculateCart();
   });
+}
+
+function formatNumber(number)
+{
+    var number = number.toFixed(0) + '';
+    var x = number.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
 }

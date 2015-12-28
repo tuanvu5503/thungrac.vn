@@ -78,7 +78,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a style="font-size:14px; font-weight:bold;" class="navbar-brand" href="<?php echo base_url(); ?>"><span style="margin-right:8px;" class="glyphicon glyphicon-home"></span>TRANG CHỦ</a>
+					<a style="font-size:14px; font-weight:bold;" class="navbar-brand" href="<?php echo base_url(); ?>"><span style="margin-right:8px;" class="glyphicon glyphicon-home"></span></a>
 				</div>
 
 				<div id="menu" class="navbar-collapse collapse">
@@ -114,11 +114,17 @@
 					</ul>
 
 					<!--========== START: ICON SHOPPING CART ==========-->
-					<ul id="cart" class="nav navbar-nav navbar-right">
-				      	<li>
-				      		<a id="cart"><span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng <span class="badge"><?php echo $this->cart->total_items(); ?></span></a>
-				      	</li>
-				    </ul> 
+					<?php 
+						if ($this->uri->segment(3) != 'view_order') {
+							?>
+							<ul id="cart" class="nav navbar-nav navbar-right">
+						      	<li>
+						      		<a id="cart"><span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng <span class="badge"><?php echo $this->cart->total_items(); ?></span></a>
+						      	</li>
+						    </ul> 
+							<?php	
+						}
+					?>
 					<!--========== END: ICON SHOPPING CART ==========-->
 
 						<!-- <ul style="margin-right:10px;" class="nav navbar-nav navbar-right">
@@ -160,7 +166,7 @@
 							<div class="form-group">
 								<input type="text" id="search_val" name="key" value="<?php if (isset($_GET['key'])) echo $_GET['key']; ?>" class="form-control" placeholder="Bạn tìm gì?">
 							</div>
-							<button type="submit" id="btn_search" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Tìm</button>
+							<!-- <button type="submit" id="btn_search" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Tìm</button> -->
 						</form>
 					</div>
 				</nav>
