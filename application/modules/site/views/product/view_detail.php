@@ -38,13 +38,13 @@
 
 	<!-- ================================ MY JS =================================== -->
 	<script src="<?php echo base_url().'public/js/site/jquery.bxslider.js'?>"></script>
-	<script src="<?php echo base_url().'public/js/site/jquery.elevatezoom.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/site/jquery.sticky.js'?>"></script>
 
 	<script src="<?php echo base_url().'public/js/site/products.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/site/menu.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/site/hmenu.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/site/smoothproducts.js'?>"></script>
+	<script src="<?php echo base_url().'public/js/site/zoom_product.js'?>"></script>
 	<!-- ================================ MY JS =================================== -->
 
 </head>
@@ -208,22 +208,6 @@
 					?>
 				</div>
 			</div>
-
-
-
-
-
-
-
-<script type="text/javascript">
-    /* wait for images to load */
-    $(window).load( function() {
-        $('.sp-wrap').smoothproducts();
-    });
-</script>
-
-
-
 
 			<div class="col-xs-4 col-xs-offset-1 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-1">
 				<div id="product_name"> <?php echo $product_name; ?></div>

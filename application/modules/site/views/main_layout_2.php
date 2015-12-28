@@ -78,7 +78,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a style="font-size:14px; font-weight:bold;" class="navbar-brand" href="<?php echo base_url(); ?>"><span style="margin-right:8px;" class="glyphicon glyphicon-home"></span></a>
+					<a style="font-size:14px; font-weight:bold;" class="navbar-brand" href="<?php echo base_url(); ?>"><span style="margin-right:8px;" class="glyphicon glyphicon-home"></span>TRANG CHỦ</a>
 				</div>
 
 				<div id="menu" class="navbar-collapse collapse">
@@ -114,17 +114,11 @@
 					</ul>
 
 					<!--========== START: ICON SHOPPING CART ==========-->
-					<?php 
-						if ($this->uri->segment(3) != 'view_order') {
-							?>
-							<ul id="cart" class="nav navbar-nav navbar-right">
-						      	<li>
-						      		<a id="cart"><span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng <span class="badge"><?php echo $this->cart->total_items(); ?></span></a>
-						      	</li>
-						    </ul> 
-							<?php	
-						}
-					?>
+					<ul id="cart" class="nav navbar-nav navbar-right">
+				      	<li>
+				      		<a id="cart"><span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng <span class="badge"><?php echo $this->cart->total_items(); ?></span></a>
+				      	</li>
+				    </ul> 
 					<!--========== END: ICON SHOPPING CART ==========-->
 
 						<!-- <ul style="margin-right:10px;" class="nav navbar-nav navbar-right">
@@ -166,7 +160,7 @@
 							<div class="form-group">
 								<input type="text" id="search_val" name="key" value="<?php if (isset($_GET['key'])) echo $_GET['key']; ?>" class="form-control" placeholder="Bạn tìm gì?">
 							</div>
-							<!-- <button type="submit" id="btn_search" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Tìm</button> -->
+							<button type="submit" id="btn_search" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Tìm</button>
 						</form>
 					</div>
 				</nav>
@@ -243,7 +237,114 @@
 					</ul>
 				</div>
 
-				
+				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">  <!-- Slider -->
+
+					<div id="slider">
+						<div class="slide">
+							<img src='<?php echo base_url()."/public/img/slider/slide33.jpg"?> '/>
+							<span> <b>A Tile is good</b><br/>Some text long or short text should be placed here to inform customers of your great products...</span>
+						</div>
+
+						<div class="slide">
+							<img src='<?php echo base_url()."/public/img/slider/slide22.jpg"?> '/>
+							<span> Finally a short text...</span>
+						</div>
+
+						<div class="slide">
+							<img src='<?php echo base_url()."/public/img/slider/slide11.jpg"?> '/>
+							<span> Finally a short text...</span>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"> <!-- Bai viet -->
+					<div id="acticle_head">
+						<img id="acticle_title-icon" src="<?php echo base_url().'public/icon/acticle_title-icon.png' ?>">
+						Tin hot trong tuần
+					</div>
+					<ul class="acticle" data-mcs-theme="dark" style="font-size:15px;">
+						<li>
+							<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+							<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+						</li>
+
+						<li>
+							<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+							<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+						</li>
+
+						<li>
+							<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+							<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+						</li>
+
+						<li>
+							<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+							<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+						</li>
+
+						<li>
+							<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+							<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+						</li>
+
+						<li>
+							<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+							<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+						</li>
+
+						<li>
+							<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+							<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+						</li>
+
+						<li>
+							<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+							<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+						</li>
+
+						<li>
+							<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+							<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+						</li>
+
+						<li>
+							<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+							<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+						</li>
+
+						<li>
+							<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+							<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+						</li>
+
+						<li>
+							<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+							<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+						</li>
+
+						<li>
+							<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+							<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+						</li>
+
+						<li>
+							<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+							<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+						</li>
+
+						<li>
+							<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+							<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+						</li>
+
+						<li>
+							<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+							<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
+						</li>
+					</ul>
+				</div>
 
 				<!--=========================== LOAD CONTENT ===========================-->
 				<?php 

@@ -7,13 +7,14 @@ class Homepage extends MX_Controller
     {
         parent::__construct();
         $this->load->model('Productmodel');
+        $this->load->library('cart');
     }
     public function index()
     {
         $this->load->helper('convert');
         $all_superCategory = $this->Productmodel->all_superCategory();
 
-        $products['SẢN PHẨM MỚI'] = $this->Productmodel->new_product();;
+        $products['SẢN PHẨM MỚI'] = $this->Productmodel->new_product();
         foreach ($all_superCategory as $row) {
             $products[$row['super_categoryName']] = $this->Productmodel->listProductbySuperId($row['id']);
             $menus[$row['super_categoryName']] = $this->Productmodel->getMenu($row['id']);
