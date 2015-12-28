@@ -71,7 +71,20 @@ class Productmodel extends CI_Model {
 		return $query->row_array();
 	}
 
+	public function info_of_order_product_array($order_product_info)
+	{
+		$info_of_product = array();
+		$info_of_order_product = array();
+		foreach ($order_product_info as $value) {
+			$info_of_product =  $this->get_product_info_by_id($value['id']);
+			$info_of_product['order_qty'] = $value['order_qty']; // Add order_qty field
+			$info_of_product['price_x_order_qty'] = $info_of_product['price'] * $value['order_qty']; // Add price_x_order_qty field
 
+			$info_of_order_product[] = $info_of_product;
+		}
+		
+		return $info_of_order_product;
+	}
 
 
 
