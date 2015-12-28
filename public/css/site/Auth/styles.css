@@ -268,13 +268,6 @@ label {
   text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
 }
 
-/** clearfix **/
-.clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
-.clearfix { display: inline-block; }
- 
-html[xmlns] .clearfix { display: block; }
-* html .clearfix { height: 1%; }
-
 /*Thats all. I hope you enjoyed it.
 Thanks :)*/
 /***************************************************************/
