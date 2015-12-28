@@ -87,6 +87,7 @@ $db['default'] = array(
 	// 'hostname' => 'localhost',
 	// 'username' => 'root',
 	// 'password' => '',
+	// 'database' => 'tuanvu-tr',
 
 
 	// 'hostname' => 'sql213.freevnn.com',
