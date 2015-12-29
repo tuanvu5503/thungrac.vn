@@ -17,7 +17,7 @@
       <form id="registerform" method="post" action="<?php echo base_url().'index.php/site/auth/regist_account' ?>">
         <div class="formrow">
           <label for="username">Tên đăng nhập</label>
-          <input required data-progression="" type="text" name="username" id="username" class="basetxt" tabindex="1" data-helper="Nhập ít nhất 6 ký tự">
+          <input data-progression="" type="text" name="username" id="username" class="basetxt" tabindex="1" data-helper="Nhập ít nhất 6 ký tự">
           <p class="errmsg">Username không hợp lệ!</p>
         </div>
         
@@ -28,23 +28,23 @@
         </div>
 
          <div class="formrow">
-          <label for="email">Số điện thoại</label>
-          <input required data-progression="" type="text" name="phone" id="phone" class="basetxt" tabindex="2" data-helper="Nhập số điện thoại của bạn!">
+          <label for="phone">Số điện thoại</label>
+          <input data-progression="" type="text" name="phone" id="phone" class="basetxt" tabindex="2" data-helper="Nhập số điện thoại của bạn!">
           <p class="errmsg">Số điện thoại không đúng!</p>
         </div>
         
         <div class="formrow">
           <label for="password1">Mật khẩu</label>
-          <input required data-progression="" type="password" name="password1" id="password1" class="basetxt" tabindex="3" data-helper="Nhập mật khẩu!">
+          <input data-progression="" type="password" name="password1" id="password1" class="basetxt" tabindex="3" data-helper="Nhập mật khẩu!">
         </div>
         
         <div class="formrow">
           <label for="password2">Nhập lại mật khẩu</label>
-          <input required data-progression="" type="password" name="password2" id="password2" class="basetxt" tabindex="4" data-helper="Nhập lại mật khẩu!">
+          <input data-progression="" type="password" name="password2" id="password2" class="basetxt" tabindex="4" data-helper="Nhập lại mật khẩu!">
           <p class="errmsg">Mật khẩu không khớp nhau!</p>
         </div>
         
-        <input type="submit" id="submitformbtn" class="submitbtn" value="Đăng ký">
+        <input type="submit" name="registion_button" id="submitformbtn" class="submitbtn" value="Đăng ký">
       </form>
     </div><!-- @end #content -->
   </div><!-- @end #w -->

@@ -16,13 +16,12 @@ $(document).ready(function() {
 		$.ajax({
 			url: base_url+'index.php/site/cart/add_cart',
 			type: 'POST',
-			dataType: 'text',
+			dataType: 'json',
 	        data: {id: id},
 	        success: function(msg){
-	        	console.log(msg);
-				if (parseInt(msg) != 0) { 
-
-	            } 
+				if (msg.status) {
+					location.reload();
+				}
 	        }
 	    });
 		
