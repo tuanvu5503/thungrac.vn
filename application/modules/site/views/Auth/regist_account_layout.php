@@ -5,6 +5,21 @@
   <meta http-equiv="Content-Type" content="text/html">
   <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url().'public/css/site/Auth/styles.css'; ?>">
   <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url().'public/css/site/Auth/progression.min.css'; ?>">
+  <style type="text/css">
+      div.error{
+        width: 100%;
+        background-color: #FD9800;
+        margin-bottom: 20px;
+      }
+
+      span.error_items{
+        line-height: 20px;
+        margin-left: 10px;
+        font-size: 14px;
+        color: #fff;
+        font-weight: bold;
+      }
+  </style>
   <script type="text/javascript" src="<?php echo base_url().'public/js/site/Auth/progression.min.js'; ?>"></script>
 </head>
 
@@ -13,23 +28,33 @@
   <div id="w">
     <div id="content">
       <h1>Đăng ký tài khoản</h1>
-      
+      <div class="error">
+        <?php 
+        if (isset($error)) {
+          foreach ($error as $key => $value) {
+            ?>
+            <span class='error_items'><?php echo $value; ?></span> <br>
+            <?php
+          }
+        }
+         ?>
+      </div>
       <form id="registerform" method="post" action="<?php echo base_url().'index.php/site/auth/regist_account' ?>">
         <div class="formrow">
           <label for="username">Tên đăng nhập</label>
-          <input data-progression="" type="text" name="username" id="username" class="basetxt" tabindex="1" data-helper="Nhập ít nhất 6 ký tự">
+          <input value="<?php if (isset($re_username)) echo $re_username; ?>" data-progression="" type="text" name="username" id="username" class="basetxt" tabindex="1" data-helper="Nhập ít nhất 4 ký tự">
           <p class="errmsg">Username không hợp lệ!</p>
         </div>
         
         <div class="formrow">
           <label for="email">Email</label>
-          <input data-progression="" type="email" name="email" id="email" class="basetxt" tabindex="2" data-helper="Nhập địa chỉ email của bạn!">
+          <input value="<?php if (isset($re_email)) echo $re_email; ?>" data-progression="" type="email" name="email" id="email" class="basetxt" tabindex="2" data-helper="Nhập địa chỉ email của bạn!">
           <p class="errmsg">Email không hợp lệ!</p>
         </div>
 
          <div class="formrow">
           <label for="phone">Số điện thoại</label>
-          <input data-progression="" type="text" name="phone" id="phone" class="basetxt" tabindex="2" data-helper="Nhập số điện thoại của bạn!">
+          <input value="<?php if (isset($re_phone)) echo $re_phone; ?>" data-progression="" type="text" name="phone" id="phone" class="basetxt" tabindex="2" data-helper="Nhập số điện thoại của bạn!">
           <p class="errmsg">Số điện thoại không đúng!</p>
         </div>
         
@@ -72,7 +97,7 @@ $(function(){
   $('#username').on('blur', function(){
     var currval = $(this).val();
     
-    if(currval.length < 6) {
+    if(currval.length < 4) {
       $(this).next('.errmsg').slideDown();
     } else {
       // the username is 6 or more characters and we hide the error
