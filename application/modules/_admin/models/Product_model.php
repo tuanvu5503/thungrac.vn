@@ -36,19 +36,11 @@ class Product_model extends CI_Model {
 
 	public function limit_product($start,$limit,$key='')
 	{
-		// if ($key != '') {
-		// 	$sql="select c.category_name, p.* from product p, category c where p.category_id = c.id and product_name like '%$key%'  order by p.id desc limit $start, $limit";
-		// } else {
-			$sql="select c.category_name, p.* from product p, category c where p.category_id = c.id";
-			if ($key != '') {
-				$sql .= "and product_name like '%$key%'";
-			    
-			}
-			if (isset($data['user_name'])) {
-				$sql .= "and user_name like '%$$data['user_name']%'";
-			}
-			$sql .= " order by p.id desc limit $start, $limit";
-		// }
+		if (isset($key)) {
+			$sql="select * from product where product_name like '%$key%'  order by id desc limit $start, $limit";
+		} else {
+			$sql="select * from product order by id desc limit $start, $limit";
+		}
 		$info = $this->db->query($sql);
 		return $info->result_array();
 	}

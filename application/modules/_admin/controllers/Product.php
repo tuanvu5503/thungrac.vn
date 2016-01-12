@@ -51,6 +51,7 @@ class Product extends MX_Controller {
         $start = $start == null ? 0 : $start;
         // var_dump($start);
         $data['all_pro'] = $this->Product->limit_product($start, $config['per_page']);
+        var_dump($data);
         $this->load->view('/product/product_layout', $data);
 
         // $this->output->cache(20);
