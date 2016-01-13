@@ -3,37 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Product_model extends CI_Model {
 
-	public function all_product()
-	{
-		$all_product = $this->db->select("select * from product p, category c where p.category_id = c.id");
-		return $all_product;
-	}
-
-	public function getProductbyID($product_id)
-	{
-		$list = $this->db->select("select * from product where id=".$product_id);
-		return $list;
-	}
-
-	public function checkCategory($category_id)
-	{
-		$sql="select count(*) from category where id = ".$category_id;
-		$rs = $this->db->get_row($sql);
-		return $rs ? true : false;
-	}
-
-	public function checkProductName($product_name, $id='')
-	{
-		if (isset($id)) {
-			$id  = (int) $id;
-			$sql = "select count(*) from product where product_name = '$product_name' and id !=".$id;
-		} else {
-			$sql = "select count(*) from product where product_name = '$product_name'";
-		}
-		$rs = $this->db->get_row($sql);
-		return $rs ? true : false;
-	}
-
 	public function limit_product($start,$limit,$key='')
 	{
 		if (isset($key)) {
@@ -56,6 +25,67 @@ class Product_model extends CI_Model {
 		$row  = count($info->result_array());
 		return $row;
 	}
+
+	public function get_category_name_by_id($product_id)
+	{
+		$this->db->select('category_name');
+		$this->db->where('product.id', $product_id);
+		$this->db->join('category', 'product.category_id = category.id', 'left');
+
+		$query = $this->db->get('product');
+		$arr_category_name = $query->result_array()[0];
+		foreach ($arr_category_name as $value) {
+			return $value;
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public function getProductbyID($product_id)
+	{
+		$list = $this->db->query("select * from product where id=".$product_id);
+		var_dump( $list->result_array()); die;
+		return $list->result_array();
+	}
+
+
+	public function all_product()
+	{
+		$all_product = $this->db->select("select * from product p, category c where p.category_id = c.id");
+		return $all_product;
+	}
+
+	public function checkCategory($category_id)
+	{
+		$sql="select count(*) from category where id = ".$category_id;
+		$rs = $this->db->get_row($sql);
+		return $rs ? true : false;
+	}
+
+	public function checkProductName($product_name, $id='')
+	{
+		if (isset($id)) {
+			$id  = (int) $id;
+			$sql = "select count(*) from product where product_name = '$product_name' and id !=".$id;
+		} else {
+			$sql = "select count(*) from product where product_name = '$product_name'";
+		}
+		$rs = $this->db->get_row($sql);
+		return $rs ? true : false;
+	}
+
+
 
 	public function del($tbl, $del_id)
 	{
