@@ -49,9 +49,14 @@ class Product extends MX_Controller {
 
         $start=$this->uri->segment(4);
         $start = $start == null ? 0 : $start;
-        // var_dump($start);
         $data['all_pro'] = $this->Product->limit_product($start, $config['per_page']);
-        $this->load->view('/product/product_layout', $data);
+        foreach ($data['all_pro'] as &$item) {
+            $item['category_name'] = $this->Product->get_category_name_by_id($item['id']);
+        }
+        // var_dump($data);
+        $data['subView'] = "/product/product_layout";
+        $data['subData'] = $data;
+        $this->load->view('/main/main_layout', $data);
 
         // $this->output->cache(20);
     }

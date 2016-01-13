@@ -22,10 +22,10 @@ class Homepage extends MX_Controller
 
         $data['products'] = $products;
         $data['menus'] = $menus;
+        $data['menu'] = $this->Productmodel->listCategory();
         
         $data['title'] = "Thungrac Online";
         $data['subView'] = "allProduct_layout";
-        $data['menu'] = $this->Productmodel->listCategory();
         $data['subData'] = $data;
 
         $this->load->view('main_layout', $data);

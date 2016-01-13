@@ -30,6 +30,13 @@ class Cart extends MX_Controller
 
             // $ok = $this->cart->destroy($data);
             $ok = $this->cart->insert($data);
+            if ($ok) {
+                $rs['status'] = true;
+            } else {
+                $rs['status'] = false;
+            }
+
+            echo json_encode($rs);
         }
     }
     public function view_order()

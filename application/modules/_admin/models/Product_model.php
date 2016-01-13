@@ -3,16 +3,67 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Product_model extends CI_Model {
 
+	public function limit_product($start,$limit,$key='')
+	{
+		if (isset($key)) {
+			$sql="select * from product where product_name like '%$key%'  order by id desc limit $start, $limit";
+		} else {
+			$sql="select * from product order by id desc limit $start, $limit";
+		}
+		$info = $this->db->query($sql);
+		return $info->result_array();
+	}
+
+	public function total_record_product($key='')
+	{
+		if (isset($key)) {
+			$sql="select * from product where product_name like '%$key%' ";
+		} else {
+			$sql="select * from product";
+		}
+		$info = $this->db->query($sql);
+		$row  = count($info->result_array());
+		return $row;
+	}
+
+	public function get_category_name_by_id($product_id)
+	{
+		$this->db->select('category_name');
+		$this->db->where('product.id', $product_id);
+		$this->db->join('category', 'product.category_id = category.id', 'left');
+
+		$query = $this->db->get('product');
+		$arr_category_name = $query->result_array()[0];
+		foreach ($arr_category_name as $value) {
+			return $value;
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public function getProductbyID($product_id)
+	{
+		$list = $this->db->query("select * from product where id=".$product_id);
+		var_dump( $list->result_array()); die;
+		return $list->result_array();
+	}
+
+
 	public function all_product()
 	{
 		$all_product = $this->db->select("select * from product p, category c where p.category_id = c.id");
 		return $all_product;
-	}
-
-	public function getProductbyID($product_id)
-	{
-		$list = $this->db->select("select * from product where id=".$product_id);
-		return $list;
 	}
 
 	public function checkCategory($category_id)
@@ -34,36 +85,7 @@ class Product_model extends CI_Model {
 		return $rs ? true : false;
 	}
 
-	public function limit_product($start,$limit,$key='')
-	{
-		// if ($key != '') {
-		// 	$sql="select c.category_name, p.* from product p, category c where p.category_id = c.id and product_name like '%$key%'  order by p.id desc limit $start, $limit";
-		// } else {
-			$sql="select c.category_name, p.* from product p, category c where p.category_id = c.id";
-			if ($key != '') {
-				$sql .= "and product_name like '%$key%'";
-			    
-			}
-			if (isset($data['user_name'])) {
-				$sql .= "and user_name like '%$$data['user_name']%'";
-			}
-			$sql .= " order by p.id desc limit $start, $limit";
-		// }
-		$info = $this->db->query($sql);
-		return $info->result_array();
-	}
 
-	public function total_record_product($key='')
-	{
-		if (isset($key)) {
-			$sql="select * from product where product_name like '%$key%' ";
-		} else {
-			$sql="select * from product";
-		}
-		$info = $this->db->query($sql);
-		$row  = count($info->result_array());
-		return $row;
-	}
 
 	public function del($tbl, $del_id)
 	{

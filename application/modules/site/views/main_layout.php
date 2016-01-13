@@ -117,7 +117,7 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thành viên <span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Đăng ký</a></li>
+								<li><a href="<?php echo base_url().'index.php/site/auth/regist_account' ?>">Đăng ký</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="#">Đăng nhập</a></li>
 							</ul>
