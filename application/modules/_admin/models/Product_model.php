@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Product_model extends CI_Model {
 
+	private $table = 'product';
+
 	public function limit_product($start,$limit,$key='')
 	{
 		if (isset($key)) {
@@ -39,9 +41,34 @@ class Product_model extends CI_Model {
 		}
 	}
 
+	public function removeImage($del_id)
+	{
+		$detail_image='';
+		$img = $this->db->query('select image, detail_image from product where id = '.$del_id);
+		foreach ($img->result_array() as $row) {
+			$detail_image=$row['detail_image'];
+			@unlink('public/img/products/'.$row['image']);
+		}
+		$detail_image=explode('|',$detail_image);
 
+		for ($i = 0; $i < count($detail_image); $i++) {
+			@unlink('public/img/detail_img/'.$detail_image[$i]);
+		}
+	}
 
+	public function getProductNamebyId($id)
+	{
+		$info = $this->db->query("select product_name from product where id=".$id);
+		foreach ($info->result_array() as $row) {
 
+			return $row['product_name'];
+		}; 
+	}
+
+	public function del_product_by_id($del_id)
+	{
+		return $this->db->delete($this->table,  array('id' => $del_id));
+	}
 
 
 
@@ -87,25 +114,8 @@ class Product_model extends CI_Model {
 
 
 
-	public function del($tbl, $del_id)
-	{
-		return $this->db->del($tbl, $del_id);
-	}
+	
 
-	public function removeImage($del_id)
-	{
-		$detail_image='';
-		$img = $this->db->select('select image, detail_image from product where id = '.$del_id);
-		foreach ($img as $row) {
-			$detail_image=$row['detail_image'];
-			@unlink('public/img/products/'.$row['image']);
-		}
-		$detail_image=explode('|',$detail_image);
-
-		for ($i = 0; $i < count($detail_image); $i++) {
-			@unlink('public/img/detail_img/'.$detail_image[$i]);
-		}
-	}
 
 	public function get_category()
 	{
@@ -144,13 +154,6 @@ class Product_model extends CI_Model {
 		return $rs;
 	}
 
-	public function getProductNamebyId($id)
-	{
-		$info = $this->db->select("select product_name from product where id=".$id);
-		foreach ($info as $row) {
-
-			return $row['product_name'];
-		}; 
-	}
+	
 }
 

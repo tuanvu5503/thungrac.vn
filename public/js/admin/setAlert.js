@@ -10,6 +10,7 @@ function deleteCookie (cname) {
 }
 
 function setAlert(name) {
+    console.log('Ham setAlert nay da thay doi'); 
     content = $.cookie(name);
     deleteCookie(name);
     if (content) {
@@ -20,5 +21,16 @@ function setAlert(name) {
             showAlert('#failed-alert');
             $.cookie('failed','');
         }
+    }
+} 
+
+function set_alert(status, msg) {
+    if (status == 1) {
+        $("strong.mess").text(msg);
+        showAlert('#success-alert');
+
+    } else {
+        $("strong.mess").text(msg);
+        showAlert('#failed-alert');
     }
 } 

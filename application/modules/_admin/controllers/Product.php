@@ -6,20 +6,25 @@ class Product extends MX_Controller {
     {
         parent::__construct();
         $this->load->model('Product_model', 'Product');
+
+        session_start();
+        if (!isset($_SESSION['user'])) {
+            header("location:".base_url()."index.php/_admin/login/");
+        }
     }
 
     public function index()
     {
         $data['title'] = "Quản lý sản phẩm";
-        // $this->load->menuadmin();
+
         //========================== PHÂN TRANG ==========================
         $total_record = $this->Product->total_record_product();
 
         $this->load->library('pagination');
         
-        $config['base_url'] = base_url().'index.php/home/product/index';
+        $config['base_url'] = base_url().'index.php/_admin/product/index';
         $config['total_rows'] = $total_record;
-        $config['per_page'] = 5;
+        $config['per_page'] = 10;
         $config['uri_segment'] = 4;
         $config['num_links'] = 3;
         
@@ -54,12 +59,57 @@ class Product extends MX_Controller {
             $item['category_name'] = $this->Product->get_category_name_by_id($item['id']);
         }
         // var_dump($data);
+        $data['total_product'] = $total_record;
         $data['subView'] = "/product/product_layout";
         $data['subData'] = $data;
         $this->load->view('/main/main_layout', $data);
 
         // $this->output->cache(20);
     }
+
+     public function del_product ()
+    {
+        if(isset($_POST["del_id"]) && is_numeric($_POST["del_id"]))
+        {
+            if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
+                die();
+            }
+            $error = array();
+            $del_id = $_POST['del_id'];
+            $del_id = (int) filter_var($del_id, FILTER_SANITIZE_NUMBER_INT);
+
+            $this->Product->removeImage($del_id);
+            $error['product_name'] = $this->Product->getProductNamebyId($del_id);
+            $error['status'] = $this->Product->del_product_by_id($del_id);
+            echo json_encode($error);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function search ()
     {
@@ -95,23 +145,7 @@ class Product extends MX_Controller {
         }
     }
 
-    public function del_product ()
-    {
-        if(isset($_POST["del_id"]) && is_numeric($_POST["del_id"]))
-        {
-            if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
-                die();
-            }
-            $alert = array();
-            $del_id = $_POST['del_id'];
-            $del_id = (int) filter_var($del_id, FILTER_SANITIZE_NUMBER_INT);
-
-            $this->Product->removeImage($del_id);
-            $alert['product_name'] = $this->Product->getProductNamebyId($del_id);
-            $alert['status'] = $this->Product->del('product', $del_id);
-            echo json_encode($alert);
-        }
-    }
+   
 
     public function add ()
     {

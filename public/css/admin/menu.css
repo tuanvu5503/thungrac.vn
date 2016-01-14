@@ -2,6 +2,7 @@ div.header_bar{
 	width: 100%;
 	line-height: 50px;
 	background-color: #3c8dbc;
+	height: 45px;
 }
 
 div.menu{
@@ -11,6 +12,7 @@ div.menu{
 	height: 600px;
 	color: #fff;
 	padding-top: 10px;
+    margin-left: 15px;
 }
 div#user_panel{
 	margin: 0 10px 10px 10px;
@@ -88,7 +90,6 @@ a.action{
 	display: block;
 	cursor: default;
 	background-color: #1C2832;
-	font-size: 16px;
 	font-weight: 500;
 	padding-left: 20px;
 	border-left: 5px #1C2832 solid;

@@ -1,6 +1,10 @@
-<legend style="margin-top:50px; margin-bottom:50px; text-align:center;">DANH MỤC SẢN PHẨM</legend>
+<script type="text/javascript">
+	var delete_url = '<?php echo base_url()."index.php/_admin/product/del_product"?>';
+</script>
 
-<table style="margin-top:50px;" class="table table-striped table-hover">
+<legend style="margin-top:10px; margin-bottom:20px; text-align:center;">DANH MỤC SẢN PHẨM (<?= $total_product;?>)</legend>
+
+<table style="margin-top:10px;" class="table table-striped table-hover">
 	<thead>
 		<tr>
 			<th style="text-align:center;">#</th>
@@ -24,8 +28,9 @@
 				</tr>
 			<?php
 		} else {
-			$page = isset($_GET['page']) ? $_GET['page'] : 1;
-			$stt= ($page * 5) - 5; 
+	
+			$stt = $this->uri->segment(4) == null ? 0 : $this->uri->segment(4);
+		
 			foreach ($all_pro as $row) {
 				$stt++;
 				?>
@@ -37,7 +42,7 @@
 					<td style="text-align:right;"><?php echo number_format($row['price']).'$' ?></td>
 					<td><?php echo number_format($row['qty']) ?></td>
 					<td>
-						<a href="<?php echo base_url().'admin/product/edit/'.$row['id'].'/'.$page; ?>">
+						<a href="<?php echo base_url().'admin/product/edit/'.$row['id'] ?>">
 							<span class="icon_action glyphicon glyphicon-pencil"></span>
 						</a>
 						<a class="delete" data-toggle="modal" data-id="<?php echo $row['id'] ?>" href='#modal_delete'>
@@ -58,31 +63,3 @@
 ?>
 </div>
 
-<script type="text/javascript">
-	$("a.delete").click(function(event) {
-		var id = $(this).data('id');
-		$("input#del_id").val(id);
-	});
-	$("button.delete").click(function(event) {
-		$('#modal_delete').modal('hide');
-		del_id = $("input#del_id").val();
-		$.ajax({
-			url: '<?php echo base_url()."admin/product/del_product"?>',
-			type: 'POST',
-			dataType: 'json',
-			data: 
-			{
-				del_id: del_id
-			},
-			success: function(msg){
-				if (msg.status)
-	            {
-	                $.cookie('success','Xóa sản phẩm '+msg.product_name+' thành công');
-	                setAlert('success');
-	                $("tr#"+del_id).addClass('remove');
-	            } 
-			}
-		});
-
-	});
-</script>

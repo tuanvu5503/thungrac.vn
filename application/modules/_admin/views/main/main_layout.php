@@ -17,6 +17,7 @@
 	<!--===================================== My CSS =====================================-->
 	<link href="<?php echo base_url().'public/css/admin/menu.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/admin/product.css' ?>" rel="stylesheet">
+	<link href="<?php echo base_url().'public/css/admin/main.css' ?>" rel="stylesheet">
 	<!--===================================== My CSS =====================================-->
 
 	<!-- Bootstrap CSS -->
@@ -83,12 +84,12 @@
          <!--============================ Thong bao loi ============================-->
 
 		<!--============================== Alert ==============================-->
-		<div style="display:none;" id="success-alert" class="text-center alert alert-success">
+		<div style="display:none;" id="success-alert" class="show_alert text-center alert alert-success">
 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 			<strong class='mess'></strong>
 		</div>
 
-		<div style="display:none;" id="failed-alert" class="text-center alert alert-danger">
+		<div style="display:none;" id="failed-alert" class="show_alert text-center alert alert-danger">
 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 			<strong class='mess'></strong>
 		</div>
@@ -112,7 +113,7 @@
 			<?php 
 				$active = 'product';
 			 ?>
-			<div class="menu">
+			<!-- <div class="menu">
 				<div id="user_panel">
 					<img src="<?php echo base_url().'public/img/avatar/a.png' ?>" width="50px" height="50px">
 					<div id="profile"><span id="edit_user" class="glyphicon glyphicon-pencil"></span></div>
@@ -134,9 +135,47 @@
 				</div>
 
 				<div id="title_dashboard">BẢNG ĐIỀU HƯỚNG</div>
-				<a href="<?php echo base_url().'admin/product' ?>" class="action <?php if ($active == 'product') echo ' act_active';?>"><span class="glyphicon glyphicon-gift"></span> Quản lý sản phẩm</a>
+				<a href="<?php echo base_url().'index.php/_admin/product' ?>" class="action <?php if ($active == 'product') echo ' act_active';?>"><span class="glyphicon glyphicon-gift"></span> Quản lý sản phẩm</a>
 				<a href="#" class="action"><span class="glyphicon glyphicon-shopping-cart"></span> Quản lý đơn hàng</a>
 				<a href="#" class="action"><span class="glyphicon glyphicon-user"></span> Quản lý account</a>
+				<a href="#" class="action"><span class="glyphicon glyphicon-envelope"></span> Hộp thư góp ý</a>
+			</div>
+		</div> -->
+
+		<div class="menu">
+
+				<div id="user_panel">
+					<li id="logout" class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="<?php if ($_SESSION['user']['avatar'] != '') echo base_url().'public/img/avatar/'.$_SESSION['user']['avatar']; else echo base_url().'public/img/avatar/noimage.jpg'; ?>" width="50px" height="50px"></a>
+						<ul class="dropdown-menu">
+							<li><a href="<?php echo base_url().'admin/account/edit/'.$_SESSION['user']['id']; ?>">Chỉnh sửa</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="<?php echo base_url().'index.php/_admin/login/logout' ?>">Đăng xuất</a></li>
+						</ul>
+					</li>
+					<div id="user_name"><?php echo $_SESSION['user']['username'];  ?></div>
+					<div id="online"><img  style="margin-right:3px; padding-top:3px;" src="<?php echo base_url().'public/icon/online.png' ?>">Online</div>
+					<!-- <div id="profile"><span id="edit_user" class="glyphicon glyphicon-pencil"></span></div> -->
+				</div>
+
+				<div id="fm_search">
+					<form action="<?php echo base_url().'admin/product/search' ?>" method="get" class="sidebar-form">
+						<div class="input-group">
+							<input name="key" value="<?php if (isset($_GET['key'])) echo $_GET['key']; ?>" id="input_search" class="form-control" placeholder="Search product..." type="text">
+							<span class="input-group-btn">
+								<button type="submit" id="search-btn" class="btn">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</span>
+						</div>
+					</form>
+				</div>
+
+				<div id="title_dashboard">BẢNG ĐIỀU HƯỚNG</div>
+				<a href="<?php echo base_url().'admin/category/' ?>" class="action <?php if ($active == 'category') echo ' act_active';?>"><span class="glyphicon glyphicon-list-alt"></span> Quản lý danh mục</a>
+				<a href="<?php echo base_url().'index.php/_admin/product/' ?>" class="action <?php if ($active == 'product') echo ' act_active';?>"><span class="glyphicon glyphicon-gift"></span> Quản lý sản phẩm</a>
+				<a href="#" class="action"><span class="glyphicon glyphicon-shopping-cart"></span> Quản lý đơn hàng</a>
+				<a href="<?php echo base_url().'admin/account/' ?>" class="action <?php if ($active == 'account') echo ' act_active';?>"><span class="glyphicon glyphicon-user"></span> Quản lý account</a>
 				<a href="#" class="action"><span class="glyphicon glyphicon-envelope"></span> Hộp thư góp ý</a>
 			</div>
 		</div>

@@ -1,0 +1,5 @@
+.show_alert{
+	position: fixed;
+	z-index: 1000;
+	width: 100%;
+}
