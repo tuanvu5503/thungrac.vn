@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'http://shop9.freevnn.com';
-// $config['base_url'] = 'http://localhost/thungrac.vn';
+$config['base_url'] = 'http://localhost/thungrac.vn';
 
 /*
 |--------------------------------------------------------------------------

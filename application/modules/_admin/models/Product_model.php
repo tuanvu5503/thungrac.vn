@@ -70,21 +70,38 @@ class Product_model extends CI_Model {
 		return $this->db->delete($this->table,  array('id' => $del_id));
 	}
 
-
-
-
-
-
-
-
-
-
 	public function getProductbyID($product_id)
 	{
 		$list = $this->db->query("select * from product where id=".$product_id);
-		var_dump( $list->result_array()); die;
 		return $list->result_array();
 	}
+
+	public function check_product_by_id($product_id)
+	{
+		$this->db->where('id', $product_id);
+		$num = $this->db->get($this->table)->num_rows();
+		return $num > 0 ? true : false;
+	}
+
+	public function getAvatar($id)
+	{
+		$this->db->select('image');
+		$this->db->where('id', $id);
+		$image = $this->db->get($this->table)->result_array();
+		foreach ($image as $row) {
+			foreach ($row as $val) {
+				$rs = $val;
+			}
+		}
+		return $rs;
+	}
+
+
+
+
+
+
+
 
 
 	public function all_product()
@@ -112,15 +129,33 @@ class Product_model extends CI_Model {
 		return $rs ? true : false;
 	}
 
+	public function get_category()
+	{
+		return $this->db->query('select * from category')->result_array();
+	}
+
+	public function getDetail_image($id)
+	{
+		$this->db->select('detail_image');
+		$this->db->where('id', $id);
+		$list = $this->db->get($this->table)->result_array();
+		foreach ($list as $row) {
+			foreach ($row as $val) {
+				$rs = $val;
+			}
+		}
+		return $rs;
+	}
+
+
+
+
+
 
 
 	
 
 
-	public function get_category()
-	{
-		return $this->db->select('select * from category');
-	}
 
 	public function insert($table, $array)
 	{
@@ -132,28 +167,8 @@ class Product_model extends CI_Model {
 		return $this->db->update('product',$id, $array);
 	}
 
-	public function getAvatar($id)
-	{
-		$image = $this->db->select('select image from product where id='.$id);
-		foreach ($image as $row) {
-			foreach ($row as $val) {
-				$rs = $val;
-			}
-		}
-		return $rs;
-	}
 
-	public function getDetail_image($id)
-	{
-		$detail_image = $this->db->select('select detail_image from product where id='.$id);
-		foreach ($detail_image as $row) {
-			foreach ($row as $val) {
-				$rs = $val;
-			}
-		}
-		return $rs;
-	}
-
+	
 	
 }
 

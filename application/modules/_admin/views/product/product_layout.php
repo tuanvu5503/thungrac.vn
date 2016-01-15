@@ -11,13 +11,14 @@
 			<th style="text-align:center;">Hình đại diện</th>
 			<th style="text-align:center;">Tên sản phẩm</th>
 			<th style="text-align:center;">Loại sản phẩm</th>
-			<th style="text-align:center;">Giá</th>
+			<th style="text-align:center;">Giá (VNĐ)</th>
 			<th style="text-align:center;">Số lượng</th>
 			<th style="text-align:center;">Thao tác</th>
 		</tr>
 	</thead>
 	<tbody>
 		<?php 
+		$page = $this->uri->segment(4) == null ? 1 : $this->uri->segment(4);
 		if (count($all_pro) == 0) {
 			?>
 				<!-- NO DATA -->
@@ -39,10 +40,10 @@
 					<td><img style="margin: 0 auto;" width="70px" src="<?php echo base_url().'public/img/products/'.$row['image'] ?>" class="img-responsive" alt="Image"></td>
 					<td><?php echo htmlspecialchars($row['product_name']); ?></td>
 					<td><?php echo htmlspecialchars($row['category_name']) ?></td>
-					<td style="text-align:right;"><?php echo number_format($row['price']).'$' ?></td>
+					<td style="text-align:right;"><?php echo number_format($row['price']) ?></td>
 					<td><?php echo number_format($row['qty']) ?></td>
 					<td>
-						<a href="<?php echo base_url().'admin/product/edit/'.$row['id'] ?>">
+						<a href="<?php echo base_url().'index.php/_admin/product/edit/'.$row['id'].'/'.$page ?>">
 							<span class="icon_action glyphicon glyphicon-pencil"></span>
 						</a>
 						<a class="delete" data-toggle="modal" data-id="<?php echo $row['id'] ?>" href='#modal_delete'>
