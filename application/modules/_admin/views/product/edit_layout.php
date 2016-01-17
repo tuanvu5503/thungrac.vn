@@ -1,11 +1,8 @@
-	<!--===================================== My CSS =====================================-->
-	<link href="<?php echo base_url().'public/css/admin/menu.css' ?>" rel="stylesheet">
+    <!--===================================== My CSS =====================================-->
 	<link href="<?php echo base_url().'public/css/admin/edit_product.css' ?>" rel="stylesheet">
 	<!--===================================== My CSS =====================================-->
 
-	<!-- ===============================       MY JS         ======================== -->
-	<script src="<?php echo base_url().'public/js/admin/menu.js'?>"></script>
-	<script src="<?php echo base_url().'public/js/admin/header.js'?>"></script>
+	<!-- ===============================      MY JS         ======================== -->
 	<script src="<?php echo base_url().'public/js/admin/edit_product.js'?>"></script>
 	<!-- ===============================      MY JS         ======================== -->
          	
@@ -22,7 +19,7 @@
  			$detail_image = htmlspecialchars($row['detail_image']);
  		}
  	}
-	?>
+    ?>
 <legend style="margin-top:50px; margin-bottom:50px; text-align:center;">Cập nhật sản phẩm</legend>
 <form action="<?php echo base_url().'index.php/_admin/product/doedit' ?>" method="POST" enctype="multipart/form-data">
     <div class="wrap">
@@ -45,8 +42,8 @@
         </div>
 
         <div id="hidden">
-        	<input name="id" type="hidden" value="<?php if (isset($id)) echo $id; ?>">	
-        	<input name="page" type="hidden" value="<?php if (isset($re_page)) echo $re_page; elseif (isset($page)) echo $page; ?>">	
+            <input name="id" type="hidden" value="<?php if (isset($id)) echo $id; ?>">  
+            <input name="page" type="hidden" value="<?php if (isset($re_page)) echo $re_page; elseif (isset($page)) echo $page; ?>">    
         </div>
 
         <div id="pro_name">
@@ -67,7 +64,7 @@
             </select>
         </div>
         <div id="price">
-            <label for="gia">GIÁ BÁN ($)</label>
+            <label for="gia">GIÁ BÁN (VNĐ)</label>
             <input value="<?php if (isset($re_price)) echo $re_price; elseif (isset($price)) echo $price; ?>" name="price" type="text" class="form-control add" id="gia" placeholder="Nhập giá sản phẩm">
         </div>
         <div id="qty"><label for="soluong">SỐ LƯỢNG</label>
@@ -83,12 +80,12 @@
     <br>
     <table style="width:400px;" class="table">
         <tbody id="add">
-        	<?php 
-        	$info = explode('|', $detail_image); 
-        	if ($detail_image != '') {
-            	foreach ($info as $value) {
-            		?>
-            		<tr>
+            <?php 
+            $info = explode('|', $detail_image); 
+            if ($detail_image != '') {
+                foreach ($info as $value) {
+                    ?>
+                    <tr>
                         <td>
                             <img width="100" src="<?php echo base_url().'public/img/detail_img/'.$value ?>" class="img-responsive" alt="Image"> 
                         </td>
@@ -96,16 +93,16 @@
                             <button id="<?php echo $value; ?>" type="button" class="delete_detail_img xoaanh btn btn-xs btn-default">Xóa</button>
                         </td>
                     </tr>
-            		<?php
-            	}
-        	}
-        	?>
+                    <?php
+                }
+            }
+            ?>
             <tr>
                 <td>
                     <input type="file" name="detail_img[]">   
                 </td>
                 <td>
-                    <button type="button" class="xoaanh btn btn-xs btn-default">hủy</button>
+                    <button type="button" class="xoaanh btn btn-xs btn-default">Xóa</button>
                 </td>
             </tr>
             <tr>
@@ -113,3 +110,4 @@
     </table>
     <button id="0" type="button" class="addmore btn btn-info">Thêm ảnh chi tiết</button>  
 </form>
+    <?php die; ?>

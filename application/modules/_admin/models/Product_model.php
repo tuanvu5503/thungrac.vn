@@ -96,6 +96,32 @@ class Product_model extends CI_Model {
 		return $rs;
 	}
 
+	public function checkproduct_name($product_name, $id='')
+	{
+		if ($id != '') {
+			$this->db->where('id !=', $id);
+		}
+		$this->db->where('product_name', $product_name);
+		$num = $this->db->get($this->table)->num_rows();
+		return $num > 0 ? true : false;
+	}
+
+	public function update($id, $array)
+	{
+		$this->db->where('id', $id);
+		return $this->db->update($this->table, $array);
+	}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -110,12 +136,7 @@ class Product_model extends CI_Model {
 		return $all_product;
 	}
 
-	public function checkCategory($category_id)
-	{
-		$sql="select count(*) from category where id = ".$category_id;
-		$rs = $this->db->get_row($sql);
-		return $rs ? true : false;
-	}
+	
 
 	public function checkProductName($product_name, $id='')
 	{
@@ -147,25 +168,12 @@ class Product_model extends CI_Model {
 		return $rs;
 	}
 
-
-
-
-
-
-
-	
-
-
-
 	public function insert($table, $array)
 	{
 		return $this->db->insert($table, $array);
 	}
 
-	public function update($id, $array)
-	{
-		return $this->db->update('product',$id, $array);
-	}
+	
 
 
 	

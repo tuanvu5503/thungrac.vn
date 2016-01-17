@@ -38,7 +38,6 @@ class Login extends MX_Controller {
 
     public function logout()
     {
-        session_start();
         session_destroy();
         $this->index();
     }

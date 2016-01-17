@@ -6,8 +6,8 @@ class Product extends MX_Controller {
     {
         parent::__construct();
         $this->load->model('Product_model', 'Product');
-
-        session_start();
+        $this->load->model('Category_model', 'Category');
+        // session_start();
         if (!isset($_SESSION['user'])) {
             header("location:".base_url()."index.php/_admin/login/");
         }
@@ -114,7 +114,6 @@ class Product extends MX_Controller {
             $purifier = new HTMLPurifier($config);
             // $clean_html = $purifier->purify($dirty_html); //su dung
             //============================== Purifier ==============================
-
             $war = array();
             $loi = array();
             $id = $_POST['id'];
@@ -127,9 +126,8 @@ class Product extends MX_Controller {
             $old_detail_image = $this->Product->getDetail_image($id);
             // die('here');
             $old_avatar  = $this->Product->getAvatar($id);
-            $delete_detail_img = $_POST['delete_detail_img'];
-            // var_dump($delete_detail_img); die('here');
-
+            $delete_detail_img = empty($_POST['delete_detail_img']) ? array() : $_POST['delete_detail_img'];
+            
             $glad = false;
             if (count($_FILES['detail_img']['name']) > 0) {
                 $imgs=$_FILES['detail_img'];
@@ -137,30 +135,38 @@ class Product extends MX_Controller {
                 $tmp_name_detail_img=array();
                 for($i = 0; $i < count($_FILES['detail_img']['name']); $i++)
                 {
-                    if (strlen($_FILES['detail_img']['name'][$i]) > 0) {
-                        $type = end(explode(".", $_FILES['detail_img']['name'][$i]));
-                        if (strtolower($type) != 'jpg' && strtolower($type) != 'gif'
+            // var_dump($_FILES['detail_img']); 
+            //         var_dump($_FILES['detail_img']['error'][$i]); die;
+                    if ($_FILES['detail_img']['error'][$i] == 0) {
+                        $tmp = new SplFileInfo($_FILES['detail_img']['name'][$i]);
+                        // var_dump($info->getExtension()); die;
+                        $type = $tmp->getExtension();
+                        if (strtolower($type) != 'jpg' 
+                            && strtolower($type) != 'gif'
                             && strtolower($type) != 'png'
-                            ) {
+                        ){
                             $war[] = "Không đúng định dạng ảnh cho phép!";
-                    } elseif ( ! isImage($_FILES['detail_img']['tmp_name'][$i])) {
-                        $war[] = "Không phải là file ảnh!";
-                    } elseif ($_FILES['detail_img']['size'][$i] > 1024000) {
-                        $war[] = "Ảnh chi tiết lớn hơn 1MB";
+                        } elseif ($_FILES['detail_img']['size'][$i] > 1024000) {
+                            $war[] = "Ảnh chi tiết lớn hơn 1MB";
+                        } elseif ( ! isImage($_FILES['detail_img']['tmp_name'][$i])) {
+                            die('here');
+                            $war[] = "Không phải là file ảnh!";
+                        } else {
+                            $url= $url.'|'.htmlspecialchars(md5($_POST['product_name'])).'-'.$i.time().'.'.$type;
+                            $tmp_name_detail_img[] = $_FILES['detail_img']['tmp_name'][$i];
+                        }
                     } else {
-                        $url= $url.'|'.htmlspecialchars(md5($_POST['product_name'])).'-'.$i.time().'.'.$type;
-                        $tmp_name_detail_img[] = $_FILES['detail_img']['tmp_name'][$i];
+                        $war[] = "Có lỗi xảy ra khi upload ảnh";
                     }
                 }
-            }
 
-            if (trim($url,'|') != '') {
-                $new_detail_image = trim($url,'|');
-                $insert_data['detail_image'] = $old_detail_image.'|'.$new_detail_image;
-                $insert_data['detail_image'] = trim($insert_data['detail_image'],'|');
-                $glad = true;
+                if (trim($url,'|') != '') {
+                    $new_detail_image = trim($url,'|');
+                    $insert_data['detail_image'] = $old_detail_image.'|'.$new_detail_image;
+                    $insert_data['detail_image'] = trim($insert_data['detail_image'],'|');
+                    $glad = true;
+                }
             }
-        }
 
         if (!empty($delete_detail_img)) {
             if ($glad) {
@@ -175,8 +181,11 @@ class Product extends MX_Controller {
             }
             $insert_data['detail_image'] = trim($insert_data['detail_image'],'|');
         }
-        $avatar_name = $_FILES['avatar']['name'];
-            $avatar_type = end(explode(".",$avatar_name)); // lay phan mo rong(.jpg|.gif)
+            $avatar_name = $_FILES['avatar']['name'];
+
+            $tmp = new SplFileInfo($avatar_name);
+            $avatar_type = $tmp->getExtension();
+
             $insert_data['product_name'] = trim_input($_POST["product_name"]);
             $insert_data['category_id'] = $_POST["category_id"];
             $insert_data['des'] = $purifier->purify($_POST["des"]);
@@ -184,20 +193,20 @@ class Product extends MX_Controller {
             $insert_data['price'] = trim_input($_POST["price"]);
             $insert_data['qty'] = trim_input($_POST["qty"]);
 
-            //====================== Validate  ======================
-            if (!empty($_FILES['avatar']['name'])) {
-                if (strtolower($avatar_type) != 'jpg' && strtolower($avatar_type) != 'gif'
-                    && strtolower($avatar_type) != 'png'
-                    ) {
-                    $loi[] = "Định dạng ảnh không cho phép!";
-            } elseif ( ! isImage($_FILES['avatar']['tmp_name'])) {
-                $loi[] = "Không phải là file ảnh!";
-            } elseif ($_FILES['avatar']['size'] > 1024000) {
-                $loi[] = "Ảnh đại diện phải < 1MB";
-            } else {
-                $tmp_name_avatar = $_FILES['avatar']['tmp_name'];
-                $insert_data['image'] = md5($insert_data['product_name']).'-'.time().'.'.$avatar_type;
-            }
+        //====================== Validate START ======================
+        if (!empty($_FILES['avatar']['name'])) {
+            if (strtolower($avatar_type) != 'jpg' && strtolower($avatar_type) != 'gif'
+                && strtolower($avatar_type) != 'png'
+                ) {
+                $loi[] = "Định dạng ảnh không cho phép!";
+        } elseif ( ! isImage($_FILES['avatar']['tmp_name'])) {
+            $loi[] = "Không phải là file ảnh!";
+        } elseif ($_FILES['avatar']['size'] > 1024000) {
+            $loi[] = "Ảnh đại diện phải < 1MB";
+        } else {
+            $tmp_name_avatar = $_FILES['avatar']['tmp_name'];
+            $insert_data['image'] = md5($insert_data['product_name']).'-'.time().'.'.$avatar_type;
+        }
         }
         if (empty($_POST["product_name"]))  {
             $loi[] = "Tên sản phẩm không được rỗng";
@@ -220,7 +229,7 @@ class Product extends MX_Controller {
         if (empty($insert_data['category_id'])) {
             $loi[] = "Chưa chọn loại sản phẩm!";
         } elseif (!is_numeric($insert_data['category_id'])
-            || !$this->Product->checkCategory($insert_data['category_id'])
+            || !$this->Category->checkCategory($insert_data['category_id'])
             ) {
 
             $loi[] = "Loại sản phẩm không hợp lệ!";
@@ -235,7 +244,7 @@ class Product extends MX_Controller {
                 $loi[] = "Số lượng phải là kiểu số!";
             }
         } 
-            //====================== Validate  ======================
+            //====================== Validate END ======================
 
         if (count($loi) > 0) {
             $redata['re_product_name'] = $_POST['product_name'];
@@ -244,13 +253,16 @@ class Product extends MX_Controller {
             $redata['re_qty'] = $_POST['qty'];
             $redata['re_des'] = $_POST['des'];
             $redata['re_page'] = $page;
-            $redata['title'] = "Thêm mới sản phẩm";
-            $redata['error'] = $loi;
-            $this->load->headeradmin();
-            $this->load->menuadmin();
             $redata['category'] = $this->Product->get_category();
             $redata['info'] = $this->Product->getProductbyID($id);
-            $this->load->view('/product/edit_layout', $redata);
+            
+            // $data['error'] = $loi;
+            $data['subView'] = '/product/edit_layout';
+            $data['title'] = 'Chỉnh sửa sản phẩm';
+            $data['subData'] = $redata;
+// var_dump($data); die;
+            $this->session->set_flashdata('error', $loi);
+            $this->load->view('/main/main_layout', $data);
             die;
         }
 
@@ -291,14 +303,14 @@ class Product extends MX_Controller {
                     session_start();
                     $war['title'] = 'Cập nhật sản phẩm '.$insert_data['product_name'].' thành công!';
                     $_SESSION['war'] = $war;
-                    header('location:'.base_url().'admin/product');
+                    header('location:'.base_url().'index.php/_admin/product');
                 } else {
                     $mess = 'Cập nhật sản phẩm '.$insert_data["product_name"].' thành công!';
                     setcookie('success', $mess, time() + 1);
-                    header('location:'.base_url().'admin/product?page='.$page);
+                    header('location:'.base_url().'index.php/_admin/product/index/'.$page);
                 }
             } else {
-                header('location:'.base_url().'admin/product');
+                header('location:'.base_url().'index.php/_admin/product');
             }
         }
     }
@@ -445,7 +457,7 @@ class Product extends MX_Controller {
         if (empty($insert_data['category_id'])) {
             $loi[] = "Chưa chọn loại sản phẩm!";
         } elseif (!is_numeric($insert_data['category_id'])
-            || !$this->Product->checkCategory($insert_data['category_id'])
+            || !$this->Category->checkCategory($insert_data['category_id'])
             ) {
             $loi[] = "Loại sản phẩm không hợp lệ!";
         }

@@ -15,20 +15,15 @@
 	</style>
 
 	<!--===================================== My CSS =====================================-->
+	<link href="<?php echo base_url().'public/bootstrap/css/bootstrap.min.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/admin/menu.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/admin/product.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/admin/main.css' ?>" rel="stylesheet">
 	<!--===================================== My CSS =====================================-->
 
-	<!-- Bootstrap CSS -->
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-	<!-- jQuery -->
-	<script src="//code.jquery.com/jquery.js"></script>
-	<!-- Bootstrap JavaScript -->
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-
 	<!-- ===============================       MY JS         ======================== -->
+	<script src="<?php echo base_url().'public/jquery/jquery.js'?>"></script>
+	<script src="<?php echo base_url().'public/bootstrap/js/bootstrap.min.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/admin/jquery.cookie.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/admin/setAlert.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/admin/product.js'?>"></script>
@@ -84,9 +79,23 @@
          <!--============================ Thong bao loi ============================-->
 
 		<!--============================== Alert ==============================-->
-		<div style="display:none;" id="success-alert" class="show_alert text-center alert alert-success">
+		<div
+			<?php 
+				if (null !== $this->session->userdata('error')) {
+					echo 'style="display:block;"';
+				} else {
+					echo 'style="display:none;"';
+				}
+			?>	
+	 		id="success-alert" class="show_alert text-center alert alert-success">
 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			<strong class='mess'></strong>
+			<strong class='mess'>
+				<?php 
+					if (null !== $this->session->userdata('error')) {
+						var_dump($this->session->userdata('error'));
+					}
+				?>				
+			</strong>
 		</div>
 
 		<div style="display:none;" id="failed-alert" class="show_alert text-center alert alert-danger">
