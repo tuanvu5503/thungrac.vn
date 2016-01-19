@@ -16,7 +16,7 @@
 
 	<!--===================================== My CSS =====================================-->
 	<link href="<?php echo base_url().'public/bootstrap/css/bootstrap.min.css' ?>" rel="stylesheet">
-	<link href="<?php echo base_url().'public/css/admin/menu.css' ?>" rel="stylesheet">
+	<link href="<?php echo base_url().'public/css/admin/menu/menu.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/admin/product.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/admin/main.css' ?>" rel="stylesheet">
 	<!--===================================== My CSS =====================================-->
@@ -27,7 +27,7 @@
 	<script src="<?php echo base_url().'public/js/admin/jquery.cookie.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/admin/setAlert.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/admin/product.js'?>"></script>
-	<script src="<?php echo base_url().'public/js/admin/menu.js'?>"></script>
+	<script src="<?php echo base_url().'public/js/admin/menu/menu.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/admin/main/header.js'?>"></script>
 	<!-- ===============================      MY JS         ======================== -->
 
@@ -181,11 +181,32 @@
 				</div>
 
 				<div id="title_dashboard">BẢNG ĐIỀU HƯỚNG</div>
-				<a href="<?php echo base_url().'admin/category/' ?>" class="action <?php if ($active == 'category') echo ' act_active';?>"><span class="glyphicon glyphicon-list-alt"></span> Quản lý danh mục</a>
-				<a href="<?php echo base_url().'index.php/_admin/product/' ?>" class="action <?php if ($active == 'product') echo ' act_active';?>"><span class="glyphicon glyphicon-gift"></span> Quản lý sản phẩm</a>
-				<a href="#" class="action"><span class="glyphicon glyphicon-shopping-cart"></span> Quản lý đơn hàng</a>
-				<a href="<?php echo base_url().'admin/account/' ?>" class="action <?php if ($active == 'account') echo ' act_active';?>"><span class="glyphicon glyphicon-user"></span> Quản lý account</a>
-				<a href="#" class="action"><span class="glyphicon glyphicon-envelope"></span> Hộp thư góp ý</a>
+				<ul class="nav panel-group nav-stacked" id="stacked-menu">
+
+					<li class="menu_collapse">
+						<a data-target="#category" data-toggle="collapse" data-parent="#stacked-menu"><span class="glyphicon glyphicon-list-alt"></span> Quản lý danh mục<span class="caret arrow"></span></a>
+					</li>
+						<ul class="nav nav-stacked collapse left-submenu" id="category">
+							<li class="action <?php if ($active == 'super_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/category/show_super_category' ?>">Danh mục loại sản phẩm</a></li>
+							<li class="action <?php if ($active == 'sub_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/category/show_sub_category' ?>">Danh mục sản phẩm</a></li>
+						</ul>
+
+					<li class="menu_collapse">
+						<a data-target="#product" data-toggle="collapse" data-parent="#stacked-menu"><span class="glyphicon glyphicon-gift"></span> Quản lý sản phẩm<span class="caret arrow"></span></a>
+					</li>
+						<ul class="nav nav-stacked collapse left-submenu" id="product">
+							<li class="action <?php if ($active == 'super_category') echo ' act_active';?>"><a href="google.com">Tất cả sản phẩm</a></li>
+							<li class="action <?php if ($active == 'super_category') echo ' act_active';?>"><a href="google.com">Sản phẩm nhà vệ sinh</a></li>
+							<li class="action <?php if ($active == 'sub_category') echo ' act_active';?>"><a href="gmail.com">Sản phẩm thùng rác</a></li>
+							<li class="action <?php if ($active == 'sub_category') echo ' act_active';?>"><a href="gmail.com">Sản phẩm khác</a></li>
+						</ul>
+
+
+					<li class="action <?php if ($active == 'account') echo ' act_active';?>"><a href="#" ><span class="glyphicon glyphicon-shopping-cart"></span> Quản lý đơn hàng</a></li>
+					<li class="action <?php if ($active == 'account') echo ' act_active';?>"><a href="<?php echo base_url().'admin/account/' ?>" ><span class="glyphicon glyphicon-user"></span> Quản lý account</a></li>
+					<li class="action <?php if ($active == 'account') echo ' act_active';?>"><a href="#" ><span class="glyphicon glyphicon-envelope"></span> Hộp thư góp ý</a></li>
+
+				</ul>
 			</div>
 		</div>
 		<!--============================== Menu END ==============================-->

@@ -58,7 +58,7 @@
 		?>
 	</tbody>
 </table>
-<a style="float:left; margin-top:20px;" class="btn btn-primary" href="<?php echo base_url().'admin/product/add' ?>" role="button">THÊM SẢN PHẨM</a>
+<a style="float:left; margin-top:20px;" class="btn btn-primary" href="<?php echo base_url().'index.php/_admin/product/add' ?>" role="button">THÊM SẢN PHẨM</a>
 <?php 
 	echo $pagination;
 ?>

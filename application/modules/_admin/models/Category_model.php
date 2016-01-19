@@ -3,32 +3,50 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Category_model extends CI_Model {
 
-	private $table = 'category';
-
 	public function checkCategory($id)
 	{
 		$this->db->where('id', $id);
-		$num = $this->db->get($this->table)->num_rows();
+		$num = $this->db->get('category')->num_rows();
 		return $num > 0 ? true : false;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-	public function listAll()
+	public function list_all_sub_category()
 	{
-		$list = $this->db->select("select * from category");
-		return $list;
+		$arr_sub_category = $this->db->get('category')->result_array();
+		if( ! empty($arr_sub_category)) {
+			foreach ($arr_sub_category as &$item) {
+				$item['super_categoryName'] = $this->get_super_category_name_by_id($item['super_categoryId']);
+				// unset($item);
+				// var_dump($item['super_categoryName']); die;
+			}
+		}
+
+		return $arr_sub_category;
 	}
+
+	public function list_all_super_category()
+	{
+		return $this->db->get('super_category')->result_array();
+	}
+
+	public function get_super_category_name_by_id($super_categoryId) 
+	{
+		$this->db->select('super_categoryName');
+		$this->db->where('id', $super_categoryId);
+		return $this->db->get('super_category')->result_array()[0]['super_categoryName'];
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 	public function getCategorybyID($category_name)
 	{

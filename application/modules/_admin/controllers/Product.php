@@ -315,65 +315,6 @@ class Product extends MX_Controller {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function search ()
-    {
-        if (isset($_GET['key']))
-        {
-            $key = filter_var($_GET['key'], FILTER_SANITIZE_STRING);
-            $key = trim($key);
-
-            //=======================  PHÂN TRANG  ======================= 
-            $total_record = $this->Product->total_record_product($key);
-            $limit = 5;
-            $current_page=isset($_GET['page']) ? $_GET['page'] : 1;
-            $start = ($current_page - 1) * $limit;
-            //Cau hinh phan trang
-            $config = array(
-                'current_page'  => $current_page,
-                'total_record'  => $total_record, 
-                'limit'         => $limit,
-                'link_full'     => '?key='.$key.'&page={page}',
-                'link_first'    => '',
-                'range'         => 5 
-                );
-            $this->load->library('Pagination');
-            $this->Pagination->config($config);
-            $data['pagination'] = $this->Pagination->create_link();
-            //=======================  PHÂN TRANG  ======================= 
-
-            $data['all_pro'] = $this->Product->limit_product($start, $limit, $key);
-            $this->load->headeradmin();
-            $this->load->menuadmin();
-            $data['title'] = "Tìm kiếm";
-            $this->load->view('/product/product_layout', $data);
-        }
-    }
-
-   
-
     public function add ()
     {
         if(isset($_POST["btnSubmit"])){
@@ -531,6 +472,65 @@ class Product extends MX_Controller {
             $this->load->view('/product/add_layout', $data);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function search ()
+    {
+        if (isset($_GET['key']))
+        {
+            $key = filter_var($_GET['key'], FILTER_SANITIZE_STRING);
+            $key = trim($key);
+
+            //=======================  PHÂN TRANG  ======================= 
+            $total_record = $this->Product->total_record_product($key);
+            $limit = 5;
+            $current_page=isset($_GET['page']) ? $_GET['page'] : 1;
+            $start = ($current_page - 1) * $limit;
+            //Cau hinh phan trang
+            $config = array(
+                'current_page'  => $current_page,
+                'total_record'  => $total_record, 
+                'limit'         => $limit,
+                'link_full'     => '?key='.$key.'&page={page}',
+                'link_first'    => '',
+                'range'         => 5 
+                );
+            $this->load->library('Pagination');
+            $this->Pagination->config($config);
+            $data['pagination'] = $this->Pagination->create_link();
+            //=======================  PHÂN TRANG  ======================= 
+
+            $data['all_pro'] = $this->Product->limit_product($start, $limit, $key);
+            $this->load->headeradmin();
+            $this->load->menuadmin();
+            $data['title'] = "Tìm kiếm";
+            $this->load->view('/product/product_layout', $data);
+        }
+    }
+
+   
+
 
     
 
