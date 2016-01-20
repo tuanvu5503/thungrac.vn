@@ -1,4 +1,5 @@
-<?php if ( ! defined('PATH_SYSTEM')) die ('Bad requested!');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 function trim_input($data) {

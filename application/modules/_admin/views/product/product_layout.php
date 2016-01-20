@@ -12,7 +12,8 @@
 			<th style="text-align:center;">Tên sản phẩm</th>
 			<th style="text-align:center;">Loại sản phẩm</th>
 			<th style="text-align:center;">Giá (VNĐ)</th>
-			<th style="text-align:center;">Số lượng</th>
+			<th style="text-align:center;">Kích thước</th>
+			<th style="text-align:center;">Chất liệu</th>
 			<th style="text-align:center;">Thao tác</th>
 		</tr>
 	</thead>
@@ -23,7 +24,7 @@
 			?>
 				<!-- NO DATA -->
 				<tr style="text-align:center;" class="warning">
-					<td colspan="7">
+					<td colspan="8">
 						<h2 class="text-center">Không tìm thấy sản phẩm nào!</h2>
 					</td>
 				</tr>
@@ -41,7 +42,8 @@
 					<td><?php echo htmlspecialchars($row['product_name']); ?></td>
 					<td><?php echo htmlspecialchars($row['category_name']) ?></td>
 					<td style="text-align:right;"><?php echo number_format($row['price']) ?></td>
-					<td><?php echo number_format($row['qty']) ?></td>
+					<td><?php echo number_format($row['size']) ?></td>
+					<td><?php echo number_format($row['substance']) ?></td>
 					<td>
 						<a href="<?php echo base_url().'index.php/_admin/product/edit/'.$row['id'].'/'.$page ?>">
 							<span class="icon_action glyphicon glyphicon-pencil"></span>

@@ -12,7 +12,8 @@
  			$id=$row['id'];
  			$category_id=$row['category_id'];
  			$price=$row['price'];
- 			$qty=$row['qty'];
+            $size=$row['size'];
+ 			$size=$row['substance'];
  			$product_name = htmlspecialchars($row['product_name']);
  			$des = htmlspecialchars($row['des']);
  			$image = htmlspecialchars($row['image']);
@@ -67,8 +68,13 @@
             <label for="gia">GIÁ BÁN (VNĐ)</label>
             <input value="<?php if (isset($re_price)) echo $re_price; elseif (isset($price)) echo $price; ?>" name="price" type="text" class="form-control add" id="gia" placeholder="Nhập giá sản phẩm">
         </div>
-        <div id="qty"><label for="soluong">SỐ LƯỢNG</label>
-            <input value="<?php if (isset($re_qty)) echo $re_qty; elseif (isset($qty)) echo $qty; ?>" name="qty" type="text" class="form-control add" id="soluong" placeholder="Nhập số lượng sản phẩm"></div>
+        <div id="size"><label for="size">KÍCH THƯỚC</label>
+            <input value="<?php if (isset($re_size)) echo $re_size; elseif (isset($size)) echo $size; ?>" name="size" type="text" class="form-control add" id="size" placeholder="Kích thước">
+        </div>
+        <div id="substance">
+            <label for="chatlieu">CHẤT LIỆU (VNĐ)</label>
+            <input value="<?php if (isset($re_substance)) echo $re_substance; elseif (isset($substance)) echo $substance; ?>" name="substance" type="text" class="form-control add" id="chatlieu" placeholder="Chất liệu">
+        </div>
         <div id="describe">
             <label for="mota">MÔ TẢ SẢN PHẨM</label>
             <textarea name="des" style="max-height:54%; max-width:100%;" id="mota" class="form-control add" placeholder="Mô tả chi tiết sản phẩm" rows="3"><?php if (isset($re_des)) echo $re_des; elseif (isset($des)) echo $des; ?></textarea>

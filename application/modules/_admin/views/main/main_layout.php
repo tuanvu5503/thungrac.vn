@@ -33,7 +33,6 @@
 
 </head>
 <body>
-
 		<!--============================== Modal Delte ==============================-->
 		<div class="modal fade" id="modal_delete">
 			<div class="modal-dialog modal-sm">
@@ -79,24 +78,27 @@
          <!--============================ Thong bao loi ============================-->
 
 		<!--============================== Alert ==============================-->
-		<div
-			<?php 
-				if (null !== $this->session->userdata('error')) {
-					echo 'style="display:block;"';
-				} else {
-					echo 'style="display:none;"';
-				}
-			?>	
-	 		id="success-alert" class="show_alert text-center alert alert-success">
-			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			<strong class='mess'>
-				<?php 
-					if (null !== $this->session->userdata('error')) {
-						var_dump($this->session->userdata('error'));
-					}
-				?>				
-			</strong>
-		</div>
+		<?php 
+			if (null !== $this->session->flashdata('status')) {
+				$status = $this->session->flashdata('status')
+				?>
+				<div style="display:block;" id="show-alert" class="show_alert text-center alert <?php if ($status['status'] == SUCCESS_STATUS) echo "alert-success"; else echo "alert-danger"; ?>">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<strong class='mess'>
+						<?= $status['content']; ?>
+					</strong>
+				</div>
+
+				<script type="text/javascript">
+					setTimeout(function(){ $('div#show-alert').fadeOut(400, function() {
+						$(this).fadeTo(400, 0);}
+					); }, 5000);
+				</script>
+				<?php
+			} 
+		?>	
+
+
 
 		<div style="display:none;" id="failed-alert" class="show_alert text-center alert alert-danger">
 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -195,16 +197,16 @@
 						<a data-target="#product" data-toggle="collapse" data-parent="#stacked-menu"><span class="glyphicon glyphicon-gift"></span> Quản lý sản phẩm<span class="caret arrow"></span></a>
 					</li>
 						<ul class="nav nav-stacked collapse left-submenu" id="product">
-							<li class="action <?php if ($active == 'super_category') echo ' act_active';?>"><a href="google.com">Tất cả sản phẩm</a></li>
-							<li class="action <?php if ($active == 'super_category') echo ' act_active';?>"><a href="google.com">Sản phẩm nhà vệ sinh</a></li>
-							<li class="action <?php if ($active == 'sub_category') echo ' act_active';?>"><a href="gmail.com">Sản phẩm thùng rác</a></li>
-							<li class="action <?php if ($active == 'sub_category') echo ' act_active';?>"><a href="gmail.com">Sản phẩm khác</a></li>
+							<li class="action <?php if ($active == 'super_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/product' ?>">Tất cả sản phẩm</a></li>
+							<li class="action <?php if ($active == 'super_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/product' ?>">Sản phẩm nhà vệ sinh</a></li>
+							<li class="action <?php if ($active == 'sub_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/product' ?>">Sản phẩm thùng rác</a></li>
+							<li class="action <?php if ($active == 'sub_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/product' ?>">Sản phẩm khác</a></li>
 						</ul>
 
 
 					<li class="action <?php if ($active == 'account') echo ' act_active';?>"><a href="#" ><span class="glyphicon glyphicon-shopping-cart"></span> Quản lý đơn hàng</a></li>
 					<li class="action <?php if ($active == 'account') echo ' act_active';?>"><a href="<?php echo base_url().'admin/account/' ?>" ><span class="glyphicon glyphicon-user"></span> Quản lý account</a></li>
-					<li class="action <?php if ($active == 'account') echo ' act_active';?>"><a href="#" ><span class="glyphicon glyphicon-envelope"></span> Hộp thư góp ý</a></li>
+					<li class="action <?php if ($active == 'account') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/acticle/show_acticle' ?>" ><span class="glyphicon glyphicon-envelope"></span> Bài viết - Đăng tin</a></li>
 
 				</ul>
 			</div>
@@ -214,6 +216,7 @@
 		<!--============================== Load content START ==============================-->
 		<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 			<?php 
+				$subData = isset($subData) ? $subData : null;
 				$this->load->view($subView, $subData);
 			?>
 		</div>
