@@ -7,9 +7,7 @@ class Product extends MX_Controller {
         parent::__construct();
         $this->load->model('Product_model', 'Product');
         $this->load->model('Category_model', 'Category');
-        if (!isset($_SESSION['user'])) {
-            header("location:".base_url()."index.php/_admin/login/");
-        }
+        
     }
 
     public function index()

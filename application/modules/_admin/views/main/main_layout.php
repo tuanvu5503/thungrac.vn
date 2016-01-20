@@ -1,3 +1,8 @@
+<?php 
+	if (!isset($_SESSION['user'])) {
+        header("location:".base_url()."index.php/_admin/login/");
+    }
+?>
 <!DOCTYPE html>
 <html lang="">
 <head>
