@@ -76,8 +76,10 @@ class Product extends MX_Controller {
             $del_id = (int) filter_var($del_id, FILTER_SANITIZE_NUMBER_INT);
 
             $this->Product->removeImage($del_id);
-            $error['product_name'] = $this->Product->getProductNamebyId($del_id);
+            $product_name    = $this->Product->getProductNamebyId($del_id);
             $error['status'] = $this->Product->del_product_by_id($del_id);
+
+            $error['mess']   = $error['status'] == SUCCESS_STATUS ? 'Xóa sản phẩm <span style="color:blue;">'.$product_name.'</span> thành công.' : 'Xóa sản phẩm <span style="color:blue;">'.$product_name.'</span> thất bại.';
             echo json_encode($error);
         }
     }

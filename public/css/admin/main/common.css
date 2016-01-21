@@ -1,0 +1,17 @@
+.show-alert {
+	margin: 0px !important;
+}
+
+div.ajax_alert {
+	position: fixed;
+	z-index: 1000;
+	width: 100%;
+}
+
+button.button_of_delete_modal {
+	margin-right: 12px !important;
+}
+
+tr.remove{
+	display: none !important;
+}

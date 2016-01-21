@@ -1,9 +1,10 @@
-
-
+<?php 
+	$url = base_url()."index.php/_admin/acticle/delete_acticle"; 
+?>
 
 <div class="row">
 	<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-		<h3 class="text-center">Quản lý bài viết</h3> 
+		<h3 class="text-center">QUẢN LÝ BÀI VIẾT</h3> 
 	</div>
 </div>
 
@@ -35,13 +36,13 @@
 									<span style="font-size: 22px !important; padding-right: 10px !important;" class="glyphicon glyphicon-eye-open"></span>
 								</a>
 
-								<a href="<?php echo base_url().'index.php/_admin/product/edit/'.$row['id']; ?>">
+								<a href="<?php echo base_url().'index.php/_admin/acticle/edit_acticle/'.$row['id']; ?>">
 									<span class="icon_action glyphicon glyphicon-pencil"></span>
 								</a>
 
-								<a class="delete" data-toggle="modal" data-id="<?php echo $row['id'] ?>" href='#modal_delete'>
+								<a class="delete" onclick="delete_modal('<?= $url ?>', <?= $row['id'] ?>,'del_acticle_success')">
 									<span class="icon_action glyphicon glyphicon-trash"></span>
-								</a>
+								</a>							
 							</td>
 						</tr>
 						<?php
@@ -51,3 +52,9 @@
 	</table>
 </div>
 <a style="margin: 0 auto; margin-right:10px;" class="btn btn-primary" href="<?php echo base_url(); ?>index.php/_admin/acticle/add_acticle" role="button">Thêm bài viết</a>
+
+<script type="text/javascript">
+	function del_acticle_success (del_id) {
+		$("tr#"+del_id).addClass('remove');
+	}
+</script>

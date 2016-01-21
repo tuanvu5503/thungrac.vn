@@ -20,41 +20,24 @@
 	</style>
 
 	<!--===================================== My CSS =====================================-->
-	<link href="<?php echo base_url().'public/bootstrap/css/bootstrap.min.css' ?>" rel="stylesheet">
+	<link href="<?php echo base_url().'public/bootstrap/css/bootstrap.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/admin/menu/menu.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/admin/product.css' ?>" rel="stylesheet">
-	<link href="<?php echo base_url().'public/css/admin/main.css' ?>" rel="stylesheet">
+	<link href="<?php echo base_url().'public/css/admin/main/common.css' ?>" rel="stylesheet">
+	<link href="<?php echo base_url().'public/font-awesome/css/font-awesome.css' ?>" rel="stylesheet">
 	<!--===================================== My CSS =====================================-->
 
 	<!-- ===============================       MY JS         ======================== -->
 	<script src="<?php echo base_url().'public/jquery/jquery.js'?>"></script>
-	<script src="<?php echo base_url().'public/bootstrap/js/bootstrap.min.js'?>"></script>
-	<script src="<?php echo base_url().'public/js/admin/jquery.cookie.js'?>"></script>
-	<script src="<?php echo base_url().'public/js/admin/setAlert.js'?>"></script>
-	<script src="<?php echo base_url().'public/js/admin/product.js'?>"></script>
+	<script src="<?php echo base_url().'public/bootstrap/js/bootstrap.js'?>"></script>
+	<script src="<?php echo base_url().'public/js/admin/main/bootbox.js'?>"></script>
+	<script src="<?php echo base_url().'public/js/admin/main/common.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/admin/menu/menu.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/admin/main/header.js'?>"></script>
 	<!-- ===============================      MY JS         ======================== -->
 
 </head>
 <body>
-		<!--============================== Modal Delte ==============================-->
-		<div class="modal fade" id="modal_delete">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Bạn chắc chắn xóa?</h4>
-						<input id="del_id" 	type="hidden" value="">
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-						<button type="button" class=" delete btn btn-danger">Delete</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--============================== Modal Delte ==============================-->
 
 		<!--============================ Thong bao loi ============================-->
          <div id="war" style="<?php if (isset($_SESSION['war']) && count($_SESSION['war']) > 0) echo 'display:block;'; else echo 'display:none;'; ?>" class="alert alert-warning">
@@ -83,32 +66,18 @@
          <!--============================ Thong bao loi ============================-->
 
 		<!--============================== Alert ==============================-->
+		<div class="ajax_alert"></div>
+		
 		<?php 
 			if (null !== $this->session->flashdata('status')) {
-				$status = $this->session->flashdata('status')
+				$status = $this->session->flashdata('status');
 				?>
-				<div style="display:block;" id="show-alert" class="show_alert text-center alert <?php if ($status['status'] == SUCCESS_STATUS) echo "alert-success"; else echo "alert-danger"; ?>">
-					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-					<strong class='mess'>
-						<?= $status['content']; ?>
-					</strong>
-				</div>
-
 				<script type="text/javascript">
-					setTimeout(function(){ $('div#show-alert').fadeOut(400, function() {
-						$(this).fadeTo(400, 0);}
-					); }, 5000);
+					set_alert(<?= $status['status'] ?>,'<?= $status['content'] ?>');
 				</script>
 				<?php
 			} 
 		?>	
-
-
-
-		<div style="display:none;" id="failed-alert" class="show_alert text-center alert alert-danger">
-			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			<strong class='mess'></strong>
-		</div>
 		<!--============================== Alert ==============================-->
 
 		<!--============================== Clock header START ==============================-->
@@ -194,8 +163,8 @@
 						<a data-target="#category" data-toggle="collapse" data-parent="#stacked-menu"><span class="glyphicon glyphicon-list-alt"></span> Quản lý danh mục<span class="caret arrow"></span></a>
 					</li>
 						<ul class="nav nav-stacked collapse left-submenu" id="category">
-							<li class="action <?php if ($active == 'super_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/category/show_super_category' ?>">Danh mục loại sản phẩm</a></li>
-							<li class="action <?php if ($active == 'sub_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/category/show_sub_category' ?>">Danh mục sản phẩm</a></li>
+							<li class="action <?php if ($active == 'super_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/category/show_super_category' ?>">Quản lý loại danh mục</a></li>
+							<li class="action <?php if ($active == 'sub_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/category/show_sub_category' ?>">Quản lý loại sản phẩm</a></li>
 						</ul>
 
 					<li class="menu_collapse">

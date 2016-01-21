@@ -30,7 +30,7 @@
 						<td><?php echo htmlspecialchars($row['category_name']); ?></td>
 						<td><?php echo htmlspecialchars($row['super_categoryName']); ?></td>
 						<td>
-							<a href="<?php echo base_url().'admin/category/edit/'.$row['id']; ?>">
+							<a href="<?php echo base_url().'index.php/_admin/category/edit_sub_category/'.$row['id']; ?>">
 								<span class="icon_action glyphicon glyphicon-pencil"></span>
 							</a>
 							<a class="delete" data-toggle="modal" data-id="<?php echo $row['id'] ?>" href='#modal_delete'>
@@ -45,5 +45,5 @@
 			?>
 		</tbody>
 	</table>
-	<a style="float:left; margin-top:20px;" class="btn btn-primary" href="<?php echo base_url().'admin/category/add' ?>" role="button">THÊM DANH MỤC</a>
+	<a style="float:left; margin-top:20px;" class="btn btn-primary" href="<?php echo base_url().'index.php/_admin/category/add_sub_category' ?>" role="button">THÊM LOẠI SẢN PHẨM</a>
 </div>

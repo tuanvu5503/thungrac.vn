@@ -1,9 +1,8 @@
-<script type="text/javascript">
-	var delete_url = '<?php echo base_url()."index.php/_admin/product/del_product"?>';
-</script>
+<?php 
+	$url = base_url()."index.php/_admin/product/del_product"; 
+?>
 
 <legend style="margin-top:10px; margin-bottom:20px; text-align:center;">DANH MỤC SẢN PHẨM (<?= $total_product;?>)</legend>
-
 <table style="margin-top:10px;" class="table table-striped table-hover">
 	<thead>
 		<tr>
@@ -42,13 +41,13 @@
 					<td><?php echo htmlspecialchars($row['product_name']); ?></td>
 					<td><?php echo htmlspecialchars($row['category_name']) ?></td>
 					<td style="text-align:right;"><?php echo number_format($row['price']) ?></td>
-					<td><?php echo number_format($row['size']) ?></td>
-					<td><?php echo number_format($row['substance']) ?></td>
+					<td><?= $row['size'] ?></td>
+					<td><?= $row['substance'] ?></td>
 					<td>
 						<a href="<?php echo base_url().'index.php/_admin/product/edit/'.$row['id'].'/'.$page ?>">
 							<span class="icon_action glyphicon glyphicon-pencil"></span>
 						</a>
-						<a class="delete" data-toggle="modal" data-id="<?php echo $row['id'] ?>" href='#modal_delete'>
+						<a class="delete" onclick="delete_modal('<?= $url ?>', <?= $row['id'] ?>,'del_product_success')">
 							<span class="icon_action glyphicon glyphicon-trash"></span>
 						</a>
 					</td>
@@ -65,4 +64,10 @@
 	echo $pagination;
 ?>
 </div>
+
+<script type="text/javascript">
+	function del_product_success (del_id) {
+		$("tr#"+del_id).addClass('remove');
+	}
+</script>
 

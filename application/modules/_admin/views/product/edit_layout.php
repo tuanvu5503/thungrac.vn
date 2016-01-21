@@ -3,7 +3,7 @@
 	<!--===================================== My CSS =====================================-->
 
 	<!-- ===============================      MY JS         ======================== -->
-	<script src="<?php echo base_url().'public/js/admin/edit_product.js'?>"></script>
+	<script src="<?php echo base_url().'public/js/admin/product/edit_product.js'?>"></script>
 	<!-- ===============================      MY JS         ======================== -->
          	
 	<?php

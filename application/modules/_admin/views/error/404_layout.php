@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>404 ERROR</title>
+<title>Trang không tồn tại</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link href='http://fonts.googleapis.com/css?family=Amarante' rel='stylesheet' type='text/css'>
 <style type="text/css">
@@ -45,7 +45,7 @@ body{
     <div class="logo">
 		<img src="<?php echo base_url().'public/img/404-temp/woody-404.png' ?>"/>
 			<div class="sub">
-			  <p><a href="<?php echo $pre_page; ?>">Go Back to Home</a></p>
+			  <p><a href="<?php echo $pre_page; ?>">Go Back</a></p>
 			</div>
      </div>
   </div>
