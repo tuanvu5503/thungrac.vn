@@ -78,16 +78,16 @@ $db['default'] = array(
 
 
 
-	'hostname' => '172.16.100.3',
-	'username' => 'root',
-	'password' => 'lampart',
-	'database' => 'tuanvu-tr',
-
-
-	// 'hostname' => 'localhost',
+	// 'hostname' => '172.16.100.3',
 	// 'username' => 'root',
-	// 'password' => '',
+	// 'password' => 'lampart',
 	// 'database' => 'tuanvu-tr',
+
+
+	'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'tuanvu-tr',
 
 
 	// 'hostname' => 'sql213.freevnn.com',

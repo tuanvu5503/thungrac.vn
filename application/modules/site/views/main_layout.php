@@ -15,13 +15,6 @@
 		
 	</style>
 
-	<!-- Bootstrap CSS -->
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-	<!-- jQuery -->
-	<script src="//code.jquery.com/jquery.js"></script>
-	<!-- Bootstrap JavaScript -->
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
 	<!--================================= My CSS =================================-->
 	<link href="<?php echo base_url().'public/css/site/s3-slider.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/jquery.mCustomScrollbar.css' ?>" rel="stylesheet">
@@ -35,9 +28,13 @@
 	<link href="<?php echo base_url().'public/css/site/banner.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/hmenu.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/cart/cart.css' ?>" rel="stylesheet">
+	<link href="<?php echo base_url().'public/bootstrap/css/bootstrap.min.css' ?>" rel="stylesheet">
 	<!--================================= My CSS =================================-->
 
+
 	<!-- ================================ MY JS =================================== -->
+	<script src="<?php echo base_url().'public/jquery/jquery.js'?>"></script>
+	<script src="<?php echo base_url().'public/bootstrap/js/bootstrap.min.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/site/jquery.bxslider.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/site/jquery.mCustomScrollbar.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/site/s3-slider.js'?>"></script>
@@ -62,9 +59,6 @@
 
 	<div class="container">
 		<div class="row">
-
-
-
 			<!--================= START: Banner website =================-->
 			<img style="width:100%;" src="<?php echo base_url().'public/img/banner/banner.jpg'; ?>" class="img-responsive" alt="Image">
 			<!--================= END: Banner website ===================-->
@@ -84,7 +78,6 @@
 				<div id="menu" class="navbar-collapse collapse">
 					<ul style="margin-right:10px;" class="nav navbar-nav navbar-left">
 						<?php 
-								// var_dump($menus);
 						foreach ($menus as $key => $value) {
 							?>
 							<li class="dropdown">
