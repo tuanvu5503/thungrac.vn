@@ -12,8 +12,8 @@
  			$id=$row['id'];
  			$category_id=$row['category_id'];
  			$price=$row['price'];
-            $size=$row['size'];
- 			$size=$row['substance'];
+            $size= htmlspecialchars($row['size']);
+ 			$size= htmlspecialchars($row['substance']);
  			$product_name = htmlspecialchars($row['product_name']);
  			$des = htmlspecialchars($row['des']);
  			$image = htmlspecialchars($row['image']);
@@ -43,13 +43,13 @@
         </div>
 
         <div id="hidden">
-            <input name="id" type="hidden" value="<?php if (isset($id)) echo $id; ?>">  
+            <input name="product_id" type="hidden" value="<?php if (isset($id)) echo $id; ?>">  
             <input name="page" type="hidden" value="<?php if (isset($re_page)) echo $re_page; elseif (isset($page)) echo $page; ?>">    
         </div>
 
         <div id="pro_name">
-            <label for="name">TÊN SẢN PHẨM</label>
-            <input required value="<?php if (isset($re_product_name)) echo $re_product_name; elseif (isset($product_name)) echo $product_name; ?>" type="text" name="product_name" class="form-control add" id="name" placeholder="Nhập tên sản phẩm">
+            <label for="product_name">TÊN SẢN PHẨM</label>
+            <input required value="<?php if (isset($re_product_name)) echo $re_product_name; elseif (isset($product_name)) echo $product_name; ?>" type="text" name="product_name" class="form-control add" id="product_name" placeholder="Nhập tên sản phẩm">
         </div>
         <div id="category">
             <label for="cate">LOẠI SẢN PHẨM</label>
@@ -82,7 +82,7 @@
     </div>
     <button name="btnSubmit" id="btnSubmit" type="submit" class="btn btn-success">Cập nhật</button>
     <?php if (isset($re_page)) $page= $re_page; ?>
-    <a class="btn btn-danger" id="cancel" href="<?php echo base_url().'index.php/_admin/product/index/'.$page ?>" role="button">Hủy</a>
+    <a class="btn btn-danger" id="cancel" href="javascript:history.go(-1)" role="button">Hủy</a>
     <br>
     <table style="width:400px;" class="table">
         <tbody id="add">
@@ -116,4 +116,3 @@
     </table>
     <button id="0" type="button" class="addmore btn btn-info">Thêm ảnh chi tiết</button>  
 </form>
-    <?php die; ?>

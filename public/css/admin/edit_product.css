@@ -1,4 +1,8 @@
 /*========================= AVATAR  =========================*/
+div#boxchoice{
+	height: 298px !important;
+}
+
 div#avatar{
 	width: 30%;
 	height: 300px;
@@ -199,4 +203,8 @@ a#cancel{
 	margin-right: 30px;
 	width: 150px;
 	height: 40px;
+}
+
+input#input_search{
+	font-size: 12px;
 }

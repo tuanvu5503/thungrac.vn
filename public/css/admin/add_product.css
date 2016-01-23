@@ -1,4 +1,8 @@
 /*========================= AVATAR  =========================*/
+div#boxchoice{
+	height: 298px !important;
+}
+
 div#avatar{
 	width: 30%;
 	height: 300px;
@@ -120,7 +124,7 @@ div#category{
 	border-top-right-radius: 10px;
 }
 div#price{
-	width: 30%;
+	width: 15%;
 	height: 90px;
 	display: block;
 	/*background-color: blue;*/
@@ -130,7 +134,18 @@ div#price{
 	border-bottom: 1px solid #C8C8C8;
 }
 
-div#qty{
+div#size{
+	width: 15%;
+	height: 90px;
+	display: block;
+	/*background-color: blue;*/
+	float: left;
+	border-top: 1px solid #C8C8C8;
+	border-right: 1px solid #C8C8C8;
+	border-bottom: 1px solid #C8C8C8;
+}
+
+div#substance{
 	width: 30%;
 	height: 90px;
 	display: block;
@@ -182,3 +197,14 @@ button#btnSubmit{
 	height: 40px;
 }
 
+a#cancel{
+	float: right;
+	margin-top:80px;
+	margin-right: 30px;
+	width: 150px;
+	height: 40px;
+}
+
+input#input_search{
+	font-size: 12px;
+}

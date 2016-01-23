@@ -2,7 +2,7 @@
 	$url = base_url()."index.php/_admin/product/del_product"; 
 ?>
 
-<legend style="margin-top:10px; margin-bottom:20px; text-align:center;">DANH MỤC SẢN PHẨM (<?= $total_product;?>)</legend>
+<legend style="margin-top:10px; margin-bottom:20px; text-align:center;"><?= mb_strtoupper($super_category_name) ?> (<?= $total_product;?>)</legend>
 <table style="margin-top:10px;" class="table table-striped table-hover">
 	<thead>
 		<tr>
@@ -18,7 +18,12 @@
 	</thead>
 	<tbody>
 		<?php 
-		$page = $this->uri->segment(4) == null ? 1 : $this->uri->segment(4);
+		if ($this->uri->segment(3) == 'product_in_category') {
+			$page = $this->uri->segment(5) == null ? 1 : $this->uri->segment(5);
+		} else {
+			$page = $this->uri->segment(4) == null ? 1 : $this->uri->segment(4);
+		}
+			
 		if (count($all_pro) == 0) {
 			?>
 				<!-- NO DATA -->
@@ -29,8 +34,11 @@
 				</tr>
 			<?php
 		} else {
-	
-			$stt = $this->uri->segment(4) == null ? 0 : $this->uri->segment(4);
+			if ($this->uri->segment(3) == 'product_in_category') {
+				$stt = $this->uri->segment(5) == null ? 0 : $this->uri->segment(5);
+			} else {
+				$stt = $this->uri->segment(4) == null ? 0 : $this->uri->segment(4);
+			}
 		
 			foreach ($all_pro as $row) {
 				$stt++;
@@ -59,7 +67,7 @@
 		?>
 	</tbody>
 </table>
-<a style="float:left; margin-top:20px;" class="btn btn-primary" href="<?php echo base_url().'index.php/_admin/product/add' ?>" role="button">THÊM SẢN PHẨM</a>
+<a style="float:left; margin-top:20px;" class="btn btn-primary" href="<?php echo base_url().'index.php/_admin/product/add_product' ?>" role="button">THÊM SẢN PHẨM</a>
 <?php 
 	echo $pagination;
 ?>

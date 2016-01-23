@@ -7,6 +7,7 @@ class Login extends MX_Controller {
     {
         parent::__construct();
         $this->load->model('Login_model','Login');
+        $this->load->model('Category_model','Category');
     }
     public function index()
     {
@@ -17,10 +18,12 @@ class Login extends MX_Controller {
             $login = $this->Login->checkLogin($username, $password);
             if ($login) {
                 $user = $this->Login->getInfo($username);
-            // var_dump($user); die;
+                $super_category = $this->Category->list_all_super_category();
                 
                 session_start();
                 $_SESSION['user'] = $user;
+                $_SESSION['super_category'] = $super_category;
+
                 header("location:".base_url()."index.php/_admin/product");
             } else {
                 $error[] = 'Sai tên đăng nhập hoặc mật khẩu!';

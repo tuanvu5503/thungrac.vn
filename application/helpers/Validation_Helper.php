@@ -49,7 +49,7 @@ function resizeImage($originalFile, $targetFile, $newWidth, $newHeight) {
 
     // $newHeight = ($height / $width) * $newWidth;
     $tmp = imagecreatetruecolor($newWidth, $newHeight);
-    $white = imagecolorallocate($tmp,  0, 0, 0, 127);
+    $white = imagecolorallocate($tmp, 0, 0, 127);
     imagecolortransparent($tmp, $white);
     imagecopyresampled($tmp, $img, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 

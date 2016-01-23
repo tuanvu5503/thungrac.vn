@@ -38,42 +38,23 @@
 
 </head>
 <body>
-
-		<!--============================ Thong bao loi ============================-->
-         <div id="war" style="<?php if (isset($_SESSION['war']) && count($_SESSION['war']) > 0) echo 'display:block;'; else echo 'display:none;'; ?>" class="alert alert-warning">
-             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-             <strong class="war"><?php
-                    if (isset($_SESSION['war']) && count($_SESSION['war']) > 0) {
-                    	$i = 0;
-                    	echo  "<span style='color: green; font-size:16px; font-weight:bold;'>".$_SESSION['war']['title'].'</span> <br>';
-                    	unset($_SESSION['war']['title']);  //xoa khoi array
-                    	echo "<span style='font-size:15px; font-weight:bold;'>Có ".count($_SESSION['war'])." ảnh chi tiết không được upload vì:</span>";
-                        foreach ($_SESSION['war'] as $key => $value) {
-                        	$i++;
-                           	echo '<li style="margin-left:15px;">Ảnh '.$i.': '.$value.'</li>';
-                        }
-                        ?>
-                        <script type="text/javascript">
-                        	$('div#war').delay(5000).fadeTo(2000, 500).slideUp(500,function () {
-						        $("strong.war").text('');
-						    });
-                        </script>
-                        <?php
-                        $_SESSION['war']=array();
-                    } 
-              ?></strong>         
-        </div>
-         <!--============================ Thong bao loi ============================-->
-
 		<!--============================== Alert ==============================-->
 		<div class="ajax_alert"></div>
 		
 		<?php 
 			if (null !== $this->session->flashdata('status')) {
-				$status = $this->session->flashdata('status');
+				$notice_data = $this->session->flashdata('status');
+
+				$status = $notice_data['status'];
+				$content_arr = (array) $notice_data['content'];
+				$alert_time  =  $notice_data['alert_time'];
+
 				?>
 				<script type="text/javascript">
-					set_alert(<?= $status['status'] ?>,'<?= $status['content'] ?>');
+					var alert_time  =  <?= $alert_time ?>;
+					var content_arr = <?php echo json_encode($content_arr); ?>;
+					
+					set_alert(<?= $status ?>,content_arr,alert_time);
 				</script>
 				<?php
 			} 
@@ -98,35 +79,6 @@
 			<?php 
 				$active = 'product';
 			 ?>
-			<!-- <div class="menu">
-				<div id="user_panel">
-					<img src="<?php echo base_url().'public/img/avatar/a.png' ?>" width="50px" height="50px">
-					<div id="profile"><span id="edit_user" class="glyphicon glyphicon-pencil"></span></div>
-					<div id="user_name">Huỳnh Tuấn Vũ</div>
-					<div id="online"><img  style="margin-right:3px; padding-top:3px;" src="<?php echo base_url().'public/icon/online.png' ?>">Online</div>
-				</div>
-
-				<div id="fm_search">
-					<form action="<?php echo base_url().'admin/search' ?>" method="get" class="sidebar-form">
-						<div class="input-group">
-							<input name="key" value="<?php if (isset($_GET['key'])) echo $_GET['key']; ?>" id="input_search" class="form-control" placeholder="Search..." type="text">
-							<span class="input-group-btn">
-								<button type="submit" id="search-btn" class="btn">
-									<span class="glyphicon glyphicon-search"></span>
-								</button>
-							</span>
-						</div>
-					</form>
-				</div>
-
-				<div id="title_dashboard">BẢNG ĐIỀU HƯỚNG</div>
-				<a href="<?php echo base_url().'index.php/_admin/product' ?>" class="action <?php if ($active == 'product') echo ' act_active';?>"><span class="glyphicon glyphicon-gift"></span> Quản lý sản phẩm</a>
-				<a href="#" class="action"><span class="glyphicon glyphicon-shopping-cart"></span> Quản lý đơn hàng</a>
-				<a href="#" class="action"><span class="glyphicon glyphicon-user"></span> Quản lý account</a>
-				<a href="#" class="action"><span class="glyphicon glyphicon-envelope"></span> Hộp thư góp ý</a>
-			</div>
-		</div> -->
-
 		<div class="menu">
 
 				<div id="user_panel">
@@ -146,7 +98,7 @@
 				<div id="fm_search">
 					<form action="<?php echo base_url().'admin/product/search' ?>" method="get" class="sidebar-form">
 						<div class="input-group">
-							<input name="key" value="<?php if (isset($_GET['key'])) echo $_GET['key']; ?>" id="input_search" class="form-control" placeholder="Search product..." type="text">
+							<input name="key" value="<?php if (isset($_GET['key'])) echo $_GET['key']; ?>" id="input_search" class="form-control" placeholder="Tìm kiếm sản phẩm" type="text">
 							<span class="input-group-btn">
 								<button type="submit" id="search-btn" class="btn">
 									<span class="glyphicon glyphicon-search"></span>
@@ -172,9 +124,23 @@
 					</li>
 						<ul class="nav nav-stacked collapse left-submenu" id="product">
 							<li class="action <?php if ($active == 'super_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/product' ?>">Tất cả sản phẩm</a></li>
-							<li class="action <?php if ($active == 'super_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/product' ?>">Sản phẩm nhà vệ sinh</a></li>
-							<li class="action <?php if ($active == 'sub_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/product' ?>">Sản phẩm thùng rác</a></li>
-							<li class="action <?php if ($active == 'sub_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/product' ?>">Sản phẩm khác</a></li>
+							
+							<?php 
+							if (isset($_SESSION['super_category'])) {
+								$data = $_SESSION['super_category'];
+								// print_r($data);
+								foreach ($data as $item) {
+									$item['super_categoryName'] = mb_strtolower($item['super_categoryName']);
+									$item['super_categoryName'] = ucfirst($item['super_categoryName']);
+									$item['super_categoryName'] = htmlspecialchars($item['super_categoryName']);
+									?>
+									<li class="action <?php if ($active == 'super_category') echo ' act_active';?>">
+										<a href="<?php echo base_url().'index.php/_admin/product/product_in_category/'.$item['id']; ?>"><?= $item['super_categoryName'] ?></a>
+									</li>
+									<?php
+								}
+							}
+							?>
 						</ul>
 
 

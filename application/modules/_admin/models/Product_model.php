@@ -16,6 +16,15 @@ class Product_model extends CI_Model {
 		return $info->result_array();
 	}
 
+	public function limit_product_in_super_category($super_category_id, $start, $limit)
+	{
+		$this->db->join('Category', $this->table.'.category_id = Category.id', 'left');
+
+		$this->db->select($this->table.'.*');
+		$this->db->where('Category.super_categoryId', $super_category_id);
+		return $this->db->get($this->table, $limit, $start)->result_array();
+	}
+
 	public function total_record_product($key='')
 	{
 		if (isset($key)) {
@@ -30,9 +39,9 @@ class Product_model extends CI_Model {
 
 	public function get_category_name_by_id($product_id)
 	{
-		$this->db->select('category_name');
-		$this->db->where('product.id', $product_id);
 		$this->db->join('category', 'product.category_id = category.id', 'left');
+		$this->db->select('category.category_name');
+		$this->db->where('product.id', $product_id);
 
 		$query = $this->db->get('product');
 		$arr_category_name = $query->result_array()[0];
@@ -56,7 +65,7 @@ class Product_model extends CI_Model {
 		}
 	}
 
-	public function getProductNamebyId($id)
+	public function get_product_name_by_id($id)
 	{
 		$info = $this->db->query("select product_name from product where id=".$id);
 		foreach ($info->result_array() as $row) {
@@ -70,10 +79,10 @@ class Product_model extends CI_Model {
 		return $this->db->delete($this->table,  array('id' => $del_id));
 	}
 
-	public function getProductbyID($product_id)
+	public function get_product_by_id($product_id)
 	{
-		$list = $this->db->query("select * from product where id=".$product_id);
-		return $list->result_array();
+		$this->db->where('id', $product_id);
+		return $this->db->get($this->table)->result_array();
 	}
 
 	public function check_product_by_id($product_id)
@@ -83,7 +92,7 @@ class Product_model extends CI_Model {
 		return $num > 0 ? true : false;
 	}
 
-	public function getAvatar($id)
+	public function get_avatar($id)
 	{
 		$this->db->select('image');
 		$this->db->where('id', $id);
@@ -106,56 +115,29 @@ class Product_model extends CI_Model {
 		return $num > 0 ? true : false;
 	}
 
-	public function update($id, $array)
+	public function update($id, $arr_data)
 	{
 		$this->db->where('id', $id);
-		return $this->db->update($this->table, $array);
+		return $this->db->update($this->table, $arr_data);
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	public function all_product()
+	public function has_exist_product_name($product_name, $product_id='')
 	{
-		$all_product = $this->db->select("select * from product p, category c where p.category_id = c.id");
-		return $all_product;
-	}
-
-	
-
-	public function checkProductName($product_name, $id='')
-	{
-		if (isset($id)) {
-			$id  = (int) $id;
-			$sql = "select count(*) from product where product_name = '$product_name' and id !=".$id;
-		} else {
-			$sql = "select count(*) from product where product_name = '$product_name'";
+		if ($product_id != '') {
+			$this->db->where('id !=', $product_id);
 		}
-		$rs = $this->db->get_row($sql);
-		return $rs ? true : false;
+
+		$this->db->where('product_name', $product_name);
+		$num = $this->db->get($this->table)->num_rows();
+		return $num > 0 ? TRUE : FALSE;
 	}
 
-	public function get_category()
+	public function insert($arr_data)
 	{
-		return $this->db->query('select * from category')->result_array();
+		return $this->db->insert($this->table, $arr_data);
 	}
 
-	public function getDetail_image($id)
+	public function get_detail_image($id)
 	{
 		$this->db->select('detail_image');
 		$this->db->where('id', $id);
@@ -168,15 +150,13 @@ class Product_model extends CI_Model {
 		return $rs;
 	}
 
-	public function insert($table, $array)
+	public function total_record_product_in_super_category($super_category_id)
 	{
-		return $this->db->insert($table, $array);
+		$this->db->join('Category', $this->table.'.category_id = Category.id', 'left');
+
+		$this->db->where('Category.super_categoryId', $super_category_id);
+		return $this->db->get($this->table)->num_rows();
 	}
-
-	
-
-
-	
 	
 }
 

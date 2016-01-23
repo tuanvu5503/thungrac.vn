@@ -47,6 +47,6 @@ $(document).ready(function () {
   //========================================
   $("button.delete_detail_img").click(function(event) {
       id = $(this).attr('id');
-      $("#hidden").append("<input value='"+id+"' type='text' name='delete_detail_img[]'>");
+      $("#hidden").append("<input value='"+id+"' type='hidden' name='delete_detail_img[]'>");
    });
 })
