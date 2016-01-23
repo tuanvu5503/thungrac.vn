@@ -77,7 +77,7 @@
 		<!--============================== Menu START ==============================-->
 		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" id="menu">
 			<?php 
-				$active = 'product';
+				$active = $this->uri->segment(3);
 			 ?>
 		<div class="menu">
 
@@ -111,19 +111,21 @@
 				<div id="title_dashboard">BẢNG ĐIỀU HƯỚNG</div>
 				<ul class="nav panel-group nav-stacked" id="stacked-menu">
 
-					<li class="menu_collapse">
-						<a data-target="#category" data-toggle="collapse" data-parent="#stacked-menu"><span class="glyphicon glyphicon-list-alt"></span> Quản lý danh mục<span class="caret arrow"></span></a>
+					<li class="menu_collapse <?php if ($this->uri->segment(2) == 'category') echo "menu_collapse_active"; ?>">
+						<a data-target="#category" data-toggle="collapse" data-parent="#stacked-menu"><span class="glyphicon glyphicon-list-alt"></span> Quản lý danh mục <span class="caret arrow"></span></a>
 					</li>
-						<ul class="nav nav-stacked collapse left-submenu" id="category">
-							<li class="action <?php if ($active == 'super_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/category/show_super_category' ?>">Quản lý loại danh mục</a></li>
-							<li class="action <?php if ($active == 'sub_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/category/show_sub_category' ?>">Quản lý loại sản phẩm</a></li>
+						<ul class="nav nav-stacked collapse left-submenu <?php if ($this->uri->segment(2) == 'category') echo "in"; ?>" id="category">
+							<li class="action <?php if ($active == 'show_super_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/category/show_super_category' ?>">Quản lý loại danh mục</a></li>
+							<li class="action <?php if ($active == 'show_sub_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/category/show_sub_category' ?>">Quản lý loại sản phẩm</a></li>
 						</ul>
 
-					<li class="menu_collapse">
-						<a data-target="#product" data-toggle="collapse" data-parent="#stacked-menu"><span class="glyphicon glyphicon-gift"></span> Quản lý sản phẩm<span class="caret arrow"></span></a>
+					<li class="menu_collapse <?php if ($this->uri->segment(2) == 'product') echo "menu_collapse_active"; ?>">
+						<a data-target="#product" data-toggle="collapse" data-parent="#stacked-menu"><span class="glyphicon glyphicon-gift"></span> Quản lý sản phẩm <span class="caret arrow"></span></a>
 					</li>
-						<ul class="nav nav-stacked collapse left-submenu" id="product">
-							<li class="action <?php if ($active == 'super_category') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/product' ?>">Tất cả sản phẩm</a></li>
+						<ul class="nav nav-stacked collapse left-submenu <?php if ($this->uri->segment(2) == 'product') echo "in"; ?>" id="product">
+							<li class="action <?php if ($this->uri->segment(2) == 'product' 
+														&& ($this->uri->segment(3) == NULL || $this->uri->segment(3) == 'index')
+													) echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/product' ?>">Tất cả sản phẩm</a></li>
 							
 							<?php 
 							if (isset($_SESSION['super_category'])) {
@@ -134,7 +136,7 @@
 									$item['super_categoryName'] = ucfirst($item['super_categoryName']);
 									$item['super_categoryName'] = htmlspecialchars($item['super_categoryName']);
 									?>
-									<li class="action <?php if ($active == 'super_category') echo ' act_active';?>">
+									<li class="action <?php if ($this->uri->segment(4) == $item['id']) echo ' act_active';?>">
 										<a href="<?php echo base_url().'index.php/_admin/product/product_in_category/'.$item['id']; ?>"><?= $item['super_categoryName'] ?></a>
 									</li>
 									<?php
@@ -144,9 +146,9 @@
 						</ul>
 
 
-					<li class="action <?php if ($active == 'account') echo ' act_active';?>"><a href="#" ><span class="glyphicon glyphicon-shopping-cart"></span> Quản lý đơn hàng</a></li>
-					<li class="action <?php if ($active == 'account') echo ' act_active';?>"><a href="<?php echo base_url().'admin/account/' ?>" ><span class="glyphicon glyphicon-user"></span> Quản lý account</a></li>
-					<li class="action <?php if ($active == 'account') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/acticle/show_acticle' ?>" ><span class="glyphicon glyphicon-envelope"></span> Bài viết - Đăng tin</a></li>
+					<li class="action <?php if ($this->uri->segment(2) == 'cart') echo ' act_active';?>"><a href="#" ><span class="glyphicon glyphicon-shopping-cart"></span> Quản lý đơn hàng</a></li>
+					<li class="action <?php if ($this->uri->segment(2) == 'account') echo ' act_active';?>"><a href="<?php echo base_url().'admin/account/' ?>" ><span class="glyphicon glyphicon-user"></span> Quản lý account</a></li>
+					<li class="action <?php if ($this->uri->segment(2) == 'acticle') echo ' act_active';?>"><a href="<?php echo base_url().'index.php/_admin/acticle/show_acticle' ?>" ><span class="glyphicon glyphicon-envelope"></span> Bài viết - Đăng tin</a></li>
 
 				</ul>
 			</div>

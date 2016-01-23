@@ -7,4 +7,6 @@ $(document).ready(function() {
 		$( "button#search-btn" ).removeClass('isfocus');
 		$( "span.input-group-btn" ).removeClass('isfocus');
 	});
+
+	
 });

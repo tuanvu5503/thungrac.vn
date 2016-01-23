@@ -181,8 +181,8 @@ li#logout {
 
 
 ul.collapse li.action{
-	border-left: 5px transparent solid !important;
-	background-color: rgba(64, 62, 66, 0.52) !important;
+	border-left: 5px transparent solid ;
+	background-color: rgba(64, 62, 66, 0.52) ;
 }
 ul.collapse li.action:hover{
 	border-left: 5px #3c8dbc solid !important;
@@ -198,4 +198,8 @@ ul.collapsing li.action{
 	background-color: rgba(64, 62, 66, 0.52) !important;
 	border-left: 5px transparent solid !important;
 	border-radius: 0px !important;
+}
+.menu_collapse_active{
+	background-color: #0B141B   !important;
+	color: #fff !important;
 }
