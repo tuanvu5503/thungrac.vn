@@ -562,68 +562,68 @@ class Product extends MX_Controller {
         }
     }
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function search ()
+    public function search_product ()
     {
-        if (isset($_GET['key']))
-        {
-            $key = filter_var($_GET['key'], FILTER_SANITIZE_STRING);
+            if (isset($_GET['key'])) {
+                $key = $_GET['key'];
+            } else {
+                $key = $this->uri->segment(4);
+            }
+            $key = filter_var($key, FILTER_SANITIZE_STRING);
             $key = trim($key);
 
             //=======================  PHÂN TRANG  ======================= 
             $total_record = $this->Product->total_record_product($key);
-            $limit = 5;
-            $current_page=isset($_GET['page']) ? $_GET['page'] : 1;
-            $start = ($current_page - 1) * $limit;
-            //Cau hinh phan trang
-            $config = array(
-                'current_page'  => $current_page,
-                'total_record'  => $total_record, 
-                'limit'         => $limit,
-                'link_full'     => '?key='.$key.'&page={page}',
-                'link_first'    => '',
-                'range'         => 5 
-                );
-            $this->load->library('Pagination');
-            $this->Pagination->config($config);
-            $data['pagination'] = $this->Pagination->create_link();
+            $this->load->library('pagination');
+            
+            $config['base_url'] = base_url().'index.php/_admin/product/search_product/'.$key;
+            $config['total_rows'] = $total_record;
+            $config['per_page'] = 10;
+            $config['uri_segment'] = 0; //tai sao
+            $config['num_links'] = 3;
+
+            $config['full_tag_open'] = '<ul class="pagination pagination-small">';
+            $config['full_tag_close'] = '</ul><!--pagination-->';
+            $config['first_link'] = '&laquo; First';
+            $config['first_tag_open'] = '<li class="prev page">';
+            $config['first_tag_close'] = '</li>';
+            $config['last_link'] = 'Last &raquo;';
+            $config['last_tag_open'] = '<li class="next page">';
+            $config['last_tag_close'] = '</li>';
+            $config['next_link'] = 'Next &rarr;';
+            $config['next_tag_open'] = '<li class="next page">';
+            $config['next_tag_close'] = '</li>';
+            $config['prev_link'] = '&larr; Previous';
+            $config['prev_tag_open'] = '<li class="prev page">';
+            $config['prev_tag_close'] = '</li>';
+            $config['cur_tag_open'] = '<li class="active"><a href="">';
+            $config['cur_tag_close'] = '</a></li>';
+            $config['num_tag_open'] = '<li class="page">';
+            $config['num_tag_close'] = '</li>';
+
+            $this->pagination->initialize($config);
+
+            $data['pagination'] = $this->pagination->create_links();
             //=======================  PHÂN TRANG  ======================= 
 
-            $data['all_pro'] = $this->Product->limit_product($start, $limit, $key);
-            $this->load->headeradmin();
-            $this->load->menuadmin();
-            $data['title'] = "Tìm kiếm";
-            $this->load->view('/product/show_product_layout', $data);
-        }
+            $start = NULL !== $this->uri->segment(5) ? $this->uri->segment(5) : 0;
+
+            $data['total_product'] = $total_record;
+            $data['super_category_name'] = 'KẾT QUẢ TÌM KIẾM';
+
+            $data['all_pro'] = $this->Product->limit_product($start, $config['per_page'], $key);
+            
+            foreach ($data['all_pro'] as &$item) {
+                $item['category_name'] = $this->Product->get_category_name_by_id($item['id']);
+            }
+
+            $data['title'] = "Tìm kiếm sản phẩm";
+            $data['subView'] = "/product/show_product_layout";
+            $data['subData'] = $data;
+
+            $this->load->view('/main/main_layout', $data);
+        
     }
-
-   
-
-
-    
 
 }
 
