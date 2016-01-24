@@ -96,7 +96,7 @@
 				</div>
 
 				<div id="fm_search">
-					<form action="<?php echo base_url().'admin/product/search' ?>" method="get" class="sidebar-form">
+					<form action="<?php echo base_url().'index.php/_admin/product/search_product' ?>" method="get" class="sidebar-form">
 						<div class="input-group">
 							<input name="key" value="<?php if (isset($_GET['key'])) echo $_GET['key']; ?>" id="input_search" class="form-control" placeholder="Tìm kiếm sản phẩm" type="text">
 							<span class="input-group-btn">
