@@ -23,15 +23,15 @@
 	<link href="<?php echo base_url().'public/bootstrap/css/bootstrap.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/admin/menu/menu.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/admin/product.css' ?>" rel="stylesheet">
-	<link href="<?php echo base_url().'public/css/admin/main/common.css' ?>" rel="stylesheet">
+	<link href="<?php echo base_url().'public/css/common/common.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/font-awesome/css/font-awesome.css' ?>" rel="stylesheet">
 	<!--===================================== My CSS =====================================-->
 
 	<!-- ===============================       MY JS         ======================== -->
 	<script src="<?php echo base_url().'public/jquery/jquery.js'?>"></script>
 	<script src="<?php echo base_url().'public/bootstrap/js/bootstrap.js'?>"></script>
-	<script src="<?php echo base_url().'public/js/admin/main/bootbox.js'?>"></script>
-	<script src="<?php echo base_url().'public/js/admin/main/common.js'?>"></script>
+	<script src="<?php echo base_url().'public/js/common/bootbox.js'?>"></script>
+	<script src="<?php echo base_url().'public/js/common/common.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/admin/menu/menu.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/admin/main/header.js'?>"></script>
 	<!-- ===============================      MY JS         ======================== -->
@@ -47,14 +47,14 @@
 
 				$status = $notice_data['status'];
 				$content_arr = (array) $notice_data['content'];
-				$alert_time  =  $notice_data['alert_time'];
+				$notice_time  =  $notice_data['alert_time'];
 
 				?>
 				<script type="text/javascript">
-					var alert_time  =  <?= $alert_time ?>;
+					var notice_time  =  <?= $notice_time ?>;
 					var content_arr = <?php echo json_encode($content_arr); ?>;
 					
-					set_alert(<?= $status ?>,content_arr,alert_time);
+					set_notice(<?= $status ?>,content_arr,notice_time);
 				</script>
 				<?php
 			} 

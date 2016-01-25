@@ -10,12 +10,15 @@
 
 <?php 
 foreach ($info as $row) {
-	$id = $row['id'];
-	$img = $row['image'];
+	$id 		  = $row['id'];
+	$img 		  = $row['image'];
 	$detail_image = htmlspecialchars($row['detail_image']);
 	$product_name = $row['product_name'];
-	$price = $row['price'];
-	$des = $row['des'];
+	$price 		  = $row['price'];
+	$des 		  = $row['des'];
+	$size 		  = htmlspecialchars($row['size']);
+	$substance 	  = htmlspecialchars($row['substance']);
+
 }
 $sm_img=explode('|',$detail_image);
 ?>
@@ -50,15 +53,16 @@ $sm_img=explode('|',$detail_image);
 
 <div class="col-xs-4 col-xs-offset-1 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-1">
 	<div id="product_name"> <?php echo $product_name; ?></div>
-	<div id="price"> <span style="font-weight:bold; color:#333;">Giá:</span> <?php echo number_format($price).' VNĐ'; ?></div>
+	<div id="price"> <span style="font-weight:bold; color:#333;">Giá:</span> <?php if ($price == 0) echo "<span style='font-size:18px;'>Liên hệ</span>"; else echo number_format($price).' VNĐ'; ?></div>
 	<div>
 		<span style="float:left; font-size:15px; font-weight:bold; padding-top:15px; margin-right:20px;">Đặt hàng:</span>
 		<input style="width:70px; float:left; margin-right:20px;" type="number" id="qty" class="form-control" value="1" min="1" max="" step="" required="required" title="số lượng">
 		<button  type="button" id="btn_mua" class="btn btn-primary">Đặt hàng</button>
 	</div>
+	<div style="margin-top:15px;" id="describle"> <span style="font-weight:bold;">Kích thước:</span> <?php echo $size; ?></div>
+	<div style="margin-top:15px;" id="describle"> <span style="font-weight:bold;">Chất liệu:</span> <?php echo $substance; ?></div>
 	<div style="margin-top:15px;" id="describle"> <span style="font-weight:bold;">Mô tả:</span> <?php echo $des; ?></div>
 
 	<span style="margin-top:10px; font-size:15px; font-weight:bold; padding-top:15px; margin-right:20px;">Hỗ trợ bán hàng:</span>
 </div>
-
 

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Productmodel extends CI_Model {
+class Product_model extends CI_Model {
 	
 	public function new_product()
 	{
@@ -59,9 +59,8 @@ class Productmodel extends CI_Model {
 	public function check_product_exist($id)
 	{
 		$this->db->where('id', $id);
-		$query = $this->db->get('product');
-		$nums = $query->num_rows();
-		return $nums;
+		$num = $this->db->get('product')->num_rows();
+		return $num > 0 ? TRUE : FALSE;
 	}
 
 	public function get_product_info_by_id($id)
@@ -84,6 +83,12 @@ class Productmodel extends CI_Model {
 		}
 		
 		return $info_of_order_product;
+	}
+
+	public function get_product_name_by_id($product_id)
+	{
+		$this->db->where('id', $product_id);
+		return $this->db->get('product')->result_array()[0]['product_name'];
 	}
 
 

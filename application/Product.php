@@ -168,7 +168,7 @@ class Product extends MX_Controller {
 
         if (count($loi) > 0) {
             $alert_time = 20000;
-            set_notice('status', FAILED_STATUS , $loi, $alert_time);
+            set_notice(FAILED_STATUS , $loi, $alert_time);
             
             $data['category'] = $this->Category->list_all_sub_category();
 
@@ -216,16 +216,16 @@ class Product extends MX_Controller {
                     $war['title'] = 'Thêm sản phẩm '.$insert_data['product_name'].' thành công!';
                     $content = $war;
                     $alert_time = 15000;
-                    set_notice('status', FAILED_STATUS,$content,$alert_time);
+                    set_notice(FAILED_STATUS,$content,$alert_time);
                     header('location:'.base_url().'index.php/_admin/product');
                 } else {
                     $mess = 'Bạn vừa thêm sản phẩm '.$insert_data["product_name"];
-                    set_notice('status', SUCCESS_STATUS, $mess);
+                    set_notice(SUCCESS_STATUS, $mess);
                     header('location:'.base_url().'index.php/_admin/product');
                 }
             } else {
                 $mess = 'Có lỗi xảy ra khi thêm mới sản phẩm.';
-                set_notice('status', FAILED_STATUS, $mess);
+                set_notice(FAILED_STATUS, $mess);
 
                 header('location:'.base_url().'index.php/_admin/product/add_product');
             }
@@ -418,7 +418,7 @@ class Product extends MX_Controller {
 
             if (count($loi) > 0) {
                 $alert_time = 20000;
-                set_notice('status', FAILED_STATUS , $loi, $alert_time);
+                set_notice(FAILED_STATUS , $loi, $alert_time);
                 
                 $data['category'] = $this->Category->list_all_sub_category();
                 $redata['info'] = $this->Product->get_product_by_id($product_id);
@@ -476,18 +476,18 @@ class Product extends MX_Controller {
                         $war['title'] = 'Cập nhật sản phẩm <span style="color:blue;"> '.$update_data['product_name'].'</span> thành công!';
                         $content = $war;
                         $alert_time = 15000;
-                        set_notice('status', FAILED_STATUS,$content,$alert_time);
+                        set_notice(FAILED_STATUS,$content,$alert_time);
                         
                         header('location:'.base_url().'index.php/_admin/product');
                     } else {
                         $mess = 'Cập nhật sản phẩm <span style="color:blue;"> '.$update_data['product_name'].'</span> thành công!';
-                        set_notice('status', SUCCESS_STATUS, $mess);
+                        set_notice(SUCCESS_STATUS, $mess);
                         
                         header('location:'.base_url().'index.php/_admin/product');
                     }
                 } else {
                     $mess = 'Có lỗi xảy ra cập nhật sản phẩm.';
-                    set_notice('status', FAILED_STATUS, $mess);
+                    set_notice(FAILED_STATUS, $mess);
 
                     header('location:'.base_url().'index.php/_admin/product/add_product');
                 }

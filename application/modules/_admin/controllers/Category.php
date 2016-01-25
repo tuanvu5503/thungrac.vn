@@ -50,7 +50,7 @@ class Category extends MX_Controller {
             }
             //========================= VALIDATION: END =========================
             if (count($error) > 0) { // has error validate
-                set_notice(FAILED_STATUS , $error);
+                set_notice('status', FAILED_STATUS , $error);
            
                 $data['all_super_category'] = $this->Category->list_all_super_category();
                 $data['subData'] = $data;
@@ -62,12 +62,12 @@ class Category extends MX_Controller {
             } else { // not error validate
                 if ($this->Category->insert_sub_category($data_insert)) {
                     $content = 'Thêm loại sản phẩm <span style="color:blue">'. $data_insert['category_name'].'</span> thành công.';
-                    set_notice(SUCCESS_STATUS , $content);
+                    set_notice('status', SUCCESS_STATUS , $content);
                     
                     header('location:'.base_url().'index.php/_admin/category/show_sub_category');
                 } else {
                     $content = 'Thêm loại sản phẩm thất bại.';
-                    set_notice(FAILED_STATUS , $content);
+                    set_notice('status', FAILED_STATUS , $content);
                     
                     header('location:'.base_url().'index.php/_admin/category/show_sub_category');
                 }
@@ -113,7 +113,7 @@ class Category extends MX_Controller {
             }
             //========================= VALIDATION: END =========================
             if (count($error) > 0) { // has error validate
-                set_notice(FAILED_STATUS , $error);
+                set_notice('status', FAILED_STATUS , $error);
            
                 $data['sub_category_info'] = $this->Category->get_sub_category_info($sub_category_id);
                 $data['all_super_category'] = $this->Category->list_all_super_category();
@@ -131,11 +131,11 @@ class Category extends MX_Controller {
 
                 if ($this->Category->update_sub_category($sub_category_id, $data_update)) {
                     $content = 'Cập nhật loại danh mục <span style="color:blue;">'.$old_sub_category_name.'</span> thành <span style="color:blue;">'.$new_sub_category_name.'</span>';
-                    set_notice(SUCCESS_STATUS , $content);
+                    set_notice('status', SUCCESS_STATUS , $content);
                     header('location:'.base_url().'index.php/_admin/category/show_sub_category');
                 } else {
                     $content = 'Cập nhật loại danh mục <span style="color:blue;">'.$old_sub_category_name.'</span> thất bại.';
-                    set_notice(FAILED_STATUS , $content);
+                    set_notice('status', FAILED_STATUS , $content);
                     header('location:'.base_url().'index.php/_admin/category/show_sub_category');
                 }
             }
@@ -219,7 +219,7 @@ class Category extends MX_Controller {
             }
             //========================= VALIDATION: END =========================
             if (count($error) > 0) { // has error validate
-                set_notice(FAILED_STATUS , $error);
+                set_notice('status', FAILED_STATUS , $error);
 
                 $data['re_super_category_name'] = $data_post['super_category_name'];
                 $data['subView'] = '/category/add_super_category_layout';
@@ -229,11 +229,16 @@ class Category extends MX_Controller {
             } else { // not error validate
                 if ($this->Category->insert_super_category($data_insert)) {
                     $content = 'Thêm loại danh mục <span style="color:blue">'. $data_insert['super_categoryName'].'</span> thành công.';
-                    set_notice(SUCCESS_STATUS , $content);
+                    set_notice('status', SUCCESS_STATUS , $content);
+
+                    // MENU USE THIS DATA TO SHOW
+                    $super_category = $this->Category->list_all_super_category();
+                    $_SESSION['super_category'] = $super_category;
+
                     header('location:'.base_url().'index.php/_admin/category/show_super_category');
                 } else {
                     $content = 'Thêm loại danh mục <span style="color:blue">'. $data_insert['super_categoryName'].'</span> thất bại.';
-                    set_notice(FAILED_STATUS , $content);
+                    set_notice('status', FAILED_STATUS , $content);
                     header('location:'.base_url().'index.php/_admin/category/show_super_category');
                 }
             }
@@ -268,7 +273,7 @@ class Category extends MX_Controller {
             //========================= VALIDATION: END =========================
             
             if (count($error) > 0) { // has error validate
-                set_notice(FAILED_STATUS , $error);
+                set_notice('status', FAILED_STATUS , $error);
 
                 $data['re_super_category_name'] = $data_post['super_categoryName'];
                 $data['re_super_category_id'] = $data_post['super_category_id'];
@@ -286,12 +291,12 @@ class Category extends MX_Controller {
                     } else {
                         $content = 'Cập nhật loại danh mục <span style="color:blue;">'.$old_super_category_name.'</span> thành công.';
                     }
-                    set_notice(SUCCESS_STATUS , $content);
+                    set_notice('status', SUCCESS_STATUS , $content);
                     
                     header('location:'.base_url().'index.php/_admin/category/show_super_category');
                 } else {
                     $content = 'Cập nhật loại danh mục <span style="color:blue;">'.$old_super_category_name.'</span> thất bại.';
-                    set_notice(FAILED_STATUS , $content);
+                    set_notice('status', FAILED_STATUS , $content);
                     
                     header('location:'.base_url().'index.php/_admin/category/show_super_category');
                 }

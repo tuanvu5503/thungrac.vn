@@ -9,17 +9,20 @@
 		body{
 			/*width: 99%;*/
 			/*padding-top: 75px;*/
-			zoom: 90%;
+			zoom: 80%;
 			overflow-x: hidden;
 		}
 		
 	</style>
 
 	<!--================================= My CSS =================================-->
+	<link href="<?php echo base_url().'public/bootstrap/css/bootstrap.min.css' ?>" rel="stylesheet">
+	<link href="<?php echo base_url().'public/font-awesome/css/font-awesome.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/s3-slider.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/jquery.mCustomScrollbar.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/jquery.bxslider.css' ?>" rel="stylesheet">
 
+	<link href="<?php echo base_url().'public/css/common/common.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/product.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/header.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/footer.css' ?>" rel="stylesheet">
@@ -28,13 +31,14 @@
 	<link href="<?php echo base_url().'public/css/site/banner.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/hmenu.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/cart/cart.css' ?>" rel="stylesheet">
-	<link href="<?php echo base_url().'public/bootstrap/css/bootstrap.min.css' ?>" rel="stylesheet">
 	<!--================================= My CSS =================================-->
 
 
 	<!-- ================================ MY JS =================================== -->
 	<script src="<?php echo base_url().'public/jquery/jquery.js'?>"></script>
 	<script src="<?php echo base_url().'public/bootstrap/js/bootstrap.min.js'?>"></script>
+	<script src="<?php echo base_url().'public/js/common/bootbox.js'?>"></script>
+	<script src="<?php echo base_url().'public/js/common/common.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/site/jquery.bxslider.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/site/jquery.mCustomScrollbar.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/site/s3-slider.js'?>"></script>
@@ -49,6 +53,51 @@
 
 </head>
 <body>
+	<!--============================== Alert ==============================-->
+	<div class="ajax_alert"></div>
+	
+	<?php 
+		if (null !== $this->session->flashdata('status')) {
+			$notice_data = $this->session->flashdata('status');
+
+			$status = $notice_data['status'];
+			$content_arr = (array) $notice_data['content'];
+			$alert_time  =  $notice_data['alert_time'];
+
+			?>
+			<script type="text/javascript">
+				var alert_time  =  <?= $alert_time ?>;
+				var content_arr = <?php echo json_encode($content_arr); ?>;
+				
+				set_notice(<?= $status ?>,content_arr,alert_time);
+			</script>
+			<?php
+		}
+
+		
+		if (null !== $this->session->flashdata('order')) {
+			$notice_data = $this->session->flashdata('order');
+
+			$status = $notice_data['status'];
+			$content = (array) $notice_data['content'];
+			if ($status == 1) {
+				$title = '<div style="font-size:18px; color: rgb(79, 180, 94);"><i style="color: rgb(33, 255, 0); font-size: 30px;" class="fa fa-check-square-o"></i> Thành công</div>';
+			} else {
+				$title = '<div style="font-size:18px; color:red;"><i style="color: rgb(255, 63, 0); font-size: 30px;" class="fa fa-times-circle"></i> Thất bại</div>';
+			}
+
+			?>
+			<script type="text/javascript">
+				var content = <?php echo json_encode($content); ?>;
+				var title  =  '<?= $title ?>';
+				
+				set_alert(<?= $status ?>, title, content);
+			</script>
+			<?php
+		}
+	?>	
+	<!--============================== Alert ==============================-->
+
 	<!--============ START: ICON SCROLL TO TOP ============-->
 	<img id="top_icon" src="<?php echo base_url().'public/icon/top.png' ?>">
 	<!--============ END: ICON SCROLL TO TOP ============-->
