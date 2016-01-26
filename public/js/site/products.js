@@ -11,7 +11,7 @@ $(document).ready(function() {
 	});
 	
 	$('.like').click(function(event) {
-		alert("LIKE");
+		// alert("LIKE");
 		return false;
 	});
 

@@ -53,11 +53,11 @@ class Acticle extends MX_Controller
 
             if ($this->Acticle->insert($data_insert)) {
                 $content = 'Thêm bài viết thành công.';
-                set_notice(SUCCESS_STATUS , $content);
+                set_notice('status', SUCCESS_STATUS , $content);
                 header('location:'.base_url().'index.php/_admin/acticle/show_acticle');
             } else {
                 $content = 'Thêm bài viết thất bại.';
-                set_notice(FAILED_STATUS , $content);
+                set_notice('status', FAILED_STATUS , $content);
                 header('location:'.base_url().'index.php/_admin/acticle/show_acticle');
             }
         } else {
@@ -107,11 +107,11 @@ class Acticle extends MX_Controller
 
             if ($this->Acticle->update($id, $data_update)) {
                 $content = 'Cập nhật bài viết thành công.';
-                set_notice(SUCCESS_STATUS , $content);
+                set_notice('status', SUCCESS_STATUS , $content);
                 header('location:'.base_url().'index.php/_admin/acticle/show_acticle');
             } else {
                 $content = 'Cập nhật bài viết thất bại.';
-                set_notice(FAILED_STATUS , $content);
+                set_notice('status', FAILED_STATUS , $content);
                 header('location:'.base_url().'index.php/_admin/acticle/show_acticle');
             }
         } else {

@@ -18,10 +18,10 @@ class Product_model extends CI_Model {
 
 	public function limit_product_in_super_category($super_category_id, $start, $limit)
 	{
-		$this->db->join('Category', $this->table.'.category_id = Category.id', 'left');
+		$this->db->join('category', $this->table.'.category_id = category.id', 'left');
 
 		$this->db->select($this->table.'.*');
-		$this->db->where('Category.super_categoryId', $super_category_id);
+		$this->db->where('category.super_categoryId', $super_category_id);
 		return $this->db->get($this->table, $limit, $start)->result_array();
 	}
 
@@ -152,9 +152,9 @@ class Product_model extends CI_Model {
 
 	public function total_record_product_in_super_category($super_category_id)
 	{
-		$this->db->join('Category', $this->table.'.category_id = Category.id', 'left');
+		$this->db->join('category', $this->table.'.category_id = category.id', 'left');
 
-		$this->db->where('Category.super_categoryId', $super_category_id);
+		$this->db->where('category.super_categoryId', $super_category_id);
 		return $this->db->get($this->table)->num_rows();
 	}
 	

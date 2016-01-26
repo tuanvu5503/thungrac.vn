@@ -1,6 +1,5 @@
 const SUCCESS_STATUS = 1;
 const FAILED_STATUS = 0;
-
 //========================== FUNCTION DELETE: START ========================== 
 function delete_modal (del_url, del_id, function_callback) {
 	bootbox.confirm({
@@ -28,7 +27,9 @@ function delete_modal (del_url, del_id, function_callback) {
 						del_id: del_id
 					},
 					success: function(rs){
-						set_alert(rs.status, rs.mess, 5000);
+						if (rs.mess != '') {
+							set_notice(rs.status, rs.mess, 7000);
+						}
 						if (typeof function_callback != 'undefined') {
 							window[function_callback](del_id); 
 						}
@@ -42,7 +43,7 @@ function delete_modal (del_url, del_id, function_callback) {
 //========================== FUNCTION DELETE: END ========================== 
 
 //========================== FUNCTION SHOW NOTICE: START ========================== 
-function set_alert(status, mess, time) {
+function set_notice(status, mess, time) {
 	var mess_code = '';
 	if (typeof mess == 'object') {
 		for (var val in mess) {
@@ -65,6 +66,25 @@ function set_alert(status, mess, time) {
 		 	$("div.ajax_alert").html(''); 
 		});}
 	); }, time);
+}
+//========================== FUNCTION SHOW NOTICE: END ========================== 
+
+//========================== FUNCTION SHOW NOTICE: START ========================== 
+function set_alert(status, title, mess) {
+	var mess_code = '';
+	if (typeof mess == 'object') {
+		for (var val in mess) {
+			mess_code = mess_code + mess[val] + '<br>';
+		}
+	} else {
+		mess_code = mess;
+	}
+
+	bootbox.alert({
+		title: title,
+		message: mess_code
+	});
+	
 }
 //========================== FUNCTION SHOW NOTICE: END ========================== 
 
