@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Product_model extends CI_Model {
+	private $table = 'product';
 	
 	public function new_product()
 	{
@@ -91,115 +92,63 @@ class Product_model extends CI_Model {
 		return $this->db->get('product')->result_array()[0]['product_name'];
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-	public function limit_product($start,$limit,$key='')
-	{
-		if ($key != '') {
-			$sql="select c.category_name, p.* from product p, category c where p.category_id = c.id and product_name like '%$key%' order by p.id desc limit $start, $limit";
-		} else {
-			$sql="select c.category_name, p.* from product p, category c where p.category_id = c.id ORDER BY RAND() limit $start, $limit";
-		}
-		$info = $this->db->select($sql);
-		return $info;
-	}
-
-	public function limit_ProductbyCategoryId($category_id,$start='', $limit='')
-	{
-		if ($start == '' && $limit == '') {
-			$sql="select * from product where category_id =".$category_id;
-		} else {
-			$sql="select * from product where category_id =".$category_id." limit $start, $limit";
-		}
-		// echo $sql; die;
-		$info = $this->db->select($sql);
-		return $info;
-	}
-
-	public function total_record_product($key='')
-	{
-		if (isset($key)) {
-			$sql="select count(*) from product where product_name like '%$key%' ";
-		} else {
-			$sql="select count(*) from product";
-		}
-		// $info = $this->db->get_row($sql);
-		return 20;
-	}
-
-	public function search($product_name, $price, $category, $start=0, $limit=0)
-	{
-		$product_name=filter_var($product_name, FILTER_SANITIZE_STRING);
-		$category=filter_var($category, FILTER_SANITIZE_STRING);
-		if ($start == 0 && $limit == 0){
-			if (empty($price) && empty($product_name) && empty($category)) {
-				$search = $this->db->select("select * from product ");
-			} elseif (!empty($price) && empty($product_name) && empty($category)) {
-				$search = $this->db->select("select * from product where price <= '$price'");
-			} elseif (!empty($category) && empty($product_name) && empty($price)) {
-				$search = $this->db->select("select * from product where category_id = '$category'");
-			} elseif (!empty($product_name) && empty($price) && empty($category)) {
-				$search = $this->db->select("select * from product where product_name like '%$product_name%'");
-			} elseif(!empty($price) && !empty($product_name) && empty($category)) {
-				$search = $this->db->select("select * from product where product_name like '%$product_name%' and price <= '$price'");
-			} elseif(empty($price) && !empty($product_name) && !empty($category)) {
-				$search = $this->db->select("select * from product where product_name like '%$product_name%' and category_id = '$category'");
-			} elseif(!empty($price) && empty($product_name) && !empty($category)) {
-				$search = $this->db->select("select * from product where price <= '$price' and category_id = '$category'");
-			} else{
-				$search = $this->db->select("select * from product where product_name like '%$product_name%' and price <= '$price' and category_id = '$category'");
-			}
-		} else {
-			if (empty($price) && empty($product_name) && empty($category)) {
-				$search = $this->db->select("select * from product order by id desc limit $start, $limit");
-			} elseif (!empty($price) && empty($product_name) && empty($category)) {
-				$search = $this->db->select("select * from product where price <= '$price' order by id desc limit $start, $limit");
-			} elseif (!empty($category) && empty($product_name) && empty($price)) {
-				$search = $this->db->select("select * from product where category_id = '$category' order by id desc limit $start, $limit");
-			} elseif (!empty($product_name) && empty($price) && empty($category)) {
-				$search = $this->db->select("select * from product where product_name like '%$product_name%' order by id desc limit $start, $limit");
-			} elseif(!empty($price) && !empty($product_name) && empty($category)) {
-				$search = $this->db->select("select * from product where product_name like '%$product_name%' and price <= '$price' order by id desc limit $start, $limit");
-			} elseif(empty($price) && !empty($product_name) && !empty($category)) {
-				$search = $this->db->select("select * from product where product_name like '%$product_name%' and category_id = '$category' order by id desc limit $start, $limit");
-			} elseif(!empty($price) && empty($product_name) && !empty($category)) {
-				$search = $this->db->select("select * from product where price <= '$price' and category_id = '$category' order by id desc limit $start, $limit");
-			}else{
-				$search = $this->db->select("select * from product where product_name like '%$product_name%' and price <= '$price' and category_id = '$category' order by id desc limit $start, $limit");
-			}
-		}
-		return $search;
-	}
-
 	public function listCategory()
 	{
 		$info = $this->db->query("select * from category");
 		return $info->result_array();
 	}
 
-	public function checkCategorybyId($category_id)
+	public function total_record_product($key='')
 	{
-		$sql="select count(*) from category where id =".$category_id;
-		$rs = $this->db->get_row($sql);
-		return $rs ? true : false;
+		if (isset($key)) {
+			$sql="select * from product where product_name like '%$key%' ";
+		} else {
+			$sql="select * from product";
+		}
+		$info = $this->db->query($sql);
+		$row  = count($info->result_array());
+		return $row;
 	}
 
-	public function getCategoryNamebyCategoryId($category_id)
+	public function limit_product($start,$limit,$key='')
 	{
-		$sql = "select category_name from category where id = ".$category_id;
-		$info = $this->db->select($sql);
-		foreach ($info as $value) {
-			return $value['category_name'];
+		if (isset($key)) {
+			$sql="select * from product where product_name like '%$key%'  order by id desc limit $start, $limit";
+		} else {
+			$sql="select * from product order by id desc limit $start, $limit";
 		}
+		$info = $this->db->query($sql);
+		return $info->result_array();
+	}
+
+	public function total_record_product_in_super_category($super_category_id)
+	{
+		$this->db->join('category', $this->table.'.category_id = category.id', 'left');
+
+		$this->db->where('category.super_categoryId', $super_category_id);
+		return $this->db->get($this->table)->num_rows();
+	}
+
+	public function total_record_product_in_sub_category($sub_category_id)
+	{
+		$this->db->where('category_id', $sub_category_id);
+		return $this->db->get($this->table)->num_rows();
+	}
+
+
+	public function limit_product_in_super_category($super_category_id, $start, $limit)
+	{
+		$this->db->join('category', $this->table.'.category_id = category.id', 'left');
+
+		$this->db->select($this->table.'.*');
+		$this->db->where('category.super_categoryId', $super_category_id);
+		return $this->db->get($this->table, $limit, $start)->result_array();
+	}
+
+	public function limit_product_in_sub_category($sub_category_id, $start, $limit)
+	{
+		$this->db->where('category_id', $sub_category_id);
+		return $this->db->get($this->table, $limit, $start)->result_array();
 	}
 }
 

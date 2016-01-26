@@ -9,9 +9,9 @@ $('.product-quantity input').change( function() {
   updateQuantity(this);
 });
 
-$('.product-removal button').click( function() {
-  removeItem(this);
-});
+// $('.product-removal button').click( function() {
+//   removeItem(this);
+// });
 
 
 /* Recalculate cart */
@@ -35,11 +35,11 @@ function recalculateCart()
     $('#cart-tax').html(tax.toFixed(2));
     $('#cart-shipping').html(shipping.toFixed(2));
     $('#cart-total').html(formatNumber(total));
-    if(total == 0){
-      $('.checkout').fadeOut(fadeTime);
-    }else{
-      $('.checkout').fadeIn(fadeTime);
-    }
+    // if(total == 0){
+    //   $('.checkout').fadeOut(fadeTime);
+    // }else{
+    //   $('.checkout').fadeIn(fadeTime);
+    // }
     $('.totals-value').fadeIn(fadeTime);
   });
 }

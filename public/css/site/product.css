@@ -169,6 +169,8 @@ div.like:hover {
 
 div#search_head{
 	font: 600 19px/43px "Hind",sans-serif;
+	color: #9E8D8D;
+	text-align: center;
 }
 
 a.product_name{

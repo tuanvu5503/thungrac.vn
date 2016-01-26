@@ -1,6 +1,5 @@
 const SUCCESS_STATUS = 1;
 const FAILED_STATUS = 0;
-
 //========================== FUNCTION DELETE: START ========================== 
 function delete_modal (del_url, del_id, function_callback) {
 	bootbox.confirm({
@@ -28,7 +27,9 @@ function delete_modal (del_url, del_id, function_callback) {
 						del_id: del_id
 					},
 					success: function(rs){
-						set_notice(rs.status, rs.mess, 5000);
+						if (rs.mess != '') {
+							set_notice(rs.status, rs.mess, 7000);
+						}
 						if (typeof function_callback != 'undefined') {
 							window[function_callback](del_id); 
 						}

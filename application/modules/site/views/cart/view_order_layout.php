@@ -5,6 +5,9 @@
       border: 1px red solid;
     }
   </style>
+  <?php 
+      $url_delete_cart = base_url().'index.php/site/cart/delete_product_in_cart';
+  ?>
 
 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
   <h1>Đơn đặt hàng</h1>
@@ -41,7 +44,7 @@
               <input name="order_qty[]" type="number" value="<?php echo $items['order_qty']; ?>" min="1">
             </div>
             <div class="product-removal">
-              <button type="button" class="remove-product">
+              <button id="<?= $items['id'] ?>" onclick="delete_modal('<?= $url_delete_cart ?>', <?= $items['id'] ?>,'del_product_in_cart_success')" type="button" class="remove-product">
                 Xóa
               </button>
             </div>
@@ -62,18 +65,15 @@
       </div>
     </div>
 
-    <button id="do_order" type="button" name="do_order_btn" class="checkout">Tiếp theo</button>
+    <button id="do_order" type="button" onclick="show_customer_form('tuan vu','01676869501')" name="do_order_btn" class="checkout">Tiếp theo</button>
     </form>
 
   </div>
 
 </div>
 <script src="<?php echo base_url().'public/js/site/cart/index.js'?>"></script>
+
 <script type="text/javascript">
-  $('button#do_order').click(function(event) {
-    show_customer_form();
-  });
-  
 
 function show_customer_form (customer_name, phone,customer_name_class, phone_class) {
     if (typeof customer_name === 'undefined') {
@@ -151,4 +151,11 @@ function show_customer_form (customer_name, phone,customer_name_class, phone_cla
       }
     })
 }
+</script>
+
+
+<script type="text/javascript">
+  function del_product_in_cart_success (del_id) {
+    removeItem($('button#'+del_id));
+  }
 </script>

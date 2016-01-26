@@ -25,85 +25,19 @@
 		Tin hot trong tuần
 	</div>
 	<ul class="acticle" data-mcs-theme="dark" style="font-size:15px;">
-		<li>
-			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
-		</li>
+		<?php 
+		if ( ! empty($acticle)) {
+			foreach ($acticle as $item) {
+				?>
+				<li>
+					<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
+					<a href="<?php echo base_url().'index.php/site/homepage/acticle/'.$item['id']; ?>"><?=$item['acticle_name']?></a>
+				</li>
+				<?php
+			}
+		}
+		?>
 
-		<li>
-			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
-		</li>
-
-		<li>
-			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
-		</li>
-
-		<li>
-			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
-		</li>
-
-		<li>
-			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
-		</li>
-
-		<li>
-			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
-		</li>
-
-		<li>
-			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
-		</li>
-
-		<li>
-			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
-		</li>
-
-		<li>
-			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
-		</li>
-
-		<li>
-			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
-		</li>
-
-		<li>
-			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
-		</li>
-
-		<li>
-			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
-		</li>
-
-		<li>
-			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
-		</li>
-
-		<li>
-			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
-		</li>
-
-		<li>
-			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
-		</li>
-
-		<li>
-			<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-			<a href="">Thùng rác đôi nhập khẩu hình mái vòm giá rẻ tại Hà Nội </a>
-		</li>
 	</ul>
 </div>
 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"> <!-- all product -->
@@ -114,7 +48,15 @@
 		?>
 		<div class="all_pro_head">
 			<?php 
+	// var_dump($products); die;
+			$tmp = explode('|', $key);
+			$key = $tmp[0];
 			echo mb_strtoupper($key);
+			if ($tmp[1] != 0) {
+				?>
+				<a style="float: right; font-size: 12px; color: #fff !important; margin-right: 25px;" href="<?php echo base_url().'index.php/site/homepage/product_in_super_category/'.$tmp[1]; ?>">Xem tất cả</a>
+				<?php
+			}	
 			?>
 		</div>
 

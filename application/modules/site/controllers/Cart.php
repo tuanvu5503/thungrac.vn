@@ -78,15 +78,17 @@ class Cart extends MX_Controller
 
     public function do_order()
     {
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
         $this->load->model('Order_model', 'Order');
+        
         if (isset($_POST['phone'])) {
             $this->load->helper('validation');
             
             $customer_name = trim_input($_POST['customer_name']);
             $phone = trim_input($_POST['phone']);
             
-            $arr_product_id = $_POST['product_id'];
-            $arr_order_qty = $_POST['order_qty'];
+            $arr_product_id = (array) $_POST['product_id'];
+            $arr_order_qty = (array) $_POST['order_qty'];
             $error = array();
 
             //====================== VALIDATION: START ====================
@@ -117,9 +119,12 @@ class Cart extends MX_Controller
             //====================== VALIDATION: END ======================
             
             if (count($error) > 0) {
-                set_notice('status', FAILED_STATUS , $error, 15000);
+                set_notice('order', FAILED_STATUS , $error);
                 header("location:".base_url()."index.php/site/cart/view_order");
             } else {
+                $now =  new DateTime(date('Y-m-d H:i:s'));
+                $data_insert['order_datetime'] = $now->format('Y-m-d H:i:s');
+
                 $data_insert['product_id_and_qty'] = '';
                 for ($i=0; $i<count($arr_product_id); $i++) {
                     $data_insert['product_id_and_qty'] .= $arr_product_id[$i].'-'.$arr_order_qty[$i].'|';
@@ -131,6 +136,35 @@ class Cart extends MX_Controller
 
                 if ($this->Order->insert($data_insert)) {
                     $this->cart->destroy();
+
+                    //================ SEND MAIL TO ADMIN: START ================
+                    $this->load->model('Account_model','Account');
+                    $this->load->helper('mymail');
+
+                    $arr_to_mail = $this->Account->get_list_email_admin();
+
+                    if ( ! empty($arr_to_mail)) {
+                        $date_time_order = date('d/m/Y').' - '.date("h:i:sa");
+                        $subject = 'ĐƠN ĐẶT HÀNG MỚI ('.$date_time_order.')';
+                        $message = 'Có đơn đặt hàng mới từ:'
+                                    .'<br>Khách hàng: '.$customer_name
+                                    .'<br>Số điện thoại: '.$phone.'<br><br>';
+
+                        $message .= '<html><body>';
+                        $message .= '<table rules="all" style="min-width:300px; border-color: #666;" cellpadding="10">';
+                        $message .= "<tr style='background: #eee;'><td><strong>Tên sản phẩm:</strong> </td><td>Số lượng</td></tr>";
+                        
+                        foreach ($arr_product_id as $key => $value) {
+                            $message .= "<tr><td><strong>".$this->Product->get_product_name_by_id($arr_product_id[$key])."</strong> </td><td>".$arr_order_qty[$key]."</td></tr>";
+                        }
+
+                        $message .= "</table>";
+                        $message .= "</body></html>";
+
+                        send_mail($arr_to_mail, $subject, $message);
+                    }
+                    //================ SEND MAIL TO ADMIN: START ================
+
                     $content = '<div style="color: rgb(129, 127, 123); font-size: 16px;">'
                             .'Khách hàng: <span style="color:rgb(0, 165, 255);">'.$customer_name.'</span>'
                             .'<br> Số điện thoại: <span style="color:rgb(0, 165, 255);">'.$phone.'</span>'
@@ -138,21 +172,6 @@ class Cart extends MX_Controller
                             .'</div>';
 
                     set_notice('order', SUCCESS_STATUS, $content);
-
-
-                    $this->load->library('email');
-
-                    $this->email->from('vu1111482@gmail.com', 'Website-thungrac');
-                    $this->email->to('vu1111482@gmail.com');
-                    $this->email->cc('vu111482@student.ctu.edu.vn');
-
-                    $this->email->subject('Email Test');
-                    $this->email->message('Testing the email class.');
-
-                    $mail = $this->email->send();
-                    var_dump($mail); die;
-
-
                     header("location:".base_url());
                 } else {
                     header("location:".base_url()."index.php/site/cart/view_order");
@@ -163,6 +182,34 @@ class Cart extends MX_Controller
 
         } else {
             header("location:".base_url());
+        }
+    }
+
+    public function delete_product_in_cart()
+    {
+        if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
+            die();
+        }
+
+        if(isset($_POST["del_id"]) 
+            && is_numeric($_POST["del_id"])
+        ){
+            $error = array();
+            $del_id = $_POST['del_id'];
+
+
+            $data=$this->cart->contents();
+            foreach($data as $item){
+                if($item['id'] == $del_id){
+                    $item['qty'] = 0;
+                    $delOne = array("rowid" => $item['rowid'], "qty" => $item['qty']);
+                }
+            }
+
+            $this->cart->update($delOne);
+            $error['status'] = SUCCESS_STATUS;
+            $error['mess']   = '';
+            echo json_encode($error);
         }
     }
 }
