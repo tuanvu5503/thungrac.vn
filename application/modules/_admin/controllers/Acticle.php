@@ -13,7 +13,46 @@ class Acticle extends MX_Controller
     {
         $this->load->helper('text');
 
-        $data['all_acticle'] = $this->Acticle->list_all_acticle();
+        //========================== PHÂN TRANG ==========================
+        $total_record = $this->Acticle->total_record_acticle();
+
+        $this->load->library('pagination');
+        
+        $config['base_url'] = base_url().'index.php/_admin/acticle/show_acticle';
+        $config['total_rows'] = $total_record;
+        $config['per_page'] = 10;
+        $config['uri_segment'] = 4;
+        $config['num_links'] = 3;
+        
+        $config['full_tag_open'] = '<ul class="pagination pagination-small">';
+        $config['full_tag_close'] = '</ul><!--pagination-->';
+        $config['first_link'] = '&laquo; First';
+        $config['first_tag_open'] = '<li class="prev page">';
+        $config['first_tag_close'] = '</li>';
+        $config['last_link'] = 'Last &raquo;';
+        $config['last_tag_open'] = '<li class="next page">';
+        $config['last_tag_close'] = '</li>';
+        $config['next_link'] = 'Next &rarr;';
+        $config['next_tag_open'] = '<li class="next page">';
+        $config['next_tag_close'] = '</li>';
+        $config['prev_link'] = '&larr; Previous';
+        $config['prev_tag_open'] = '<li class="prev page">';
+        $config['prev_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li class="page">';
+        $config['num_tag_close'] = '</li>';
+
+        $this->pagination->initialize($config);
+
+        $data['pagination'] = $this->pagination->create_links();
+        //======================= END PHÂN TRANG ==========================
+
+        $start=$this->uri->segment(4);
+        $start = $start == null ? 0 : $start;
+
+        $data['total_record'] = $total_record;
+        $data['all_acticle'] = $this->Acticle->limit_acticle($start, $config['per_page']);
         $data['subView']     = '/acticle/show_acticle_layout';
         $data['title']       = "Quản lý bài viết";
         $data['subData']     = $data;

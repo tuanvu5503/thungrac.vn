@@ -24,7 +24,7 @@ class Login extends MX_Controller {
                 $_SESSION['user'] = $user;
                 $_SESSION['super_category'] = $super_category;
 
-                header("location:".base_url()."index.php/_admin/product");
+                header("location:".base_url()."index.php/_admin/order/show_order");
             } else {
                 $error[] = 'Sai tên đăng nhập hoặc mật khẩu!';
                 $data['re_username'] = $_POST['username'];

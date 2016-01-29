@@ -133,6 +133,8 @@ span#edit_user:hover{
 div#menu{
 	padding: 0px;
 	margin: 0px;
+    min-width: 180px;
+
 }
 
 li#logout {

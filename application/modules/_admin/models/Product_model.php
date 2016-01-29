@@ -157,6 +157,12 @@ class Product_model extends CI_Model {
 		$this->db->where('category.super_categoryId', $super_category_id);
 		return $this->db->get($this->table)->num_rows();
 	}
+
+	public function get_product_price_by_id($product_id)
+	{
+		$this->db->where('id', $product_id);
+		return $this->db->get($this->table)->result_array()[0]['price'];
+	}
 	
 }
 

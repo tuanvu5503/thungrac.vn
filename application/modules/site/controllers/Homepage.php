@@ -281,6 +281,16 @@ class Homepage extends MX_Controller
         }
     }
 
+    public function contact()
+    {
+        $this->load->model('Contact_model', 'Contact');
+        $data['contact'] = $this->Contact->get_contact();
+
+        $data['title'] = 'Liên hệ';
+        $subView = '/contact/show_contact_layout';
+        $arr_data = $data;
+        $this->build($subView, $arr_data);
+    }
 
     public function build($subView, $arr_data)
     {

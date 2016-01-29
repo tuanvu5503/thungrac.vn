@@ -13,7 +13,7 @@
  			$category_id=$row['category_id'];
  			$price=$row['price'];
             $size= htmlspecialchars($row['size']);
- 			$size= htmlspecialchars($row['substance']);
+ 			$substance= htmlspecialchars($row['substance']);
  			$product_name = htmlspecialchars($row['product_name']);
  			$des = htmlspecialchars($row['des']);
  			$image = htmlspecialchars($row['image']);
@@ -114,5 +114,5 @@
             <tr>
         </tbody>
     </table>
-    <button id="0" type="button" class="addmore btn btn-info">Thêm ảnh chi tiết</button>  
+    <button style="margin-bottom:200px;" id="0" type="button" class="addmore btn btn-info">Thêm ảnh chi tiết</button>  
 </form>

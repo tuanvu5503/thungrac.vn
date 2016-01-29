@@ -29,6 +29,7 @@ class Cart extends MX_Controller
 
             $ok = $this->cart->insert($data);
             if ($ok) {
+                $rs['qty'] = $this->cart->total_items();
                 $rs['status'] = true;
             } else {
                 $rs['status'] = false;
@@ -95,7 +96,7 @@ class Cart extends MX_Controller
             if ($customer_name == '') {
                 $error[] = 'Tên khách hàng không được để trống.';
             }
-            $regex = "/^[0-9]{9,}$/";
+            $regex = "/^[0-9]{9,11}$/";
             if ($phone == '')  {
                 $error[] = "Số điện thoại không được rỗng.";
             } elseif ( ! preg_match( $regex, $phone, $maches)) {
@@ -211,5 +212,14 @@ class Cart extends MX_Controller
             $error['mess']   = '';
             echo json_encode($error);
         }
+    }
+
+    public function load_shopping_cart()
+    {
+        if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
+            die();
+        }
+
+        $this->load->view('/cart/body_shopping_cart');
     }
 }

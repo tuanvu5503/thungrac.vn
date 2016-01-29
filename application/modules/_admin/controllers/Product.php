@@ -360,7 +360,7 @@ class Product extends MX_Controller {
 
 
             //====================== Validate START ======================
-            if (  !empty($_FILES['avatar']['name'])) {
+            if ( ! empty($_FILES['avatar']['name'])) {
                 $avatar_name = $_FILES['avatar']['name'];
                 $tmp = new SplFileInfo($avatar_name);
                 $avatar_type = $tmp->getExtension();

@@ -9,7 +9,6 @@
       $url_delete_cart = base_url().'index.php/site/cart/delete_product_in_cart';
   ?>
 
-<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
   <h1>Đơn đặt hàng</h1>
 
   <div class="shopping-cart2">
@@ -70,7 +69,6 @@
 
   </div>
 
-</div>
 <script src="<?php echo base_url().'public/js/site/cart/index.js'?>"></script>
 
 <script type="text/javascript">

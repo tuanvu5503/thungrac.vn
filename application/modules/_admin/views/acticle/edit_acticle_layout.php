@@ -15,8 +15,8 @@
 			<textarea id="acticle_content" class="" name="acticle_content" rows="3" required="required"><?= $acticle_info['acticle_content'] ?></textarea>
 		</div>
 		
-    	<input style="margin-bottom:300px; width:100px; float:right; margin-right:200px;" class="btn btn-primary" type="submit" name="edit_acticle_btn" value="Cập nhật">
-    	<a style="margin-bottom:300px; width:100px; float:right; margin-right:10px;" class="btn btn-danger" href="<?php echo base_url().'index.php/_admin/acticle/show_acticle' ?>" role="button">Hủy</a>
+    	<input style="margin-bottom:300px; width:100px; float:right; margin-right:50px;" class="btn btn-primary" type="submit" name="edit_acticle_btn" value="Cập nhật">
+    	<a style="margin-bottom:300px; width:100px; float:right; margin-right:10px;" class="btn btn-danger" href="javascript:history.go(-1)" role="button">Hủy</a>
 	</form>		
 
 <script type="text/javascript">
