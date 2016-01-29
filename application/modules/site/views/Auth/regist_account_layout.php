@@ -1,30 +1,3 @@
-<!doctype html>
-<html lang="en-US">
-<head>
-   <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html">
-  <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url().'public/css/site/Auth/styles.css'; ?>">
-  <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url().'public/css/site/Auth/progression.min.css'; ?>">
-  <style type="text/css">
-      div.error{
-        width: 100%;
-        background-color: #FD9800;
-        margin-bottom: 20px;
-      }
-
-      span.error_items{
-        line-height: 20px;
-        margin-left: 10px;
-        font-size: 14px;
-        color: #fff;
-        font-weight: bold;
-      }
-  </style>
-  <script type="text/javascript" src="<?php echo base_url().'public/js/site/Auth/progression.min.js'; ?>"></script>
-</head>
-
-<body>
-
   <div id="w">
     <div id="content">
       <h1>Đăng ký tài khoản</h1>
@@ -141,5 +114,3 @@ $(function(){
   });
 });
 </script>
-</body>
-</html>

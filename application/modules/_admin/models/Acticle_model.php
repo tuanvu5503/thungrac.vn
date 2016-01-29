@@ -15,11 +15,6 @@ class Acticle_model extends CI_Model {
 		return $this->db->update($this->table, $arr_data);
 	}
 
-	public function list_all_acticle()
-	{
-		return $this->db->get($this->table)->result_array();
-	}
-
 	public function get_acticle_info($id)
 	{
 		$this->db->where('id', $id);
@@ -44,5 +39,15 @@ class Acticle_model extends CI_Model {
 	{
 		$this->db->where('id', $id);
 		return $this->db->delete($this->table);
+	}
+
+	public function total_record_acticle()
+	{
+		return $this->db->get($this->table)->num_rows();
+	}
+
+	public function limit_acticle($start, $limit)
+	{
+		return $this->db->get($this->table, $limit, $start)->result_array();
 	}
 }

@@ -3,7 +3,7 @@ ul#vmenu{
 	background-color:rgba(167, 239, 233, 0.35);
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
-	min-height: 1700px;
+	min-height: 600px;
 }
 
 .nav > li > a:hover, .nav > li > a:focus {

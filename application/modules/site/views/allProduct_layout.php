@@ -1,4 +1,4 @@
-<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">  <!-- Slider -->
+<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">  <!-- Slider -->
 
 	<div id="slider">
 		<div class="slide">
@@ -19,7 +19,7 @@
 	</div>
 </div>
 
-<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"> <!-- Bai viet -->
+<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"> <!-- Bai viet -->
 	<div id="acticle_head">
 		<img id="acticle_title-icon" src="<?php echo base_url().'public/icon/acticle_title-icon.png' ?>">
 		Tin hot trong tuần
@@ -40,7 +40,7 @@
 
 	</ul>
 </div>
-<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"> <!-- all product -->
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> <!-- all product -->
 	<!--================================= List product by super category =================================-->
 	<?php 
 	foreach ($products as $key => $value) {
@@ -48,7 +48,6 @@
 		?>
 		<div class="all_pro_head">
 			<?php 
-	// var_dump($products); die;
 			$tmp = explode('|', $key);
 			$key = $tmp[0];
 			echo mb_strtoupper($key);
@@ -97,12 +96,4 @@
 	}
 	?>
 	<!--================================= End List product by super category =================================-->
-
-
-
-
-
-
-
-
 </div>

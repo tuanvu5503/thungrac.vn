@@ -71,7 +71,7 @@ foreach ($info as $row) {
 	</div>
 </div>
 
-<div class="col-xs-4 col-xs-offset-1 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-1">
+<div class="col-xs-6 col-xs-offset-1 col-sm-6 col-sm-offset-1 col-md-6 col-md-offset-1 col-lg-6 col-lg-offset-1">
 	<div id="product_name"> <?php echo $product_name; ?></div>
 	<div id="price"> <span style="font-weight:bold; color:#333;">Giá:</span> <?php if ($price == 0) echo "<span style='font-size:18px;'>Liên hệ</span>"; else echo number_format($price).' VNĐ'; ?></div>
 	<div>
@@ -84,7 +84,7 @@ foreach ($info as $row) {
 			<input name="order_qty" style="width:70px; float:left; margin-right:20px;" type="number" id="qty" class="form-control" value="1" min="1" max="" step="" required="required" title="số lượng">
 		</form>
 			<button onclick="show_customer_form('tuan vu','01676869501')" type="button" id="btn_mua" class="btn btn-primary">Đặt hàng</button>
-			<i id="<?=$id?>" style="cursor: pointer; font-size: 26px; color: blue; margin-left: 20px;" class="addcart2 fa fa-cart-arrow-down"></i>
+			<i id="<?=$id?>" style="cursor: pointer; font-size: 26px; color: rgb(103, 203, 34); margin-left: 20px;" class="addcart2 fa fa-cart-arrow-down"></i>
 	</div>
 
 	<div style="margin-top:15px;" id="describle"> <span style="font-weight:bold;">Kích thước:</span> <?php echo $size; ?></div>

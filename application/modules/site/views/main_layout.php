@@ -4,12 +4,12 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title><?php echo $title; ?></title>
+	<title>Thungrac.vn - <?php echo $title; ?></title>
 	<style type="text/css">
 		body{
 			/*width: 99%;*/
 			/*padding-top: 75px;*/
-			zoom: 80%;
+			zoom: 90%;
 			overflow-x: hidden;
 		}
 		
@@ -49,8 +49,11 @@
 	<script src="<?php echo base_url().'public/js/site/acticle.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/site/slider.js'?>"></script>
 	<script src="<?php echo base_url().'public/js/site/cart/cart.js'?>"></script>
+	<script src="<?php echo base_url().'public/js/site/main/main.js'?>"></script>
 	<!-- ================================ MY JS =================================== -->
-
+	<script type="text/javascript">
+		base_url = '<?php echo base_url(); ?>';
+	</script>
 </head>
 <body>
 	<!--============================== Alert ==============================-->
@@ -113,8 +116,8 @@
 							if ( ! empty($value)) {
 							?>
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $key ?><span class="caret"></span></a>
-								<ul class="dropdown-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo mb_strtoupper($key); ?><span class="caret"></span></a>
+								<ul style="overflow:hidden;" class="dropdown-menu">
 									<?php
 									$i = 0;
 									$n = count($value);
@@ -155,7 +158,7 @@
 						?>
 						<ul id="cart" class="nav navbar-nav navbar-right">
 							<li>
-								<a id="cart"><span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng <span class="badge"><?php echo $this->cart->total_items(); ?></span></a>
+								<a id="cart"><span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng <span class="cart_total_items badge"><?php echo $this->cart->total_items(); ?></span></a>
 							</li>
 						</ul> 
 						<?php	
@@ -180,7 +183,7 @@
 				<!--========== START: BODY OF SHOPPING CART ==========-->
 				<div class="shopping-cart">
 					<div class="shopping-cart-header">
-						<span style='font-size: 15px; margin-right:8px; color: #fff;' class='glyphicon glyphicon-shopping-cart'></span><span class="badge"><?php echo $this->cart->total_items(); ?></span>
+						<span style='font-size: 15px; margin-right:8px; color: #fff;' class='glyphicon glyphicon-shopping-cart'></span><span class="cart_total_items badge"><?php echo $this->cart->total_items(); ?></span>
 						<div class="shopping-cart-total">
 							<span class="lighter-text">Total:</span>
 							<span class="main-color-text"><?php echo number_format($this->cart->total()); ?>VNĐ</span>
@@ -211,15 +214,15 @@
 						}
 						?>
 
-						</ul>
-						<?php 
-						if ( ! empty($this->cart->contents())) {
-							?>
-							<a id="checkout" class="btn btn-primary" href="<?php echo base_url().'index.php/site/cart/view_order' ?>" role="button">Đặt hàng</a>
-							<?php
-						}
+					</ul>
+					<?php 
+					if ( ! empty($this->cart->contents())) {
 						?>
-					</div> 
+						<a id="checkout" class="btn btn-primary" href="<?php echo base_url().'index.php/site/cart/view_order' ?>" role="button">Đặt hàng</a>
+						<?php
+					}
+					?>
+				</div> 
 					<!--========== END: BODY OF SHOPPING CART ==========-->
 
 					<!--================= START: MENU DOC ================= -->
@@ -249,9 +252,12 @@
 
 
 					<!--=========================== LOAD CONTENT ===========================-->
+					<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+						
 					<?php 
 					$this->load->view($subView, $subData);
 					?>
+					</div>
 					<!--=========================== LOAD CONTENT ===========================-->
 
 
@@ -260,11 +266,11 @@
 				<div class="row"><!-- Footer -->
 					<footer>
 						<div id="footer_lienhe">
-							<a href="#" class="head_footer">Trang chủ</a>
+							<a href="<?php echo base_url(); ?>" class="head_footer">Trang chủ</a>
 							<span> | </span>
-							<a href="#" class="head_footer">Liên hệ</a>
-							<span> | </span>
-							<a href="#" class="head_footer">Thành viên đăng nhập</a>
+							<a href="<?php echo base_url().'index.php/site/homepage/contact' ?>" class="head_footer">Liên hệ</a>
+							<!-- <span> | </span> -->
+							<!-- <a href="#" class="head_footer">Thành viên đăng nhập</a> -->
 						</div>
 						<div id="footer_content">
 							<span>Thông tinh website | Email liên hệ | Số điện thoại liên hệ </span>

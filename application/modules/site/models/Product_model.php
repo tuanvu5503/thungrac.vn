@@ -150,5 +150,7 @@ class Product_model extends CI_Model {
 		$this->db->where('category_id', $sub_category_id);
 		return $this->db->get($this->table, $limit, $start)->result_array();
 	}
+
+	
 }
 

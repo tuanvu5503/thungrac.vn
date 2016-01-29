@@ -336,6 +336,12 @@ class Category extends MX_Controller {
             $super_category_name = $this->Category->get_super_category_name_by_id($del_id);
             $error['status']     = $this->Category->delete_super_category($del_id);
 
+            if ($error['status'] == SUCCESS_STATUS) {
+                // MENU USE THIS DATA TO SHOW
+                $super_category = $this->Category->list_all_super_category();
+                $_SESSION['super_category'] = $super_category;
+            }
+
             $error['mess']   = $error['status'] == SUCCESS_STATUS ? 'Xóa danh mục <span style="color:blue;">'.$super_category_name.'</span> thành công.' : 'Xóa danh mục <span style="color:blue;">'.$super_category_name.'</span> thất bại.';
             echo json_encode($error);
         } else {

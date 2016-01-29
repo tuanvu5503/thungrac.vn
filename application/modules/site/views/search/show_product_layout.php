@@ -1,4 +1,3 @@
-<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
 	
 <div id="search_head"><?php echo $title_action.' ('.$total_product.')'; ?></div>
 
@@ -39,5 +38,4 @@
 		echo "Không tìm thấy sản phẩm nào!";
 	}
 	?>
-</div>
 <?php if (isset($pagination)) echo $pagination; ?>

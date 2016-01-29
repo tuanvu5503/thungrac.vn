@@ -4,7 +4,7 @@
 
 <div class="row">
 	<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-		<h3 class="text-center">QUẢN LÝ BÀI VIẾT</h3> 
+		<h3 class="text-center">QUẢN LÝ BÀI VIẾT (<?=$total_record?>)</h3> 
 	</div>
 </div>
 
@@ -52,7 +52,9 @@
 	</table>
 </div>
 <a style="margin: 0 auto; margin-right:10px;" class="btn btn-primary" href="<?php echo base_url(); ?>index.php/_admin/acticle/add_acticle" role="button">Thêm bài viết</a>
-
+<?php 
+	echo $pagination;
+?>
 <script type="text/javascript">
 	function del_acticle_success (del_id) {
 		$("tr#"+del_id).addClass('remove');

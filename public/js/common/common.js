@@ -12,7 +12,7 @@ function delete_modal (del_url, del_id, function_callback) {
 	            className: "btn-default pull-right button_of_delete_modal"
 	        },
 	        confirm: {
-	            label: "Xóa ngay",
+	            label: "Đồng ý",
 	            className: "btn-danger pull-right button_of_delete_modal"
 	        }
 	    },
@@ -30,8 +30,10 @@ function delete_modal (del_url, del_id, function_callback) {
 						if (rs.mess != '') {
 							set_notice(rs.status, rs.mess, 7000);
 						}
-						if (typeof function_callback != 'undefined') {
-							window[function_callback](del_id); 
+						if(rs.status == SUCCESS_STATUS) {
+							if (typeof function_callback != 'undefined') {
+								window[function_callback](del_id); 
+							}
 						}
 					}
 				});

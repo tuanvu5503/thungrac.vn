@@ -11,16 +11,17 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		id = $(this).attr('id');
-		// alert(id);
 
 		$.ajax({
 			url: base_url+'index.php/site/cart/add_cart',
 			type: 'POST',
 			dataType: 'json',
 	        data: {id: id},
-	        success: function(msg){
-				if (msg.status) {
-					location.reload();
+	        success: function(rs){
+				if (rs.status) {
+					// location.reload();
+          load_shopping_cart();
+          $("span.cart_total_items").html(rs.qty);
 				}
 	        }
 	    });

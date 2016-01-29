@@ -13,7 +13,7 @@
 			<textarea id="acticle_content" class="" name="acticle_content" rows="3" required="required"></textarea>
 		</div>
 		
-    	<input style="margin-bottom:300px; width:100px; float:right; margin-right:200px;" class="btn btn-primary" type="submit" name="add_acticle_btn" value="Lưu">
+    	<input style="margin-bottom:300px; width:100px; float:right; margin-right:50px;" class="btn btn-primary" type="submit" name="add_acticle_btn" value="Lưu">
     	<a style="margin-bottom:300px; width:100px; float:right; margin-right:10px;" class="btn btn-danger" href="<?php echo base_url().'index.php/_admin/acticle/show_acticle' ?>" role="button">Hủy</a>
 	</form>		
 
