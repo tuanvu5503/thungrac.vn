@@ -6,8 +6,9 @@ class Product_model extends CI_Model {
 	
 	public function new_product()
 	{
-		$new_product = $this->db->query("select c.category_name, p.* from category c, product p where p.category_id = c.id order by id desc limit 8");
-		return $new_product->result_array();
+		$this->db->join('category', $this->table.'.category_id = category.id', 'left');
+		$this->db->order_by($this->table.'.id', 'desc');
+		return $this->db->get($this->table, 5, 0)->result_array();
 	}
 
 	public function all_product()
