@@ -21,6 +21,15 @@
 		</thead>
 		<tbody>
 				<?php
+				if (empty($all_acticle)) {
+					?>
+					<tr style="background-color: rgb(255, 202, 202);">
+						<td colspan="4">
+							<h3 class="text-center">Chưa có bài viết nào!</h3>
+						</td>
+					</tr>
+					<?php
+				}
 					$stt=0;
 					foreach ($all_acticle as $row) 
 					{  

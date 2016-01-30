@@ -27,8 +27,17 @@
 		</thead>
 		<tbody>
 <?php 
+	if (empty($all_order)) {
+		?>
+		<tr style="background-color: rgb(255, 202, 202);">
+			<td colspan="11">
+				<h3 class="text-center">Chưa nhận được đơn hàng nào!</h3>
+			</td>
+		</tr>
+		<?php
+	}
 
-$stt=0;
+	$stt=0;
 	foreach ($all_order as $row) 
 	{
 		$stt++;

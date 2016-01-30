@@ -39,6 +39,14 @@
 	                </tr>
 	                <?php
 	            }
+	        } else {
+	        	?>
+				<tr style="background-color: rgb(255, 202, 202);">
+					<td colspan="4">
+						<h3 class="text-center">Chưa có hình nào trong slider!</h3>
+					</td>
+				</tr>
+				<?php
 	        }
 	        ?>
 	    </tbody>
