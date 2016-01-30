@@ -66,14 +66,23 @@
 				$super_categoryName = strtolower(utf8convert($key));
 				$super_categoryName = str_replace(' ', '-', $super_categoryName);
 				foreach ($value as $row) {
-					// var_dump($row);
 					$categoryName = strtolower(utf8convert($row['category_name']));;
 					$categoryName = str_replace(' ', '-', $categoryName);
 					?>
 					<div style="width:212px; height:300px; float:left;">
 						
 						<div class="items">
-							<div class="ribbon-wrapper-green"><div class="ribbon-green">MỚI VỀ</div></div>
+						<?php 
+							if (trim($row['ribbon']) != '') {
+								?>
+								<div class="ribbon-wrapper-green"><div class="ribbon-green"><?php echo mb_strtoupper(htmlspecialchars($row['ribbon'])); ?></div></div>
+								<?php
+							} elseif ($tmp[1] == 0){
+								?>
+								<div class="ribbon-wrapper-green"><div class="ribbon-green">MỚI VỀ</div></div>
+								<?php
+							}
+						 ?>
 							<div class="items_head">
 								<div class="pro_name"><a class="product_name" href="<?php echo base_url().'index.php/site/homepage/view_detail/'.$super_categoryName.'/'.$categoryName.'-'.$row["id"]; ?>"><?php echo htmlspecialchars($row['product_name']); ?></a></div>
 								<div class="price">Giá: <?php echo number_format($row['price']).'$'; ?></div>

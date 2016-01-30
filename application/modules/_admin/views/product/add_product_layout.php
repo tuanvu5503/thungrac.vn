@@ -51,8 +51,12 @@
             <input value="<?php if (isset($re_size)) echo htmlspecialchars($re_size); ?>" name="size" type="text" class="form-control add" id="size" placeholder="Kích thước">
         </div>
         <div id="substance">
-            <label for="chatlieu">CHẤT LIỆU (VNĐ)</label>
+            <label for="chatlieu">CHẤT LIỆU</label>
             <input value="<?php if (isset($re_substance)) echo htmlspecialchars($re_substance); ?>" name="substance" type="text" class="form-control add" id="chatlieu" placeholder="Chất liệu">
+        </div>
+        <div id="ribbon">
+            <label for="ribbon">TEM DÁN</label>
+            <input value="<?php if (isset($re_ribbon)) echo htmlspecialchars($re_ribbon); ?>" name="ribbon" type="text" class="form-control add" id="ribbon" placeholder="Tem: SALE, NEW..">
         </div>
         <div id="describe">
             <label for="mota">MÔ TẢ SẢN PHẨM</label>

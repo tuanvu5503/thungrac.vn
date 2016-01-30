@@ -23,7 +23,7 @@ $(document).ready(function() {
 	    slideMargin: 25,
 	    controls: false,
 	    auto: true,
-	    moveSlides: 1,
+	    moveSlides: 2,
 	    autoHover: true
 	  });
 	//================= PRODUCT SLIDER BAR =================

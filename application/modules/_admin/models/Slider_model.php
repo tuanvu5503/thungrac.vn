@@ -35,6 +35,16 @@ class Slider_model extends CI_Model {
 		$this->db->where('id', $id);
 		return $this->db->get($this->table)->result_array()[0]['link_slider'];
 	}
-	
+
+	public function insert($arr_data)
+	{
+		return $this->db->insert($this->table, $arr_data);
+	}
+
+	public function delete_slider($id)
+	{
+		$this->db->where('id', $id);
+		return $this->db->delete($this->table);
+	}
 }
 

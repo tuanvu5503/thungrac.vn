@@ -16,7 +16,8 @@
  			$substance= htmlspecialchars($row['substance']);
  			$product_name = htmlspecialchars($row['product_name']);
  			$des = htmlspecialchars($row['des']);
- 			$image = htmlspecialchars($row['image']);
+            $image = htmlspecialchars($row['image']);
+ 			$ribbon = htmlspecialchars($row['ribbon']);
  			$detail_image = htmlspecialchars($row['detail_image']);
  		}
  	}
@@ -72,8 +73,12 @@
             <input value="<?php if (isset($re_size)) echo $re_size; elseif (isset($size)) echo $size; ?>" name="size" type="text" class="form-control add" id="size" placeholder="Kích thước">
         </div>
         <div id="substance">
-            <label for="chatlieu">CHẤT LIỆU (VNĐ)</label>
+            <label for="chatlieu">CHẤT LIỆU</label>
             <input value="<?php if (isset($re_substance)) echo $re_substance; elseif (isset($substance)) echo $substance; ?>" name="substance" type="text" class="form-control add" id="chatlieu" placeholder="Chất liệu">
+        </div>
+        <div id="ribbon">
+            <label for="ribbon">TEM DÁN</label>
+            <input value="<?php if (isset($re_ribbon)) echo $re_ribbon; elseif (isset($ribbon)) echo $ribbon; ?>" name="ribbon" type="text" class="form-control add" id="ribbon" placeholder="Tem: SALE, NEW..">
         </div>
         <div id="describe">
             <label for="mota">MÔ TẢ SẢN PHẨM</label>
