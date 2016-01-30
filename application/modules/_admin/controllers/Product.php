@@ -163,8 +163,15 @@ class Product extends MX_Controller {
                 $loi[] = "Giá phải là kiểu số!";
             }
         }
-     
-            //====================== END Validate  ======================
+        
+        if (trim($_POST['ribbon']) != '') {
+            if (mb_strlen(trim_input($_POST['ribbon'])) > 9) {
+                $loi[] = "Tem dán tối đa 9 kí tự.";
+            } else {
+                $insert_data['ribbon'] = trim_input($_POST['ribbon']);
+            }
+        }
+        //====================== END Validate  ======================
 
         if (count($loi) > 0) {
             $alert_time = 20000;
@@ -178,8 +185,7 @@ class Product extends MX_Controller {
             $redata['re_size'] = $_POST['size'];
             $redata['re_substance'] = $_POST['substance'];
             $redata['re_des'] = $_POST['des'];
-            $redata['title'] = "Thêm mới sản phẩm";
-            $redata['error'] = $loi;
+            $redata['re_ribbon'] = $_POST['ribbon'];
             
             $data['title'] = "Thêm mới sản phẩm";
             $data['subView'] = '/product/add_product_layout';
@@ -414,6 +420,14 @@ class Product extends MX_Controller {
                 }
             }
 
+            $ribbon = trim($_POST['ribbon']);
+            if ($ribbon != '') {
+                if (mb_strlen($ribbon) > 9) {
+                    $loi[] = "Tem dán tối đa 9 kí tự.";
+                } else {
+                    $update_data['ribbon'] = trim_input($_POST['ribbon']);
+                }
+            }
             //====================== Validate END ======================
 
             if (count($loi) > 0) {
@@ -429,7 +443,7 @@ class Product extends MX_Controller {
                 $redata['re_size'] = $_POST['size'];
                 $redata['re_substance'] = $_POST['substance'];
                 $redata['re_des'] = $_POST['des'];
-                $redata['re_page'] = $page;
+                $redata['re_ribbon'] = $_POST['ribbon'];
 
                 
                 $data['subView'] = '/product/edit_product_layout';

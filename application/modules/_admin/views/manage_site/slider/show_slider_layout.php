@@ -32,7 +32,7 @@
 								<span class="icon_action glyphicon glyphicon-pencil"></span>
 							</a>
 
-							<a class="delete" onclick="delete_modal('<?= $delete_url ?>', <?= $row['id'] ?>,'del_acticle_success')">
+							<a class="delete" onclick="delete_modal('<?= $delete_url ?>', <?= $row['id'] ?>,'del_slider_success')">
 								<span class="icon_action glyphicon glyphicon-trash"></span>
 							</a>	
 	                    </td>
@@ -53,3 +53,9 @@
 	</table>
 	<a style="margin-bottom:200px; float:right; margin-right:50px;" class="btn btn-primary" href="<?php echo base_url().'index.php/_admin/manage_site/slider/add_slider'; ?>" role="button">Thêm ảnh vào slider</a>
 </form>
+
+<script type="text/javascript">
+	function del_slider_success (del_id) {
+		$("tr#"+del_id).remove();
+	}
+</script>

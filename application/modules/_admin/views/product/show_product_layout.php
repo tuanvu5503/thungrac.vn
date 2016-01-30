@@ -13,22 +13,18 @@
 			<th style="text-align:center;">Giá (VNĐ)</th>
 			<th style="text-align:center;">Kích thước</th>
 			<th style="text-align:center;">Chất liệu</th>
+			<th style="text-align:center;">Tem dán</th>
 			<th style="text-align:center;">Thao tác</th>
 		</tr>
 	</thead>
 	<tbody>
 		<?php 
-		if ($this->uri->segment(3) == 'product_in_category') {
-			$page = $this->uri->segment(5) == null ? 1 : $this->uri->segment(5);
-		} else {
-			$page = $this->uri->segment(4) == null ? 1 : $this->uri->segment(4);
-		}
-			
+		
 		if (count($all_pro) == 0) {
 			?>
 				<!-- NO DATA -->
 				<tr style="text-align:center;" class="warning">
-					<td colspan="8">
+					<td colspan="9">
 						<h2 class="text-center">Không tìm thấy sản phẩm nào!</h2>
 					</td>
 				</tr>
@@ -51,8 +47,9 @@
 					<td style="text-align:right;"><?php echo number_format($row['price']) ?></td>
 					<td><?= $row['size'] ?></td>
 					<td><?= $row['substance'] ?></td>
+					<td><?php echo htmlspecialchars(mb_strtoupper($row['ribbon'])); ?></td>
 					<td>
-						<a href="<?php echo base_url().'index.php/_admin/product/edit/'.$row['id'].'/'.$page ?>">
+						<a href="<?php echo base_url().'index.php/_admin/product/edit/'.$row['id'] ?>">
 							<span class="icon_action glyphicon glyphicon-pencil"></span>
 						</a>
 						<a class="delete" onclick="delete_modal('<?= $url ?>', <?= $row['id'] ?>,'del_product_success')">
