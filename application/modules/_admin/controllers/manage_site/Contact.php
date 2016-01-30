@@ -28,7 +28,6 @@ class Contact extends MX_Controller {
             $purifier = new HTMLPurifier($config);
 
             $data_update['content'] = $purifier->purify($data_post['content_contact']);
-
             if ($this->Contact->update($data_update)) {
                 $content = 'Cập nhật thông tin liên lạc thành công.';
                 set_notice('status', SUCCESS_STATUS , $content);

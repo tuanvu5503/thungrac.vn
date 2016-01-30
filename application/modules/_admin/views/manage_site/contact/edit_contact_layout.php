@@ -1,6 +1,6 @@
 <script src="<?php echo base_url().'public/ckeditor/ckeditor.js'?>"></script>
 
-	<form action="<?php echo base_url(); ?>index.php/_admin/contact/edit_contact" method="POST" role="form" enctype="multipart/form-data" >
+	<form action="<?php echo base_url(); ?>index.php/_admin/manage_site/contact/edit_contact" method="POST" role="form" enctype="multipart/form-data" >
 		<legend class="text-center">CHỈNH SỬA THÔNG TIN LIÊN LẠC</legend>
 		
 		<div class="form-group">

@@ -9,6 +9,7 @@ class Homepage extends MX_Controller
         $this->load->model('Product_model','Product');
         $this->load->model('Category_model','Category');
         $this->load->model('Acticle_model','Acticle');
+        $this->load->model('Slider_model','Slider');
         $this->load->library('cart');
         $this->load->helper('convert');
     }
@@ -21,6 +22,7 @@ class Homepage extends MX_Controller
             $products[$row['super_categoryName'].'|'.$row['id']] = $this->Product->listProductbySuperId($row['id']);
         }
         
+        $data['slider_info'] = $this->Slider->get_all_slider();
         $data['acticle']  = $this->Acticle->get_all_acticle();
         $data['products'] = $products;
         $data['title'] = "Trang chủ";

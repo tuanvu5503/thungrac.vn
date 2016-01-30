@@ -1,22 +1,21 @@
 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">  <!-- Slider -->
 
 	<div id="slider">
-		<div class="slide">
-			<img src='<?php echo base_url()."/public/img/slider/slide33.jpg"?> '/>
-			<span> <b>A Tile is good</b><br/>Some text long or short text should be placed here to inform customers of your great products...</span>
-		</div>
-
-		<div class="slide">
-			<img src='<?php echo base_url()."/public/img/slider/slide22.jpg"?> '/>
-			<span> Finally a short text...</span>
-		</div>
-
-		<div class="slide">
-			<img src='<?php echo base_url()."/public/img/slider/slide11.jpg"?> '/>
-			<span> Finally a short text...</span>
-		</div>
+		<?php 
+		if ( ! empty($slider_info)) {
+			foreach ($slider_info as $item) {
+				?>
+				<div class="slide">
+					<img src='<?php echo base_url()."/public/img/slider/".$item['link_slider']; ?> '/>
+					<span><?= $item['des_slider'] ?></span>
+				</div>
+				<?php
+			}
+		}
+		?>
 
 	</div>
+
 </div>
 
 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"> <!-- Bai viet -->

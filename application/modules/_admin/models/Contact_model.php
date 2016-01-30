@@ -16,6 +16,11 @@ class Contact_model extends CI_Model {
 	public function update($arr_data)
 	{
 		$id = $this->db->select_max('id')->get($this->table)->row()->id;
+		
+		if ($id === NULL) {
+			return $this->db->insert($this->table, $arr_data);
+		}
+
 		$this->db->where('id', $id);
 		return $this->db->update($this->table, $arr_data);
 	}
