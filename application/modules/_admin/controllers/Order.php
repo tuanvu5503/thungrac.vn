@@ -57,16 +57,23 @@ class Order extends MX_Controller {
             
             foreach ($arr_product_qty as $item2) {
                 $tmp = explode('-', $item2);
-                
-                $product_name = $this->Product->get_product_name_by_id($tmp[0]);
-                $qty = $tmp[1];
-                $price = $this->Product->get_product_price_by_id($tmp[0]);
+                if ($this->Product->check_product_by_id($tmp[0])) {
+                    $product_name = $this->Product->get_product_name_by_id($tmp[0]);
+                    $qty = $tmp[1];
+                    $price = $this->Product->get_product_price_by_id($tmp[0]);
 
-                $tmp2['product_name'] = $product_name;
-                $tmp2['order_qty'] = $qty;
-                $tmp2['price'] = $price;
+                    $tmp2['product_name'] = $product_name;
+                    $tmp2['order_qty'] = $qty;
+                    $tmp2['price'] = $price;
 
-                $arr_product_name_and_qty[] = $tmp2;
+                    $arr_product_name_and_qty[] = $tmp2;
+                } else {
+                    $tmp2['product_name'] = 'Sản phẩm không tồn tại hoặc đã bị xóa';
+                    $tmp2['order_qty'] = 0;
+                    $tmp2['price'] = 0;
+                    
+                    $arr_product_name_and_qty[] = $tmp2;
+                }
 
             }
             $item['product_name_and_qty'] = $arr_product_name_and_qty;

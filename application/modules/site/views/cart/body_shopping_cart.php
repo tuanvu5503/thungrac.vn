@@ -9,7 +9,7 @@
 <ul class="shopping-cart-items">
 
 	<?php 
-	if ( ! empty($this->cart->contents())) {
+	if ( count($this->cart->contents()) > 0) {
 		foreach ($this->cart->contents() as $item) {
 			?>
 			<li class="clearfix">
@@ -32,7 +32,7 @@
 
 </ul>
 <?php 
-if ( ! empty($this->cart->contents())) {
+if ( count($this->cart->contents()) > 0) {
 	?>
 	<a id="checkout" class="btn btn-primary" href="<?php echo base_url().'index.php/site/cart/view_order' ?>" role="button">Đặt hàng</a>
 	<?php
