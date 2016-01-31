@@ -2,11 +2,6 @@
 <script src="<?php echo base_url().'public/js/site/smoothproducts.js'?>"></script>
 
 <link href="<?php echo base_url().'public/css/site/smoothproducts.css' ?>" rel="stylesheet">
-<style type="text/css">
-	.sp-wrap {
-	        max-width: 400px !important;
-	    }
-</style>
 
 <?php 
 foreach ($info as $row) {

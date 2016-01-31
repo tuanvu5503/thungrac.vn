@@ -26,7 +26,7 @@
 				 ?>
 					<div class="items_head">
 						<div class="pro_name"><a class="product_name" href="<?php echo base_url().'index.php/site/homepage/view_detail/'.$super_categoryName.'/'.$categoryName.'-'.$row["id"]; ?>"><?php echo htmlspecialchars($row['product_name']); ?></a></div>
-						<div class="price">Giá: <?php echo number_format($row['price']).'$'; ?></div>
+						<div class="price">Giá: <?php echo number_format($row['price']).' Vnđ'; ?></div>
 					</div>
 					<a style="display:block;" href="<?php echo base_url().'index.php/site/homepage/view_detail/'.$super_categoryName.'/'.$categoryName.'-'.$row["id"]; ?>">
 						<div class="items_image zooming" style="background-image: url(<?php if ($row['image'] != '') echo base_url().'public/img/products/'.$row['image']; else echo base_url().'public/img/products/noimage.jpg'; ?>);">
