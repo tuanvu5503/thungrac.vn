@@ -10,6 +10,9 @@
 				$categoryName = strtolower(utf8convert($row['categoryName']));;
 				$categoryName = str_replace(' ', '-', $categoryName);
 
+				$url_product_name = strtolower(utf8convert($row['product_name']));
+				$url_product_name = str_replace(' ', '-', $url_product_name);
+
 			$i++;
 			if (($i % 4) == 0) {
 				echo '<div class="row">';
@@ -25,10 +28,10 @@
 					} 
 				 ?>
 					<div class="items_head">
-						<div class="pro_name"><a class="product_name" href="<?php echo base_url().'index.php/site/homepage/view_detail/'.$super_categoryName.'/'.$categoryName.'-'.$row["id"]; ?>"><?php echo htmlspecialchars($row['product_name']); ?></a></div>
+						<div class="pro_name"><a class="product_name" href="<?php echo base_url().'san-pham/'.$categoryName.'/'.$url_product_name; ?>"><?php echo htmlspecialchars($row['product_name']); ?></a></div>
 						<div class="price">Giá: <?php echo number_format($row['price']).' Vnđ'; ?></div>
 					</div>
-					<a style="display:block;" href="<?php echo base_url().'index.php/site/homepage/view_detail/'.$super_categoryName.'/'.$categoryName.'-'.$row["id"]; ?>">
+					<a style="display:block;" href="<?php echo base_url().'san-pham/'.$categoryName.'/'.$url_product_name; ?>">
 						<div class="items_image zooming" style="background-image: url(<?php if ($row['image'] != '') echo base_url().'public/img/products/'.$row['image']; else echo base_url().'public/img/products/noimage.jpg'; ?>);">
 							<div id="<?php echo $row['id']; ?>" class="addcart"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ</div>
 							<div class="like"><span class="glyphicon glyphicon-heart"></span> Like</div>
@@ -44,4 +47,6 @@
 		echo "Không tìm thấy sản phẩm nào!";
 	}
 	?>
-<?php if (isset($pagination)) echo $pagination; ?>
+	<div style="width:100%; clear:both; padding-right:90px; text-align:right;">
+		<?php if (isset($pagination)) echo $pagination; ?>
+	</div>

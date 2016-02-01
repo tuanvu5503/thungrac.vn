@@ -32,11 +32,13 @@ class Homepage extends MX_Controller
 
     public function view_detail()
     {
-        if ($this->uri->segment(5))
-        {
-            $id = explode('-', $this->uri->segment(5));
-            $id = (int) end($id);
-            
+        if ($this->uri->segment(3)
+            && $this->Product->has_product_exist_by_converted_product_name($this->uri->segment(3))
+        ){
+            $id = $this->Product->get_id_by_product_name($this->uri->segment(3));
+            // $id = explode('-', $this->uri->segment(3));
+            // $id = (int) end($id);
+
             $data['info'] = $this->Product->find_productbyid($id);
             if (count($data['info']) == 0)
             {
@@ -49,17 +51,15 @@ class Homepage extends MX_Controller
             $subView = "/product/view_detail";
             $this->build($subView, $data);
         } else {
-            $this->load->view('404-temp');
+            $data['pre_page'] = base_url();
+            $this->load->view('/error/404_layout', $data);
         }
     }
 
     public function search_product()
     {
-        if (isset($_GET['key'])) {
-            $key = $_GET['key'];
-        } else {
-            $key = $this->uri->segment(4);
-        }
+        $key = $this->uri->segment(2);
+        
         $key = filter_var($key, FILTER_SANITIZE_STRING);
         $key = trim($key);
         if ($key != '') {
@@ -67,9 +67,9 @@ class Homepage extends MX_Controller
             $total_record = $this->Product->total_record_product($key);
             $this->load->library('pagination');
             
-            $config['base_url'] = base_url().'index.php/site/homepage/search_product/'.$key;
+            $config['base_url'] = base_url().'tim-kiem/'.$key.'/page';
             $config['total_rows'] = $total_record;
-            $config['per_page'] = 10;
+            $config['per_page'] = 16;
             $config['uri_segment'] = 0; //tai sao
             $config['num_links'] = 3;
 
@@ -97,7 +97,7 @@ class Homepage extends MX_Controller
             $data['pagination'] = $this->pagination->create_links();
             //=======================  PHÂN TRANG  ======================= 
 
-            $start = NULL !== $this->uri->segment(5) ? $this->uri->segment(5) : 0;
+            $start = NULL !== $this->uri->segment(4) ? $this->uri->segment(4) : 0;
 
             $data['total_product'] = $total_record;
             $data['title_action'] = 'KẾT QUẢ TÌM KIẾM';
@@ -196,12 +196,12 @@ class Homepage extends MX_Controller
 
     public function acticle ()
     {
-        if (NULL !== $this->uri->segment(4) 
-            && is_numeric($this->uri->segment(4))
-            && $this->Acticle->has_acticle_exist_by_id($this->uri->segment(4))
+        if (NULL !== $this->uri->segment(2) 
+            && is_numeric(substr( strrchr($this->uri->segment(2), '-'), 1))
+            && $this->Acticle->has_acticle_exist_by_id(substr( strrchr($this->uri->segment(2), '-'), 1))
         ) {
-            $acticle_id = $this->uri->segment(4); 
-
+            $acticle_id = substr( strrchr($this->uri->segment(2), '-'), 1);
+            
             $data['title'] = $this->Acticle->get_acticle_name_by_id($acticle_id);
             $data['acticle'] = $this->Acticle->get_acticle_by_id($acticle_id);
 

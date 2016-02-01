@@ -19,7 +19,6 @@
 	<link href="<?php echo base_url().'public/bootstrap/css/bootstrap.min.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/font-awesome/css/font-awesome.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/s3-slider.css' ?>" rel="stylesheet">
-	<link href="<?php echo base_url().'public/css/site/jquery.mCustomScrollbar.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/jquery.bxslider.css' ?>" rel="stylesheet">
 
 	<link href="<?php echo base_url().'public/css/common/common.css' ?>" rel="stylesheet">
@@ -27,7 +26,6 @@
 	<link href="<?php echo base_url().'public/css/site/header.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/footer.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/vmenu.css' ?>" rel="stylesheet">
-	<link href="<?php echo base_url().'public/css/site/acticle.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/banner.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/hmenu.css' ?>" rel="stylesheet">
 	<link href="<?php echo base_url().'public/css/site/cart/cart.css' ?>" rel="stylesheet">
@@ -154,7 +152,7 @@
 					</ul> -->
 					<!--========== START: ICON SHOPPING CART ==========-->
 					<?php 
-					if ($this->uri->segment(3) != 'view_order') {
+					if ($this->uri->segment(1) != 'dat-hang') {
 						?>
 						<ul id="cart" class="nav navbar-nav navbar-right">
 							<li>
@@ -167,9 +165,16 @@
 					<!--========== END: ICON SHOPPING CART ==========-->
 
 
-					<form action="<?php echo base_url().'index.php/site/homepage/search_product'; ?>" method="get" class="navbar-form navbar-left" role="search">
+					<form id="search_form" action="<?php echo base_url().'index.php/site/homepage/search_product'; ?>" method="get" class="navbar-form navbar-left" role="search">
 							<div class="form-group">
-								<input type="text" id="search_val" name="key" value="<?php if (isset($_GET['key'])) echo $_GET['key']; ?>" class="form-control" placeholder="Nhập và nhấn Enter...">
+								<input type="text" id="search_val" name="key" 
+									value="<?php if (NULL != $this->uri->segment(1) 
+										   && $this->uri->segment(1) == 'tim-kiem'
+										   && NULL != $this->uri->segment(2)
+										   ) {
+												echo htmlspecialchars($this->uri->segment(2));
+										   	} ?>" 
+								class="form-control" placeholder="Nhập và nhấn Enter...">
 							</div>
 							<!-- <button type="submit" id="btn_search" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Tìm</button> -->
 						</form>
@@ -204,7 +209,7 @@
 									<?php endif; ?>
 									<input type="hidden" id="id" value="<?php echo $item['id']; ?>">
 									<span class="item-name"><?php echo $item['name']; ?></span>
-									Giá: <span class="item-price"><?php echo $item['price']; ?>VNĐ</span> <br>
+									Giá: <span class="item-price"><?php echo number_format($item['price']); ?>VNĐ</span> <br>
 									Số lượng: <span class="item-quantity"><?php echo $item['qty']; ?></span>
 								</li>
 								<?php
@@ -218,7 +223,7 @@
 					<?php 
 					if (count($this->cart->contents()) > 0) {
 						?>
-						<a id="checkout" class="btn btn-primary" href="<?php echo base_url().'index.php/site/cart/view_order' ?>" role="button">Đặt hàng</a>
+						<a id="checkout" class="btn btn-primary" href="<?php echo base_url().'dat-hang' ?>" role="button">Đặt hàng</a>
 						<?php
 					}
 					?>
@@ -280,3 +285,16 @@
 				</div>
 			</body>
 			</html>
+
+			<script type="text/javascript">
+			$("#search_form").submit(function(event) {
+				/* Act on the event */
+				event.preventDefault();
+				key = $("#search_val").val();
+				if (key.trim() == '') {
+					return false;
+				}
+				url = '<?php echo base_url()."tim-kiem/" ?>'+key;
+				window.location.href = url;
+			});
+			</script>

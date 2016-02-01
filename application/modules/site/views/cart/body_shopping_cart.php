@@ -20,7 +20,7 @@
 				<?php endif; ?>
 				<input type="hidden" id="id" value="<?php echo $item['id']; ?>">
 				<span class="item-name"><?php echo $item['name']; ?></span>
-				Giá: <span class="item-price"><?php echo $item['price']; ?>VNĐ</span> <br>
+				Giá: <span class="item-price"><?php echo number_format($item['price']); ?>VNĐ</span> <br>
 				Số lượng: <span class="item-quantity"><?php echo $item['qty']; ?></span>
 			</li>
 			<?php
@@ -34,7 +34,7 @@
 <?php 
 if ( count($this->cart->contents()) > 0) {
 	?>
-	<a id="checkout" class="btn btn-primary" href="<?php echo base_url().'index.php/site/cart/view_order' ?>" role="button">Đặt hàng</a>
+	<a id="checkout" class="btn btn-primary" href="<?php echo base_url().'dat-hang' ?>" role="button">Đặt hàng</a>
 	<?php
 }
 ?>

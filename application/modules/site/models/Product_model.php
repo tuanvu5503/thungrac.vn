@@ -153,6 +153,25 @@ class Product_model extends CI_Model {
 		return $this->db->get($this->table, $limit, $start)->result_array();
 	}
 
+	public function get_id_by_product_name($product_name)
+	{
+		$product_name = str_replace('-', ' ', $product_name);
+
+		$this->db->where('product_name', utf8convert($product_name));
+
+		return $this->db->get($this->table)->row()->id;
+	}
+
+	public function has_product_exist_by_converted_product_name($product_name)
+	{
+		$product_name = str_replace('-', ' ', $product_name);
+
+		$this->db->where('product_name', utf8convert($product_name));
+
+		$num = $this->db->get($this->table)->num_rows();
+		return $num > 0 ? TRUE : FALSE;
+	}
+	
 	
 }
 
