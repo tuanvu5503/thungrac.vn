@@ -52,6 +52,17 @@
 	<script type="text/javascript">
 		base_url = '<?php echo base_url(); ?>';
 	</script>
+
+	<style type="text/css">
+		::-webkit-scrollbar { width: 3px; height: 3px;}
+		::-webkit-scrollbar-button {  background-color: #666; }
+		::-webkit-scrollbar-track {  background-color: #999;}
+		::-webkit-scrollbar-track-piece { background-color: #ffffff;}
+		::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}
+		::-webkit-scrollbar-corner { background-color: #999;}}
+		::-webkit-resizer { background-color: #666;}
+
+	</style>
 </head>
 <body>
 	<!--============================== Alert ==============================-->
@@ -87,6 +98,7 @@
 	
 	<!--============ START: BASE_URL USE IN JQUERY FILE ============-->
 	<input type="hidden" id="base_url" value="<?php echo base_url(); ?>">
+	
 	<!--============ END: BASE_URL USE IN JQUERY FILE ============-->
 
 	<div class="container">
@@ -112,17 +124,20 @@
 						<?php 
 						foreach ($menus as $key => $value) {
 							if ( ! empty($value)) {
+								$super_category_name = explode('|', $key)[0];
+								$super_category_id = explode('|', $key)[1];
 							?>
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo mb_strtoupper($key); ?><span class="caret"></span></a>
+								<a onclick="refer_page('<?php echo base_url().'xem-tat-ca/'.name_in_url($super_category_name).'-'.$super_category_id.'.html'; ?>')" href="<?php echo base_url().'xem-tat-ca/'.name_in_url($super_category_name).'-'.$super_category_id.'.html'; ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo mb_strtoupper($super_category_name); ?><span class="caret"></span></a>
 								<ul style="overflow:hidden;" class="dropdown-menu">
 									<?php
 									$i = 0;
 									$n = count($value);
+
 									foreach ($value as $row) {
 										$i++;
 										?>
-										<li><a href="<?php echo base_url().'index.php/site/homepage/product_in_sub_category/'.$row['id']; ?>"><?php echo $row['category_name']; ?></a></li>
+										<li><a href="<?php echo base_url().'danh-muc/'.name_in_url($row["category_name"]).'-'.$row['id'].'.html'; ?>"><?php echo $row['category_name']; ?></a></li>
 										<?php
 										if ($i != $n) {
 											echo '<li role="separator" class="divider"></li>';
@@ -152,7 +167,7 @@
 					</ul> -->
 					<!--========== START: ICON SHOPPING CART ==========-->
 					<?php 
-					if ($this->uri->segment(1) != 'dat-hang') {
+					if ($this->uri->segment(1) != 'dat-hang.html') {
 						?>
 						<ul id="cart" class="nav navbar-nav navbar-right">
 							<li>
@@ -194,36 +209,38 @@
 							<span class="main-color-text"><?php echo number_format($this->cart->total()); ?>VNĐ</span>
 						</div>
 					</div> 
+					<div class="shopping-cart-content">
 
-					<ul class="shopping-cart-items">
+						<ul class="shopping-cart-items">
 
-						<?php 
-						if ( count($this->cart->contents()) > 0) {
-							foreach ($this->cart->contents() as $item) {
-								?>
-								<li class="clearfix">
-									<?php if ($this->cart->has_options($item['rowid']) == TRUE): ?>
-										<?php foreach ($this->cart->product_options($item['rowid']) as $option_name => $option_value): ?>
-											<img width="70" height="70" src="<?php echo base_url().'public/img/products/'.$option_value; ?>" alt="item1" />
-										<?php endforeach; ?>
-									<?php endif; ?>
-									<input type="hidden" id="id" value="<?php echo $item['id']; ?>">
-									<span class="item-name"><?php echo $item['name']; ?></span>
-									Giá: <span class="item-price"><?php echo number_format($item['price']); ?>VNĐ</span> <br>
-									Số lượng: <span class="item-quantity"><?php echo $item['qty']; ?></span>
-								</li>
-								<?php
+							<?php 
+							if ( count($this->cart->contents()) > 0) {
+								foreach ($this->cart->contents() as $item) {
+									?>
+									<li class="clearfix">
+										<?php if ($this->cart->has_options($item['rowid']) == TRUE): ?>
+											<?php foreach ($this->cart->product_options($item['rowid']) as $option_name => $option_value): ?>
+												<img width="70" height="70" src="<?php echo base_url().'public/img/products/'.$option_value; ?>" alt="item1" />
+											<?php endforeach; ?>
+										<?php endif; ?>
+										<input type="hidden" id="id" value="<?php echo $item['id']; ?>">
+										<span class="item-name"><?php echo $item['name']; ?></span>
+										Giá: <span class="item-price"><?php echo number_format($item['price']); ?>VNĐ</span> <br>
+										Số lượng: <span class="item-quantity"><?php echo $item['qty']; ?></span>
+									</li>
+									<?php
+								}
+							} else {
+								echo "Chưa có sản phẩm nào!";
 							}
-						} else {
-							echo "Chưa có sản phẩm nào!";
-						}
-						?>
+							?>
 
-					</ul>
+						</ul>
+					</div>
 					<?php 
 					if (count($this->cart->contents()) > 0) {
 						?>
-						<a id="checkout" class="btn btn-primary" href="<?php echo base_url().'dat-hang' ?>" role="button">Đặt hàng</a>
+						<a id="checkout" class="btn btn-primary" href="<?php echo base_url().'dat-hang.html' ?>" role="button">Đặt hàng</a>
 						<?php
 					}
 					?>
@@ -245,7 +262,11 @@
 							if (!empty($menu)) {
 								foreach ($menu as $row) {
 									?>
-									<li class="<?php if ($row['id'] == $active) echo "actived"; ?>" id="<?php echo $row['id']; ?>" role="presentation"><a href="<?php echo base_url().'index.php/site/homepage/product_in_sub_category/'.$row['id']; ?>"><span style="color:#0093FF;" class="glyphicon glyphicon-shopping-cart"></span>  <?php echo htmlspecialchars($row['category_name']); ?></a></li>
+									<li class="<?php if (NULL != $this->uri->segment(1)
+														&& 'danh-muc' == $this->uri->segment(1)
+														&& NULL != $this->uri->segment(2)
+														&& get_id_in_url($this->uri->segment(2)) == $row['id']
+														) echo "actived"; ?>" id="<?php echo $row['id']; ?>" role="presentation"><a style="font-size:14px;" href="<?php echo base_url().'danh-muc/'.name_in_url($row['category_name']).'-'.$row['id'].'.html'; ?>"><span style="color:#0093FF; " class="glyphicon glyphicon-shopping-cart"></span>  <?php echo htmlspecialchars($row['category_name']); ?></a></li>
 									<?php
 								}
 							}
@@ -273,7 +294,7 @@
 						<div id="footer_lienhe">
 							<a href="<?php echo base_url(); ?>" class="head_footer">Trang chủ</a>
 							<span> | </span>
-							<a href="<?php echo base_url().'index.php/site/homepage/contact' ?>" class="head_footer">Liên hệ</a>
+							<a href="<?php echo base_url().'lien-he.html' ?>" class="head_footer">Liên hệ</a>
 							<!-- <span> | </span> -->
 							<!-- <a href="#" class="head_footer">Thành viên đăng nhập</a> -->
 						</div>
@@ -286,15 +307,4 @@
 			</body>
 			</html>
 
-			<script type="text/javascript">
-			$("#search_form").submit(function(event) {
-				/* Act on the event */
-				event.preventDefault();
-				key = $("#search_val").val();
-				if (key.trim() == '') {
-					return false;
-				}
-				url = '<?php echo base_url()."tim-kiem/" ?>'+key;
-				window.location.href = url;
-			});
-			</script>
+			

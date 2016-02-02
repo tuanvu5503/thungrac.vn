@@ -51,25 +51,14 @@ class Cart extends MX_Controller
             }
             $info_of_order_product_array = $this->Product->info_of_order_product_array($order_product_info);
             //=========================== END: INFOMATION OF ORDER PRODUCT ===========================
-
-            //=========================== START: CONTENTS OF MENU ===========================
-            $all_superCategory = $this->Product->all_superCategory();
-            foreach ($all_superCategory as $row) {
-                $menus[$row['super_categoryName']] = $this->Product->getMenu($row['id']);
-            }
-            //=========================== END: CONTENTS OF MENU ===========================
-
             
             $data['info_of_order_product_array'] = $info_of_order_product_array;
-            $data['menus'] = $menus;
             $data['title'] = "Đặt hàng";
-            $data['subView'] = "/cart/view_order_layout";
             $data['menu'] = $this->Product->listCategory();
-           
 
-            $data['subData'] = $data;
 
-            $this->load->view('main_layout', $data);
+            $subView = "/cart/view_order_layout";
+            build_site($subView, $data);
         } else {
             $content = 'Chưa có sản phẩm nào trong giỏ hàng.';
             set_notice('order', FAILED_STATUS, $content);
@@ -207,7 +196,10 @@ class Cart extends MX_Controller
                 }
             }
 
-            $this->cart->update($delOne);
+            if (isset($delOne)) {
+                $this->cart->update($delOne);
+            }
+            
             $error['status'] = SUCCESS_STATUS;
             $error['mess']   = '';
             echo json_encode($error);

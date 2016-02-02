@@ -33,13 +33,13 @@
 					$stt=0;
 					foreach ($all_acticle as $row) 
 					{  
-						$noidung = word_limiter($row['acticle_content'], 40);
+						$noidung = $purifier->purify(word_limiter(strip_tags($row['acticle_content']), 40));
 						$stt++;  
 						?>
 						<tr id="<?=$row['id']?>" style="display:table-row;">
 							<td><?=$stt?></td>
 							<td><?=$row['acticle_name']?></td>
-							<td><?=$noidung?></td>
+							<td><?php echo $noidung;?></td>
 							<td>
 								<a href="<?php echo base_url().'index.php/_admin/acticle/view_acticle/'.$row['id']; ?>">
 									<span style="font-size: 22px !important; padding-right: 10px !important;" class="glyphicon glyphicon-eye-open"></span>

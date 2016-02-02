@@ -136,7 +136,7 @@ class Product extends MX_Controller {
         }
         if (empty($_POST["product_name"]))  {
             $loi[] = "Tên sản phẩm không được rỗng";
-        } elseif($this->Product->has_special_character($_POST['product_name'])) {
+        } elseif(has_special_character($_POST['product_name'])) {
             $loi[] = "Tên sản phẩm không được chứa ký tự đặc biệt.";
         } else {
             if (strlen($_POST["product_name"]) >= 4 && strlen($_POST["product_name"]) <= 100) {
@@ -387,7 +387,7 @@ class Product extends MX_Controller {
 
             if (empty($_POST["product_name"]))  {
                 $loi[] = "Tên sản phẩm không được rỗng";
-            } elseif($this->Product->has_special_character($_POST['product_name'])) {
+            } elseif(has_special_character($_POST['product_name'])) {
                 $loi[] = "Tên sản phẩm không được chứa ký tự đặc biệt.";
             } else {
                 if (strlen($_POST["product_name"]) >= 4 && strlen($_POST["product_name"]) <= 100) {

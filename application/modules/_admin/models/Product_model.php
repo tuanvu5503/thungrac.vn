@@ -163,16 +163,6 @@ class Product_model extends CI_Model {
 		$this->db->where('id', $product_id);
 		return $this->db->get($this->table)->result_array()[0]['price'];
 	}
-
-	public function has_special_character($string)
-	{
-		$patern = '/[\'\/~`\!@#\$%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/';
-		if (preg_match($patern, $string)){
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-	}
 	
 }
 

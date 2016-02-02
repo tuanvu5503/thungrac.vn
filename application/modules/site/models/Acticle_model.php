@@ -6,6 +6,7 @@ class Acticle_model extends CI_Model {
 
 	public function get_all_acticle()
 	{
+		$this->db->order_by('id', 'desc');
 		return $this->db->get($this->table,30)->result_array();
 	}
 

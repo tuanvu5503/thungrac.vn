@@ -33,7 +33,7 @@
 				?>
 				<li>
 					<img style="margin-bottom:5px;" src="<?php echo base_url().'public/icon/acticle_icon.png' ?>">
-					<a href="<?php echo base_url().'bai-viet/so-'.$item['id'].'/'.str_replace(' ', '-', utf8convert($item['acticle_name'])); ?>"><?=$item['acticle_name']?></a>
+					<a href="<?php echo base_url().'bai-viet/so-'.$item['id'].'/'.name_in_url($item['acticle_name']).'.html'; ?>"><?=$item['acticle_name']; ?></a>
 				</li>
 				<?php
 			}
@@ -55,7 +55,7 @@
 			echo mb_strtoupper($key);
 			if ($tmp[1] != 0) {
 				?>
-				<a style="float: right; font-size: 12px; color: #fff !important; margin-right: 25px;" href="<?php echo base_url().'index.php/site/homepage/product_in_super_category/'.$tmp[1]; ?>">Xem tất cả</a>
+				<a style="float: right; font-size: 12px; color: #fff !important; margin-right: 25px;" href="<?php echo base_url().'xem-tat-ca/'.name_in_url($tmp[0]).'-'.$tmp[1].'.html'; ?>">Xem tất cả</a>
 				<?php
 			}	
 			?>
@@ -66,13 +66,10 @@
 			<div class="slider1">
 
 				<?php
-				$super_categoryName = strtolower(utf8convert($key));
-				$super_categoryName = str_replace(' ', '-', $super_categoryName);
 				foreach ($value as $row) {
-					$categoryName = strtolower(utf8convert($row['category_name']));
-					$categoryName = str_replace(' ', '-', $categoryName);
-					$url_product_name = strtolower(utf8convert($row['product_name']));
-					$url_product_name = str_replace(' ', '-', $url_product_name);
+					$categoryName = name_in_url($row['category_name']);
+					$url_product_name = name_in_url($row['product_name']);
+					
 					?>
 					<div style="width:212px; height:300px; float:left;">
 						
@@ -89,10 +86,10 @@
 							}
 						 ?>
 							<div class="items_head">
-								<div class="pro_name"><a class="product_name" href="<?php echo base_url().'san-pham/'.$categoryName.'/'.$url_product_name; ?>"><?php echo htmlspecialchars($row['product_name']); ?></a></div>
+								<div class="pro_name"><a class="product_name" href="<?php echo base_url().'san-pham/'.$categoryName.'/'.$url_product_name.'/maso-'.$row['id'].'.html'; ?>"><?php echo htmlspecialchars($row['product_name']); ?></a></div>
 								<div class="price">Giá: <?php echo number_format($row['price']).' Vnđ'; ?></div>
 							</div>
-							<a style="display:block;" href="<?php echo base_url().'san-pham/'.$categoryName.'/'.$url_product_name; ?>">
+							<a style="display:block;" href="<?php echo base_url().'san-pham/'.$categoryName.'/'.$url_product_name.'/maso-'.$row['id'].'.html'; ?>">
 								<div class="items_image zooming" style="background-image: url(<?php if ($row['image'] != '') echo base_url().'public/img/products/'.$row['image']; else echo base_url().'public/img/products/noimage.jpg'; ?>);">
 									<div id="<?php echo $row['id']; ?>" class="addcart"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ</div>
 									<div class="like"><span class="glyphicon glyphicon-heart"></span> Like</div>

@@ -13,5 +13,5 @@ function utf8convert($str) {
     'y'=>'ý|ỳ|ỷ|ỹ|ỵ|Ý|Ỳ|Ỷ|Ỹ|Ỵ',
     );
   foreach($utf8 as $ascii=>$uni) $str = preg_replace("/($uni)/i",$ascii,$str);
-  return $str;
+  return $str; 
 }?>

@@ -8,7 +8,11 @@
             	<option value="">Chọn loại danh mục</option>
             	<?php 
             	foreach ($all_super_category as $item) {
-            		echo "<option value='".$item['id']."'>".$item['super_categoryName']."</option>";
+            		if (isset($re_super_categoryId) && $re_super_categoryId == $item['id']) {
+            			echo "<option selected value='".$item['id']."'>".$item['super_categoryName']."</option>";
+            		} else {
+            			echo "<option value='".$item['id']."'>".$item['super_categoryName']."</option>";
+            		}
             	}
             	?>
             </select>

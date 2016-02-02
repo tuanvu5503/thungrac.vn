@@ -1,5 +1,5 @@
 ul#vmenu{
-	font-size:14px; 
+	font-size:13px; 
 	background-color:rgba(167, 239, 233, 0.35);
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
@@ -13,6 +13,7 @@ ul#vmenu{
 }
 
 .nav > li > a{
+	font-size: 12px;
 	color: #187A18;
 	text-decoration: none;
 	font-weight: bold;

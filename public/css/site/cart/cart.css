@@ -24,8 +24,7 @@
   margin: 1px 0;
   background: white;
   width: 320px !important;
-  max-height: 550px !important;
-  overflow: scroll;
+  max-height: 90% !important;
   position: absolute;
   border-radius: 3px;
   padding: 20px;
@@ -34,6 +33,12 @@
   z-index: 100;
   display: none;
   background-color: rgba(60, 55, 55, 0.682353);
+}
+
+.shopping-cart-content {
+  max-height: 450px !important;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 .shopping-cart:hover{

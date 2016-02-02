@@ -48,6 +48,7 @@ class Acticle_model extends CI_Model {
 
 	public function limit_acticle($start, $limit)
 	{
+		$this->db->order_by('id', 'desc');
 		return $this->db->get($this->table, $limit, $start)->result_array();
 	}
 }
