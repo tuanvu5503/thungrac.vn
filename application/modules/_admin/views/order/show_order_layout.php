@@ -134,8 +134,19 @@
 ?>
 
 <script type="text/javascript">
+	function check_qty_unapprove () {
+		$.ajax({
+			url: "<?=$url.'check_qty_unapprove'?>",
+			type: 'post',
+			dataType: 'json',
+			success: function (rs) {
+				$("span#un_approval_order").html(rs.un_approval_order);
+			}
+		})
+	}
+
 	function del_order_success (del_id) {
-		console.log(del_id);
+		check_qty_unapprove();
 		$("#tr-"+del_id).remove();
 	}
 

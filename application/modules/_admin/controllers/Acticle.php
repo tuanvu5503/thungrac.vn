@@ -12,6 +12,11 @@ class Acticle extends MX_Controller
     public function show_acticle()
     {
         $this->load->helper('text');
+        $this->load->helper('Validation');
+        $this->load->helper('HTMLPurifier');
+
+        $config1 = HTMLPurifier_Config::createDefault();
+        $data['purifier'] = new HTMLPurifier($config1);
 
         //========================== PHÂN TRANG ==========================
         $total_record = $this->Acticle->total_record_acticle();
@@ -88,7 +93,7 @@ class Acticle extends MX_Controller
             $purifier = new HTMLPurifier($config);
 
             $data_insert['acticle_name'] = $purifier->purify($data_post['acticle_name']);
-            $data_insert['acticle_content'] = ($data_post['acticle_content']);
+            $data_insert['acticle_content'] = $purifier->purify($data_post['acticle_content']);
 
             if ($this->Acticle->insert($data_insert)) {
                 $content = 'Thêm bài viết thành công.';
@@ -142,7 +147,8 @@ class Acticle extends MX_Controller
 
             $id = $data_post['acticle_id'];
             $data_update['acticle_name'] = $purifier->purify($data_post['acticle_name']);
-            $data_update['acticle_content'] = $data_post['acticle_content'];
+            $data_update['acticle_content'] = $purifier->purify($data_post['acticle_content']);
+             // $data_update['acticle_content'] = trim_input($data_update['acticle_content']);
 
             if ($this->Acticle->update($id, $data_update)) {
                 $content = 'Cập nhật bài viết thành công.';

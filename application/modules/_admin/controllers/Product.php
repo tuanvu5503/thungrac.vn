@@ -134,11 +134,10 @@ class Product extends MX_Controller {
                 $insert_data['image'] = md5($insert_data['product_name']).'.'.$avatar_type;
             }
         }
-
         if (empty($_POST["product_name"]))  {
             $loi[] = "Tên sản phẩm không được rỗng";
-        } elseif((strip_tags($_POST["product_name"]) == '')) {
-            $loi[] = "Tên sản phẩm không hợp lệ!";
+        } elseif(has_special_character($_POST['product_name'])) {
+            $loi[] = "Tên sản phẩm không được chứa ký tự đặc biệt.";
         } else {
             if (strlen($_POST["product_name"]) >= 4 && strlen($_POST["product_name"]) <= 100) {
                 $insert_data['product_name'] = $purifier->purify($_POST["product_name"]);
@@ -388,8 +387,8 @@ class Product extends MX_Controller {
 
             if (empty($_POST["product_name"]))  {
                 $loi[] = "Tên sản phẩm không được rỗng";
-            } elseif((strip_tags($_POST["product_name"]) == '')) {
-                $loi[] = "Tên sản phẩm không hợp lệ!";
+            } elseif(has_special_character($_POST['product_name'])) {
+                $loi[] = "Tên sản phẩm không được chứa ký tự đặc biệt.";
             } else {
                 if (strlen($_POST["product_name"]) >= 4 && strlen($_POST["product_name"]) <= 100) {
                     $update_data['product_name'] = $_POST["product_name"];

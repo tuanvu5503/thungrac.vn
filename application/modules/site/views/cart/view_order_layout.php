@@ -43,7 +43,7 @@
               <input name="order_qty[]" type="number" value="<?php echo $items['order_qty']; ?>" min="1">
             </div>
             <div class="product-removal">
-              <button id="<?= $items['id'] ?>" onclick="delete_modal('<?= $url_delete_cart ?>', <?= $items['id'] ?>,'del_product_in_cart_success')" type="button" class="remove-product">
+              <button id="<?= 'tr_'.$items['id'] ?>" onclick="delete_modal('<?= $url_delete_cart ?>', <?= $items['id'] ?>,'del_product_in_cart_success')" type="button" class="remove-product">
                 Xóa
               </button>
             </div>
@@ -72,88 +72,14 @@
 <script src="<?php echo base_url().'public/js/site/cart/index.js'?>"></script>
 
 <script type="text/javascript">
-
-// function show_customer_form (customer_name, phone,customer_name_class, phone_class) {
-//     if (typeof customer_name === 'undefined') {
-//       customer_name = '';
-//     }
-
-//     if (typeof phone === 'undefined') {
-//       phone = '';
-//     }
-
-//     if (typeof customer_name_class === 'undefined') {
-//       customer_name_class = '';
-//     }
-
-//     if (typeof phone_class === 'undefined') {
-//       phone_class = '';
-//     }
-
-//     bootbox.dialog({
-//       title: "Thông tin khách hàng",
-//       message: '<div class="row">  ' +
-//           '<div class="col-md-12"> ' +
-//           '<form class="form-horizontal"> ' +
-//           '<div class="form-group"> ' +
-//           '<label class="col-md-4 control-label" for="customer_name">Họ tên</label> ' +
-//           '<div class="col-md-6"> ' +
-//           '<input id="customer_name" value="'+customer_name+'" name="customer_name" type="text" placeholder="Nhập họ tên quý khách" class="form-control input-md '+customer_name_class+'"> ' +
-//           '</div> ' +
-//           '</div> ' +
-//           '<div class="form-group"> ' +
-//           '<label class="col-md-4 control-label" for="phone">Số điện thoại</label> ' +
-//           '<div class="col-md-6"> ' +
-//           '<input id="phone" name="phone" value="'+phone+'" type="text" placeholder="Nhập số điện thoại quý khách" class="form-control input-md '+phone_class+'"> ' +
-//           '</div> ' +
-//           '</div> ' +
-          
-//           '</form> </div>  </div>',
-//       buttons: {
-//         success: {
-//           label: "Hoàn thành",
-//           className: "btn-success",
-//           callback: function () {
-//             var customer_name = $('#customer_name').val().trim();
-//             var phone = $('#phone').val();
-
-//             //============= validation: start ===========
-//             var error_phone = false;
-//             var error_name= false;
-//             var pattern = new RegExp(/^[0-9]{9,11}$/);
-            
-//             if (!pattern.test(phone)) {
-//               error_phone = true;
-//             }
-
-//             if (customer_name.length < 1) {
-//               error_name = true;
-//             }
-//             //============= validation: end =============
-            
-//             if (error_name && error_phone) {
-//                 show_customer_form(customer_name,phone,'customer_form_error', 'customer_form_error');
-//             } else if (error_name) {
-//                 show_customer_form(customer_name,phone,'customer_form_error', '');
-//             } else if (error_phone) {
-//                 show_customer_form(customer_name,phone,'', 'customer_form_error');
-//             } else {
-//                 $('div.customer').append('<input type="hidden" value="'+customer_name+'" name="customer_name">');
-//                 $('div.customer').append('<input type="hidden" value="'+phone+'" name="phone">');
-
-//                 $('#order_form').submit();
-//             }
-
-//           }
-//         }
-//       }
-//     })
-// }
-// </script>
-
-
-<script type="text/javascript">
+$(document).ready(function() {
+abc();
+  
+});
+function abc () {
+  console.log($('button#tr_1').text());
+}
   function del_product_in_cart_success (del_id) {
-    removeItem($('button#'+del_id));
+    removeItem('button#tr_'+del_id);
   }
 </script>

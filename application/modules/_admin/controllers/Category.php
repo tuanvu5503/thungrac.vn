@@ -33,25 +33,30 @@ class Category extends MX_Controller {
 
             //========================= VALIDATION: START =======================
             $error = array();
+
             if (trim_input($data_insert['category_name']) == '') {
-                $error = 'Tên loại sản phẩm không thể rỗng.';
+                $error[] = 'Tên loại sản phẩm không thể rỗng.';
             }
 
-            if ($this->Category->has_duplicate_sub_category_name($data_insert['category_name'])) {
-                $error = 'Loại sản phẩm này đã tồn tại.';
+            if(has_special_character( $data_insert['category_name'])) {
+                $error[] = "Tên sản phẩm không được chứa ký tự đặc biệt.";
+            } elseif ($this->Category->has_duplicate_sub_category_name($data_insert['category_name'])) {
+                $error[] = 'Loại sản phẩm này đã tồn tại.';
             }
 
             if (trim_input($data_insert['super_categoryId']) == '') {
-                $error = 'Bạn chưa chọn loại danh mục.';
+                $error[] = 'Bạn chưa chọn loại danh mục.';
             } elseif ( ! is_numeric($data_insert['super_categoryId']) 
                 || ! $this->Category->has_super_category_exist_by_id($data_insert['super_categoryId'])
             ) {
-                $error = 'Loại danh mục bạn chọn không tồn tại.';
+                $error[] = 'Loại danh mục bạn chọn không tồn tại.';
             }
             //========================= VALIDATION: END =========================
+
             if (count($error) > 0) { // has error validate
                 set_notice('status', FAILED_STATUS , $error);
-           
+                
+                $data['re_super_categoryId'] = $data_post['super_category_id'];
                 $data['all_super_category'] = $this->Category->list_all_super_category();
                 $data['subData'] = $data;
                 $data['re_sub_category_name'] = $data_post['sub_category_name'];

@@ -5,36 +5,38 @@
 		<span class="main-color-text"><?php echo number_format($this->cart->total()); ?>VNĐ</span>
 	</div>
 </div> 
+<div class="shopping-cart-content">
 
-<ul class="shopping-cart-items">
+	<ul class="shopping-cart-items">
 
-	<?php 
-	if ( count($this->cart->contents()) > 0) {
-		foreach ($this->cart->contents() as $item) {
-			?>
-			<li class="clearfix">
-				<?php if ($this->cart->has_options($item['rowid']) == TRUE): ?>
-					<?php foreach ($this->cart->product_options($item['rowid']) as $option_name => $option_value): ?>
-						<img width="70" height="70" src="<?php echo base_url().'public/img/products/'.$option_value; ?>" alt="item1" />
-					<?php endforeach; ?>
-				<?php endif; ?>
-				<input type="hidden" id="id" value="<?php echo $item['id']; ?>">
-				<span class="item-name"><?php echo $item['name']; ?></span>
-				Giá: <span class="item-price"><?php echo $item['price']; ?>VNĐ</span> <br>
-				Số lượng: <span class="item-quantity"><?php echo $item['qty']; ?></span>
-			</li>
-			<?php
+		<?php 
+		if ( count($this->cart->contents()) > 0) {
+			foreach ($this->cart->contents() as $item) {
+				?>
+				<li class="clearfix">
+					<?php if ($this->cart->has_options($item['rowid']) == TRUE): ?>
+						<?php foreach ($this->cart->product_options($item['rowid']) as $option_name => $option_value): ?>
+							<img width="70" height="70" src="<?php echo base_url().'public/img/products/'.$option_value; ?>" alt="item1" />
+						<?php endforeach; ?>
+					<?php endif; ?>
+					<input type="hidden" id="id" value="<?php echo $item['id']; ?>">
+					<span class="item-name"><?php echo $item['name']; ?></span>
+					Giá: <span class="item-price"><?php echo number_format($item['price']); ?>VNĐ</span> <br>
+					Số lượng: <span class="item-quantity"><?php echo $item['qty']; ?></span>
+				</li>
+				<?php
+			}
+		} else {
+			echo "Chưa có sản phẩm nào!";
 		}
-	} else {
-		echo "Chưa có sản phẩm nào!";
-	}
-	?>
+		?>
 
-</ul>
+	</ul>
+</div>
 <?php 
-if ( count($this->cart->contents()) > 0) {
+if (count($this->cart->contents()) > 0) {
 	?>
-	<a id="checkout" class="btn btn-primary" href="<?php echo base_url().'index.php/site/cart/view_order' ?>" role="button">Đặt hàng</a>
+	<a id="checkout" class="btn btn-primary" href="<?php echo base_url().'dat-hang.html' ?>" role="button">Đặt hàng</a>
 	<?php
 }
 ?>

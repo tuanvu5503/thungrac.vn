@@ -58,3 +58,13 @@ function resizeImage($originalFile, $targetFile, $newWidth, $newHeight) {
     }
     $image_save_func($tmp, "$targetFile");
 }
+
+function has_special_character($string)
+{
+    $patern = '/[\'\/~`\!@#\$%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/';
+    if (preg_match($patern, $string)){
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}

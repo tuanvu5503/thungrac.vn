@@ -11,6 +11,7 @@ class Homepage extends MX_Controller
         $this->load->model('Acticle_model','Acticle');
         $this->load->model('Slider_model','Slider');
         $this->load->library('cart');
+        $this->load->helper('My_url');
         $this->load->helper('convert');
     }
     public function index()
@@ -27,16 +28,16 @@ class Homepage extends MX_Controller
         $data['products'] = $products;
         $data['title'] = "Trang chủ";
         $subView = "allProduct_layout";
-        $this->build($subView, $data);
+        build_site($subView, $data);
     }
 
     public function view_detail()
     {
-        if ($this->uri->segment(5))
-        {
-            $id = explode('-', $this->uri->segment(5));
-            $id = (int) end($id);
-            
+        if (NULL != $this->uri->segment(4)
+            && $this->Product->check_product_exist(get_id_in_url($this->uri->segment(4)))
+        ){
+            $id = substr( strrchr($this->uri->segment(4), '-'), 1);
+
             $data['info'] = $this->Product->find_productbyid($id);
             if (count($data['info']) == 0)
             {
@@ -47,19 +48,17 @@ class Homepage extends MX_Controller
             }
             $data['title'] = "Xem chi tiết sản phẩm";
             $subView = "/product/view_detail";
-            $this->build($subView, $data);
+            build_site($subView, $data);
         } else {
-            $this->load->view('404-temp');
+            $data['pre_page'] = base_url();
+            $this->load->view('/error/404_layout', $data);
         }
     }
 
     public function search_product()
     {
-        if (isset($_GET['key'])) {
-            $key = $_GET['key'];
-        } else {
-            $key = $this->uri->segment(4);
-        }
+        $key = $this->uri->segment(2);
+        
         $key = filter_var($key, FILTER_SANITIZE_STRING);
         $key = trim($key);
         if ($key != '') {
@@ -67,9 +66,9 @@ class Homepage extends MX_Controller
             $total_record = $this->Product->total_record_product($key);
             $this->load->library('pagination');
             
-            $config['base_url'] = base_url().'index.php/site/homepage/search_product/'.$key;
+            $config['base_url'] = base_url().'tim-kiem/'.$key.'/page';
             $config['total_rows'] = $total_record;
-            $config['per_page'] = 10;
+            $config['per_page'] = 16;
             $config['uri_segment'] = 0; //tai sao
             $config['num_links'] = 3;
 
@@ -97,7 +96,7 @@ class Homepage extends MX_Controller
             $data['pagination'] = $this->pagination->create_links();
             //=======================  PHÂN TRANG  ======================= 
 
-            $start = NULL !== $this->uri->segment(5) ? $this->uri->segment(5) : 0;
+            $start = NULL !== $this->uri->segment(4) ? $this->uri->segment(4) : 0;
 
             $data['total_product'] = $total_record;
             $data['title_action'] = 'KẾT QUẢ TÌM KIẾM';
@@ -115,7 +114,7 @@ class Homepage extends MX_Controller
             $arr_data = $data;
             $subView  = "/search/show_product_layout";
 
-            $this->build($subView, $arr_data);
+            build_site($subView, $arr_data);
         } else {
             $data['total_product'] = 0;
             $data['title_action'] = 'KẾT QUẢ TÌM KIẾM';
@@ -124,29 +123,33 @@ class Homepage extends MX_Controller
             $data['subData'] = $data;
             $arr_data = $data;
             $subView  = "/search/show_product_layout";
-            $this->build($subView, $arr_data);
+            build_site($subView, $arr_data);
         }
     }
 
     public function product_in_super_category()
     {
-        if (NULL !== $this->uri->segment(4) 
-            && is_numeric($this->uri->segment(4))
-            && $this->Category->has_super_category_exist_by_id($this->uri->segment(4))
+        if (NULL !== $this->uri->segment(2) 
+            && is_numeric(get_id_in_url($this->uri->segment(2)))
+            && $this->Category->has_super_category_exist_by_id(get_id_in_url($this->uri->segment(2)))
         ) {
-            $super_category_id = $this->uri->segment(4); 
+            $super_category_id = get_id_in_url($this->uri->segment(2)); 
+            $super_category_name = $this->Category->get_super_category_name($super_category_id);
+            $url_super_category_name = name_in_url($super_category_name);
 
             //========================== PHÂN TRANG ==========================
             $total_record = $this->Product->total_record_product_in_super_category($super_category_id);
 
             $this->load->library('pagination');
             
-            $config['base_url'] = base_url().'index.php/site/homepage/product_in_super_category/'.$super_category_id;
+            $config['base_url'] = base_url().'xem-tat-ca/'.$url_super_category_name.'-'.$super_category_id.'/page';
             $config['total_rows'] = $total_record;
-            $config['per_page'] = 12;
-            $config['uri_segment'] = 5;
+            $config['per_page'] = 16;
+            $config['uri_segment'] = 4;
             $config['num_links'] = 3;
-            
+            $config['suffix'] = '.html';
+            $config['first_url'] = '0.html';
+
             $config['full_tag_open'] = '<ul class="pagination pagination-small">';
             $config['full_tag_close'] = '</ul><!--pagination-->';
             $config['first_link'] = '&laquo; First';
@@ -171,7 +174,7 @@ class Homepage extends MX_Controller
             $data['pagination'] = $this->pagination->create_links();
             //======================= END PHÂN TRANG ==========================
 
-            $start=$this->uri->segment(5);
+            $start=$this->uri->segment(4);
             $start = $start == null ? 0 : $start;
             $data['all_pro'] = $this->Product->limit_product_in_super_category($super_category_id, $start, $config['per_page']);
 
@@ -185,7 +188,7 @@ class Homepage extends MX_Controller
 
             $subView = "/search/show_product_layout";
             $arr_data = $data;
-            $this->build($subView, $arr_data);
+            build_site($subView, $arr_data);
             // $this->output->cache(20);
 
         } else {
@@ -196,18 +199,18 @@ class Homepage extends MX_Controller
 
     public function acticle ()
     {
-        if (NULL !== $this->uri->segment(4) 
-            && is_numeric($this->uri->segment(4))
-            && $this->Acticle->has_acticle_exist_by_id($this->uri->segment(4))
+        if (NULL !== $this->uri->segment(2) 
+            && is_numeric(get_id_in_url($this->uri->segment(2)))
+            && $this->Acticle->has_acticle_exist_by_id(get_id_in_url($this->uri->segment(2)))
         ) {
-            $acticle_id = $this->uri->segment(4); 
-
+            $acticle_id = get_id_in_url($this->uri->segment(2));
+            
             $data['title'] = $this->Acticle->get_acticle_name_by_id($acticle_id);
             $data['acticle'] = $this->Acticle->get_acticle_by_id($acticle_id);
 
             $subView  = "/acticle/view_acticle";
             $arr_data = $data;
-            $this->build($subView, $arr_data);
+            build_site($subView, $arr_data);
             // $this->output->cache(20);
 
         } else {
@@ -218,22 +221,25 @@ class Homepage extends MX_Controller
 
     public function product_in_sub_category()
     {
-        if (NULL !== $this->uri->segment(4) 
-            && is_numeric($this->uri->segment(4))
-            && $this->Category->has_sub_category_exist_by_id($this->uri->segment(4))
+        if (NULL !== $this->uri->segment(2) 
+            && $this->Category->has_sub_category_exist_by_id(get_id_in_url($this->uri->segment(2)))
         ) {
-            $sub_category_id = $this->uri->segment(4); 
+            $sub_category_id = get_id_in_url($this->uri->segment(2)); 
+            $category_name = $this->Category->get_sub_category_name($sub_category_id);
+            $url_category_name = name_in_url($category_name);
 
             //========================== PHÂN TRANG ==========================
             $total_record = $this->Product->total_record_product_in_sub_category($sub_category_id);
 
             $this->load->library('pagination');
             
-            $config['base_url'] = base_url().'index.php/site/homepage/product_in_sub_category/'.$sub_category_id;
+            $config['base_url'] = base_url().'danh-muc/'.$url_category_name.'-'.$sub_category_id.'/page';
             $config['total_rows'] = $total_record;
-            $config['per_page'] = 12;
-            $config['uri_segment'] = 5;
+            $config['per_page'] = 16;
+            $config['uri_segment'] = 4;
             $config['num_links'] = 3;
+            $config['suffix'] = '.html';
+            $config['first_url'] = '0.html';
             
             $config['full_tag_open'] = '<ul class="pagination pagination-small">';
             $config['full_tag_close'] = '</ul><!--pagination-->';
@@ -259,7 +265,7 @@ class Homepage extends MX_Controller
             $data['pagination'] = $this->pagination->create_links();
             //======================= END PHÂN TRANG ==========================
 
-            $start=$this->uri->segment(5);
+            $start=$this->uri->segment(4);
             $start = $start == null ? 0 : $start;
             $data['all_pro'] = $this->Product->limit_product_in_sub_category($sub_category_id, $start, $config['per_page']);
 
@@ -274,7 +280,7 @@ class Homepage extends MX_Controller
 
             $subView = "/search/show_product_layout";
             $arr_data = $data;
-            $this->build($subView, $arr_data);
+            build_site($subView, $arr_data);
             // $this->output->cache(20);
 
         } else {
@@ -291,26 +297,7 @@ class Homepage extends MX_Controller
         $data['title'] = 'Liên hệ';
         $subView = '/contact/show_contact_layout';
         $arr_data = $data;
-        $this->build($subView, $arr_data);
-    }
-
-    public function build($subView, $arr_data)
-    {
-
-        //==================== DATA FOR MENU: START ====================
-        $all_superCategory = $this->Product->all_superCategory();
-        $products['SẢN PHẨM MỚI'] = $this->Product->new_product();
-        foreach ($all_superCategory as $row) {
-            $menus[$row['super_categoryName']] = $this->Product->getMenu($row['id']);
-        }
-        $data['menus'] = $menus;
-        $data['menu'] = $this->Product->listCategory();
-        //==================== DATA FOR MENU: END ====================
-
-        $data['title']   = $arr_data['title'];
-        $data['subView'] = $subView;
-        $data['subData'] = $arr_data;
-        $this->load->view('main_layout', $data);
+        build_site($subView, $arr_data);
     }
 
 }

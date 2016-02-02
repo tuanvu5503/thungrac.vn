@@ -103,6 +103,7 @@ class Order extends MX_Controller {
 
             $error['status'] = $this->Order->delete_order_by_id($del_id);
 
+            $error['un_approval_order'] = $this->Order->total_record_un_approval_order();
             $error['mess']   = $error['status'] == SUCCESS_STATUS ? 'Xóa đơn hàng thành công.' : 'Xóa đơn hàng thất bại.';
             echo json_encode($error);
         } else {
@@ -135,6 +136,12 @@ class Order extends MX_Controller {
             $error['mess']   = $error['status'] == SUCCESS_STATUS ? 'Duyệt đơn hàng thành công.' : 'Duyệt đơn hàng thất bại.';
             echo json_encode($error);
         }
+    }
+
+    public function check_qty_unapprove()
+    {
+        $rs['un_approval_order'] = $this->Order->total_record_un_approval_order();
+        echo json_encode($rs);
     }
 }
 

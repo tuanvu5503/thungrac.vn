@@ -51,4 +51,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'site/homepage';
 $route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+$route['translate_uri_dashes'] = TRUE;
+
+//=============================START: REWRITE URL SITE PAGE ===========================
+$route['san-pham/(:any)/(:any)/(:any).html'] = 'site/homepage/view_detail/$1/$2/$3';
+
+$route['dat-hang.html'] = 'site/cart/view_order';
+
+$route['tim-kiem/(:any)/page/(:any)'] = 'site/homepage/search_product/$1/$2';
+$route['tim-kiem/(:any)/page'] = 'site/homepage/search_product/$1';
+$route['tim-kiem/(:any)'] = 'site/homepage/search_product/$1';
+
+$route['danh-muc/(:any)/page/(:any).html'] = 'site/homepage/product_in_sub_category/$1/$2';
+$route['danh-muc/(:any).html'] = 'site/homepage/product_in_sub_category/$1';
+
+$route['xem-tat-ca/(:any)/page/(:any).html'] = 'site/homepage/product_in_super_category/$1/$2';
+$route['xem-tat-ca/(:any).html'] = 'site/homepage/product_in_super_category/$1';
+
+$route['lien-he.html'] = 'site/homepage/contact';
+
+$route['bai-viet/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)/(:any).html'] = 'site/homepage/acticle/$1/$2/$3/$4/$5/$6/$7/$8/$9/$10';
+$route['bai-viet/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)/(:any).html'] = 'site/homepage/acticle/$1/$2/$3/$4/$5/$6/$7/$8/$9';
+$route['bai-viet/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)/(:any).html'] = 'site/homepage/acticle/$1/$2/$3/$4/$5/$6/$7/$8';
+$route['bai-viet/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)/(:any).html'] = 'site/homepage/acticle/$1/$2/$3/$4/$5/$6/$7';
+$route['bai-viet/(:any)/(:any)/(:any)/(:any)/(:any).html'] = 'site/homepage/acticle/$1/$2/$3/$4/$5';
+$route['bai-viet/(:any)/(:any)/(:any)/(:any).html'] = 'site/homepage/acticle/$1/$2/$3/$4';
+$route['bai-viet/(:any)/(:any)/(:any).html'] = 'site/homepage/acticle/$1/$2/$3';
+$route['bai-viet/(:any)/(:any).html'] = 'site/homepage/acticle/$1/$2';
+$route['bai-viet/(:any).html'] = 'site/homepage/acticle/$1';
+
+//=============================END: REWRITE URL SITE PAGE =============================
+
+
+//=============================START: REWRITE URL ADMIN PAGE ===========================
+$route['login'] = '_admin/login/index';
+
+//=============================END: REWRITE URL ADMIN PAGE =============================
+
